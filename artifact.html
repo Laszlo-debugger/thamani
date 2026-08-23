@@ -1,0 +1,1071 @@
+<title>Thamani &mdash; the Nairobi exchange, read honestly</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Archivo:wght@400;500;600;700&family=Roboto+Mono:wght@400;500;700&display=swap">
+<style>
+
+*{box-sizing:border-box;margin:0}
+:root{
+--ink0:#08080a;--ink1:#0f0f13;--ink2:#16161b;--ink3:#1d1d24;--line:#26262e;--line2:#33333d;
+--gd:#c98500;--gdb:#e5a32c;--gdt:#f0c968;--bl:#3987e5;
+--r1:#7a570d;--r2:#a06e13;--r3:#c58619;--r4:#e5a32c;
+--tp:#f2f0ec;--ts:#a5a09a;--tm:#726d66;
+--ok:#4cc98e;--wn:#e8a83c;--bd:#ef8078;
+--disp:'Fraunces',ui-serif,Georgia,serif;
+--txt:'Archivo',ui-sans-serif,-apple-system,'Segoe UI',sans-serif;
+--mono:'Roboto Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+--hdr:60px;--sub:34px}
+html{background:var(--ink0)}
+body{background:var(--ink0);color:var(--tp);font:15px/1.55 var(--txt);-webkit-font-smoothing:antialiased;
+padding-bottom:64px}
+@media(min-width:900px){body{padding-bottom:0}}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.disp{font-family:var(--disp)}
+::selection{background:rgba(229,163,44,.28)}
+
+/* ══ header ══ */
+.hd{position:sticky;top:0;z-index:40;height:var(--hdr);border-bottom:1px solid var(--line);
+background:rgba(8,8,10,.94);backdrop-filter:blur(14px);display:flex;align-items:center;gap:14px;
+padding:0 14px}
+.bmk{display:flex;align-items:baseline;gap:9px;flex:0 0 auto}
+.bmk b{font-family:var(--disp);font-size:25px;font-weight:600;letter-spacing:-.02em;
+background:linear-gradient(100deg,var(--gdt),var(--gd) 62%,#8d6010);
+-webkit-background-clip:text;background-clip:text;color:transparent}
+.bmk s{text-decoration:none;font-size:9.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--tm)}
+.nav{display:none;gap:2px;margin-left:8px}
+@media(min-width:900px){.nav{display:flex}}
+.nav a{padding:8px 13px;font-size:13.5px;color:var(--ts);border-radius:7px;transition:.14s}
+.nav a:hover{color:var(--tp);background:var(--ink2)}
+.nav a.on{color:var(--gdt);background:var(--ink2)}
+.sbox{position:relative;margin-left:auto;flex:1 1 auto;max-width:290px;min-width:0}
+.sbox input{width:100%;height:36px;padding:0 12px 0 32px;border-radius:8px;background:var(--ink2);
+border:1px solid var(--line);color:var(--tp);font:13px var(--mono);outline:none;transition:.14s}
+.sbox input:focus{border-color:#4a3406}
+.sbox input::placeholder{color:var(--tm)}
+.sbox svg{position:absolute;left:10px;top:10px;width:15px;height:15px;stroke:var(--tm);fill:none;stroke-width:2}
+.stat{display:none;flex:0 0 auto;text-align:right;font:11px/1.5 var(--mono);color:var(--tm)}
+@media(min-width:1250px){.stat{display:block}}
+.age{display:inline-block;padding:2px 9px;border-radius:999px;font:700 10.5px var(--mono);
+border:1px solid var(--line2);background:var(--ink2)}
+.age.f{color:var(--gdt);border-color:#4a3406}.age.s{color:#f0a;border-color:#4a2028;background:#1b1216}
+
+/* ══ ticker strip ══ */
+.tape{height:var(--sub);border-bottom:1px solid var(--line);background:var(--ink1);
+display:flex;align-items:center;gap:22px;padding:0 14px;overflow-x:auto;scrollbar-width:none}
+.tape::-webkit-scrollbar{display:none}
+.tape div{display:flex;align-items:baseline;gap:7px;white-space:nowrap;font-family:var(--mono);font-size:11px}
+.tape k{color:var(--tm);letter-spacing:.09em;text-transform:uppercase;font-size:9.5px}
+.tape v{color:var(--tp);font-weight:500}
+.tape c{padding:1px 6px;border-radius:4px;font-size:10px;border:1px solid transparent}
+.up{color:var(--ok)}.dn{color:var(--bd)}.fl{color:var(--tm)}
+.tape c.g{color:var(--gdt);background:rgba(201,133,0,.12);border-color:#3d2f0d}
+
+/* ══ layout ══ */
+.wrap{max-width:1680px;margin:0 auto}
+.desk{display:grid;grid-template-columns:1fr;gap:1px;background:var(--line)}
+@media(min-width:1100px){.desk{grid-template-columns:296px 1fr 316px}}
+.pane{background:var(--ink0);min-width:0}
+.stick{position:sticky;top:calc(var(--hdr) + var(--sub))}
+.page{padding:22px 16px 60px}
+h1.pt{font-family:var(--disp);font-size:31px;font-weight:600;letter-spacing:-.022em;margin:2px 0 6px;
+text-wrap:balance}
+h2.st{font-family:var(--disp);font-size:22px;font-weight:600;letter-spacing:-.015em;margin:0 0 4px}
+.eyb{font:700 9.5px var(--mono);letter-spacing:.2em;text-transform:uppercase;color:var(--gd)}
+.lede{color:var(--ts);font-size:14px;max-width:68ch;line-height:1.62;margin:0 0 18px}
+section{margin-bottom:34px}
+
+/* ══ cards ══ */
+.card{background:var(--ink1);border:1px solid var(--line);border-radius:13px;padding:18px 20px}
+.grid{display:grid;gap:12px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(292px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(196px,1fr))}
+.g4{grid-template-columns:repeat(auto-fit,minmax(138px,1fr))}
+.kpi{background:var(--ink2);border:1px solid var(--line);border-radius:11px;padding:14px 15px}
+.kpi v{display:block;font-family:var(--disp);font-size:27px;font-weight:600;letter-spacing:-.03em;
+line-height:1.06;color:var(--gdt)}
+.kpi k{display:block;font:700 9.5px var(--mono);letter-spacing:.1em;text-transform:uppercase;
+color:var(--tm);margin-top:7px;line-height:1.45}
+.kpi n{display:block;font-size:11.5px;color:var(--ts);margin-top:5px;line-height:1.5}
+.kpi.w v{color:#f09a92}.kpi.c v{color:#6fa8ee}
+
+/* ══ callouts ══ */
+.co{border-left:3px solid var(--gd);background:rgba(201,133,0,.07);padding:13px 16px;
+border-radius:0 9px 9px 0;font-size:14px;line-height:1.62;margin:13px 0}
+.co.r{border-color:#9a3a34;background:rgba(154,58,52,.09)}
+.co.b{border-color:var(--bl);background:rgba(57,135,229,.08)}
+
+/* ══ watchlist ══ */
+.wl{border-bottom:1px solid var(--line);padding:13px 14px}
+.wlh{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.wlh b{font:700 9.5px var(--mono);letter-spacing:.18em;text-transform:uppercase;color:var(--gd)}
+.gchips{display:flex;gap:5px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
+.gchips::-webkit-scrollbar{display:none}
+.gchip{white-space:nowrap;padding:5px 10px;border-radius:999px;border:1px solid var(--line);
+background:var(--ink1);font:700 10px var(--mono);letter-spacing:.06em;color:var(--tm);transition:.14s}
+.gchip:hover{border-color:#4a3406;color:var(--gdt)}
+.gchip.on{background:var(--gd);border-color:var(--gd);color:#0a0a0c}
+.wlist{max-height:calc(100vh - var(--hdr) - var(--sub) - 190px);overflow-y:auto}
+@media(max-width:1099px){.wlist{max-height:460px}}
+.row{display:flex;align-items:center;gap:11px;width:100%;padding:11px 14px;text-align:left;
+border-bottom:1px solid var(--ink2);border-left:2px solid transparent;transition:.12s}
+.row:hover{background:var(--ink1)}
+.row.on{background:var(--ink2);border-left-color:var(--gd)}
+.row.off{display:none}
+.ring{flex:0 0 34px;width:34px;height:34px;position:relative}
+.ring svg{transform:rotate(-90deg)}
+.ring i{position:absolute;inset:0;display:grid;place-items:center;font:700 10.5px var(--mono);font-style:normal}
+.rmid{flex:1 1 auto;min-width:0}
+.rtk{display:flex;align-items:center;gap:7px}
+.rtk b{font:700 12px var(--mono);letter-spacing:.03em}
+.rtk s{text-decoration:none;font-size:11px;color:var(--tm);overflow:hidden;text-overflow:ellipsis;
+white-space:nowrap}
+.dot{width:6px;height:6px;border-radius:50%;flex:0 0 6px}
+.rpx{display:flex;align-items:baseline;gap:7px;margin-top:2px;font-family:var(--mono);font-size:11px;color:var(--ts)}
+.rpx em{font-style:normal;padding:1px 5px;border-radius:4px;font-size:10px}
+.rend{flex:0 0 auto;text-align:right}
+.vd{font:700 9px var(--mono);letter-spacing:.09em;padding:2px 6px;border-radius:4px;border:1px solid}
+.vd.BUY{color:var(--ok);border-color:#1d4030;background:#10241a}
+.vd.HOLD{color:var(--gdt);border-color:#3d2f0d;background:#1c1710}
+.vd.AVOID{color:var(--bd);border-color:#4a2020;background:#211213}
+.vd.NA{color:var(--tm);border-color:var(--line);background:var(--ink2)}
+
+/* ══ tables ══ */
+.scroll{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+th,td{padding:8px 9px;border-bottom:1px solid var(--line);font-size:12.5px;vertical-align:top;text-align:right}
+th{position:sticky;top:0;z-index:2;background:var(--ink1);font:700 9px var(--mono);letter-spacing:.08em;
+text-transform:uppercase;color:var(--tm);vertical-align:bottom;border-bottom:1px solid var(--gd)}
+th:first-child,td:first-child{text-align:left}
+td.tx{text-align:left;font-size:11.5px;color:var(--ts);line-height:1.5;max-width:340px}
+tbody tr:hover{background:var(--ink1);cursor:pointer}
+tr.dim td{opacity:.4}tr.dim:hover td{opacity:1}
+tr.off{display:none}
+.pill{display:inline-block;padding:2px 8px;border-radius:999px;font:700 10px var(--mono);
+border:1px solid transparent;white-space:nowrap}
+.pill.ok{color:var(--ok);background:#10241a;border-color:#1d4030}
+.pill.gd{color:var(--gdt);background:#1c1710;border-color:#3d2f0d}
+.pill.wn{color:var(--wn);background:#1f1808;border-color:#4a3406}
+.pill.bd{color:var(--bd);background:#211213;border-color:#4a2020}
+.pill.na{color:var(--tm);background:var(--ink2);border-color:var(--line)}
+.gt{text-align:center!important;letter-spacing:1.5px;white-space:nowrap;font-family:var(--mono)}
+.pa{color:var(--ok);font-weight:700}.fa{color:#5c3b3b;font-weight:700}
+.chip{display:inline-block;padding:2px 7px;border-radius:5px;font:700 10px var(--mono);
+background:var(--ink2);border:1px solid var(--line);color:var(--gdt);margin:2px 4px 2px 0}
+
+/* ══ dossier ══ */
+.dhd{border-bottom:1px solid var(--line);background:var(--ink1);padding:18px 20px}
+.dtop{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:flex-start}
+.dname{font-family:var(--disp);font-size:27px;font-weight:600;letter-spacing:-.022em;line-height:1.15}
+.dmeta{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:5px;
+font:11px var(--mono);color:var(--tm)}
+.dpx{text-align:right}
+.dpx b{font-family:var(--disp);font-size:29px;font-weight:600;letter-spacing:-.03em}
+.verd{border:1px solid;border-radius:12px;padding:15px 17px;margin:14px 0}
+.verd.BUY{border-color:#1d4030;background:rgba(76,201,142,.07)}
+.verd.HOLD{border-color:#3d2f0d;background:rgba(201,133,0,.07)}
+.verd.AVOID{border-color:#4a2020;background:rgba(239,128,120,.06)}
+.verd.NA{border-color:var(--line);background:var(--ink2)}
+.verd h4{font-family:var(--disp);font-size:19px;font-weight:600;line-height:1.3}
+.verd p{font-size:13.5px;color:var(--ts);line-height:1.62;margin-top:7px}
+.gates{display:grid;grid-template-columns:repeat(auto-fit,minmax(148px,1fr));gap:9px;margin:12px 0}
+.gate{background:var(--ink2);border:1px solid var(--line);border-radius:9px;padding:10px 12px}
+.gate b{display:block;font:700 9px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--tm)}
+.gate s{text-decoration:none;display:block;font-size:12.5px;margin-top:4px}
+.gate.p{border-color:#1d4030}.gate.f{border-color:#3a2020}
+
+/* ══ news / legal / debt ══ */
+.item{background:var(--ink1);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
+.ihd{display:flex;flex-wrap:wrap;gap:9px;align-items:center;margin-bottom:8px}
+.iwho{font:700 9.5px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--gd)}
+.iage{margin-left:auto;font:10.5px var(--mono);color:var(--tm);white-space:nowrap}
+.item h3{font-family:var(--disp);font-size:17.5px;font-weight:600;line-height:1.34;letter-spacing:-.01em}
+.item p{font-size:12.5px;color:var(--ts);line-height:1.6;margin-top:7px}
+.imp{border-top:1px solid var(--line);margin-top:11px;padding-top:9px;font-size:12px;color:var(--gdt)}
+
+/* ══ goal gate ══ */
+.gate-ov{position:fixed;inset:0;z-index:90;background:rgba(8,8,10,.93);backdrop-filter:blur(16px);
+display:grid;place-items:center;padding:16px;overflow-y:auto}
+.gate-bx{width:100%;max-width:800px;background:var(--ink1);border:1px solid #3a2c0c;border-radius:17px;
+padding:26px 28px;box-shadow:0 0 90px rgba(201,133,0,.16)}
+.gate-bx h2{font-family:var(--disp);font-size:33px;font-weight:600;letter-spacing:-.025em;
+line-height:1.06;margin:8px 0 8px}
+.gopts{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:11px;margin:20px 0 16px}
+.gopt{text-align:left;background:var(--ink2);border:1px solid var(--line);border-radius:12px;
+padding:15px 16px;transition:.15s;display:flex;flex-direction:column;align-items:stretch;
+justify-content:flex-start}
+.gopt:hover{border-color:#4a3406;background:#191813}
+.gopt.on{border-color:var(--gd);background:#1d1a11}
+.gopt>b{display:block;font-family:var(--disp);font-size:16.5px;font-weight:600}
+.gopt.on>b{color:var(--gdt)}
+.gopt>s{text-decoration:none;display:block;font-size:12px;color:var(--tm);margin-top:4px;line-height:1.5}
+.gopt>i{font-style:normal;display:inline-block;align-self:flex-start;margin-top:auto;margin-top:9px;font:700 9.5px var(--mono);
+letter-spacing:.1em;color:var(--tm)}
+.gopt.on>i{color:var(--gd)}
+.gbtn{width:100%;padding:13px;border-radius:999px;font:700 11px var(--mono);letter-spacing:.16em;
+background:var(--gd);color:#0a0a0c;transition:.15s}
+.gbtn:disabled{background:var(--ink3);color:var(--tm);cursor:not-allowed}
+.gbtn:not(:disabled):hover{background:var(--gdb)}
+
+/* ══ bottom nav ══ */
+.bn{position:fixed;left:0;right:0;bottom:0;z-index:45;border-top:1px solid var(--line);
+background:rgba(8,8,10,.96);backdrop-filter:blur(14px);display:grid;grid-template-columns:repeat(5,1fr)}
+@media(min-width:900px){.bn{display:none}}
+.bn a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;
+min-height:60px;font:700 9px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--tm)}
+.bn a.on{color:var(--gdt)}
+.bn svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:1.7}
+
+.lgd{display:flex;flex-wrap:wrap;gap:8px 16px;font-size:11.5px;color:var(--tm);margin-top:12px;align-items:center}
+.sw{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+.foot{font-size:11.5px;color:var(--tm);line-height:1.72;border-top:1px solid var(--line);
+padding-top:18px;margin-top:10px}
+.sm{display:grid;grid-template-columns:repeat(auto-fit,minmax(188px,1fr));gap:12px}
+.smc{background:var(--ink2);border:1px solid var(--line);border-radius:11px;padding:12px 13px}
+.smc h5{display:flex;justify-content:space-between;align-items:baseline;font-size:12.5px;font-weight:600}
+.smc h5 s{text-decoration:none;font:9.5px var(--mono);color:var(--tm)}
+.smc f{display:flex;justify-content:space-between;align-items:baseline;font:10.5px var(--mono);
+color:var(--tm);margin-top:3px}
+.smc f b{font-size:14px}
+
+/* ══ amount: header control, gate input, quick buttons ══ */
+.amt{flex:0 0 auto;display:none;align-items:baseline;gap:8px;padding:6px 12px;border-radius:8px;
+background:var(--ink2);border:1px solid var(--line);transition:.15s;text-align:left}
+@media(min-width:760px){.amt{display:flex}}
+.amt:hover{border-color:#4a3406;background:#191813}
+.amt k{font:700 8.5px var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--tm)}
+.amt v{font:600 13px var(--mono);color:var(--gdt);white-space:nowrap}
+.amtin{width:100%;height:64px;padding:0 20px;border-radius:13px;background:var(--ink2);
+border:1px solid var(--line2);color:var(--gdt);font:600 30px var(--mono);letter-spacing:-.01em;
+outline:none;transition:.15s}
+.amtin:focus{border-color:var(--gd);background:#1a1811;box-shadow:0 0 0 4px rgba(201,133,0,.12)}
+.amtin::placeholder{color:var(--tm);font-weight:400;font-size:22px}
+.qamt{display:flex;flex-wrap:wrap;gap:7px;margin:0 0 20px}
+.qb{padding:7px 15px;border-radius:999px;border:1px solid var(--line);background:var(--ink2);
+color:var(--ts);font:600 12.5px var(--mono);transition:.14s}
+.qb:hover{border-color:#4a3406;background:#191813;color:var(--gdt)}
+.qb.on{background:var(--gd);border-color:var(--gd);color:#0a0a0c}
+.gexp{margin-top:11px;padding-top:11px;border-top:1px solid var(--line)}
+.gexp p{font-size:12px;line-height:1.62;color:var(--ts);margin:0 0 7px}
+.gexp p:last-child{margin-bottom:0}
+.gexp b{display:inline;font-family:var(--txt);font-size:12px;color:var(--tp);font-weight:700}
+.gexp p>b:first-child{color:var(--gdt)}
+.gopt.on .gexp{border-color:#4a3406}
+
+/* ══ the notice. Deliberately not styled to be ignorable. ══ */
+.dsc{border:1px solid #4a3406;border-radius:11px;background:#171205;
+padding:14px 16px;font-size:12.5px;line-height:1.66;color:var(--ts)}
+.dsc b{color:var(--gdt);font-weight:700}
+.dsc-top{margin:0 0 20px}
+.dsc-band{margin:26px 0 34px;background:#121317;border-color:var(--line2)}
+.dsc-band b{color:var(--tp)}
+.dsc-who{display:block;margin-top:9px;font:10.5px var(--mono);color:var(--tm);
+letter-spacing:.04em}
+@media(max-width:900px){.dsc-band{margin-bottom:84px}}
+
+</style>
+<div id="app"></div>
+<script>window.__D={"counters":[{"tk":"KPLC","name":"Kenya Power","sec":"Power","price":20.95,"chg":-2.33,"vol":1360000,"relvol":1.23,"eps":12.7594,"dps":1.0253,"epsg":null,"payout":8.6,"shares_out":1901631702,"rsi":null,"rat":"Buy","sentiment_asof":"2026-08-20","flag":"QUALITY","note":"Cheapest P/E on the exchange &mdash; and that is the warning, not the bargain. Profit swings on FX gains on dollar debt, not on selling power. Dividend covered 11.6x. FY to June reports 30 Sept.","price_asof":"2026-08-21","pe":1.64,"dy":4.89,"mcap":39.84,"rsiu":false,"scwhy":{"income":null,"growth":"no published earnings-growth figure \u2014 not a zero, an unknown. Nothing can be scored from it","safety":"the printed profit is not repeatable"},"to":28492000,"net":4.65,"real":-1.84,"g":[true,false,true,false,true],"pct":4.6,"sc":{"income":46.5,"growth":null,"safety":null}},{"tk":"KCB","name":"KCB Group","sec":"Banking","price":93.75,"chg":1.9,"vol":2170000,"relvol":1.69,"eps":21.2,"dps":5.2125,"epsg":9.13,"payout":25.0,"shares_out":3084906667,"rsi":84.83,"rat":"Strong buy","sentiment_asof":"2026-08-20","flag":null,"note":"Overbought at 84.8 <b>before</b> reporting. Launched a 300bn note programme 19 Aug &mdash; debt, not dilution. Must report by 31 Aug.","price_asof":"2026-08-20","pe":4.42,"dy":5.56,"mcap":289.21,"rsiu":false,"scwhy":{"income":null,"growth":null,"safety":null},"to":203437500,"net":5.28,"real":-1.21,"g":[true,true,true,false,false],"pct":0.6,"sc":{"income":44.8,"growth":8.4,"safety":2.5}},{"tk":"EQTY","name":"Equity Group","sec":"Banking","price":94.5,"chg":1.61,"vol":2260000,"relvol":2.01,"eps":20.01,"dps":5.8401,"epsg":64.28,"payout":29.0,"shares_out":3713756614,"rsi":75.85,"rat":"Strong buy","sentiment_asof":"2026-08-20","flag":null,"note":"Reported 19 Aug: 43.7bn attributable, +31.5%. Bad loans 13.7%&rarr;9.5% &mdash; the best asset-quality swing of the cycle. Forward ~4.0x. No interim dividend. Overbought.","price_asof":"2026-08-20","pe":4.72,"dy":6.18,"mcap":350.95,"rsiu":false,"scwhy":{"income":null,"growth":null,"safety":null},"to":213570000,"net":5.87,"real":-0.62,"g":[true,true,true,false,false],"pct":0.6,"sc":{"income":50.7,"growth":35.6,"safety":1.3}},{"tk":"DTK","name":"Diamond Trust","sec":"Banking","price":173.25,"chg":1.02,"vol":1380000,"relvol":7.17,"eps":34.84,"dps":9.2515,"epsg":23.71,"payout":27.0,"shares_out":271919192,"rsi":83.77,"rat":"\u2014","sentiment_asof":"2026-08-20","flag":null,"note":"Reported 19 Aug: pre-tax +37% to 9.84bn, interest income +26%. Volume 7.2x normal. Group figure &mdash; minorities in TZ/UG/BI shrink your slice.","price_asof":"2026-08-20","pe":4.97,"dy":5.34,"mcap":47.11,"rsiu":false,"scwhy":{"income":null,"growth":null,"safety":null},"to":239085000,"net":5.07,"real":-1.42,"g":[true,true,true,false,false],"pct":0.5,"sc":{"income":42.7,"growth":14.9,"safety":1.9}},{"tk":"NCBA","name":"NCBA Group","sec":"Banking","price":90.5,"chg":0.28,"vol":339880,"relvol":1.13,"eps":14.5,"dps":7.0214,"epsg":8.25,"payout":48.0,"shares_out":1665817175,"rsi":null,"rat":"\u2014","sentiment_asof":"2026-08-20","flag":null,"note":"<b>Not overbought. Highest covered dividend among liquid large banks</b>, covered 2.1x. Drifted <i>down</i> while every peer rose. <b>Book closure 28 Aug.</b> Must report by 31 Aug.","price_asof":"2026-08-21","pe":6.24,"dy":7.76,"mcap":150.76,"rsiu":false,"scwhy":{"income":null,"growth":null,"safety":null},"to":30759140,"net":7.37,"real":0.88,"g":[true,true,true,false,true],"pct":4.2,"sc":{"income":73.7,"growth":17.3,"safety":18.7}},{"tk":"COOP","name":"Co-operative Bank","sec":"Banking","price":36.35,"chg":-6.19,"vol":1290000,"relvol":1.24,"eps":5.74,"dps":2.4955,"epsg":26.95,"payout":44.0,"shares_out":5882322581,"rsi":74.44,"rat":"Neutral","sentiment_asof":"2026-08-20","flag":"YIELD","note":"Overbought before reporting, but liquid at 50m. <b>Dividend source conflict:</b> TradingView implies 2.50 (6.44%); afx has 3.00 (7.74% here, 8.12% at Friday's 36.95 low). At 3.00 it clears the T-bill. Verify the notice.","price_asof":"2026-08-21","pe":6.33,"dy":6.87,"mcap":213.82,"rsiu":false,"scwhy":{"income":null,"growth":null,"safety":null},"to":46891500,"net":6.53,"real":0.04,"g":[true,true,true,false,false],"pct":2.8,"sc":{"income":57.3,"growth":14.5,"safety":-3.5}},{"tk":"KEGN","name":"KenGen","sec":"Power","price":11.15,"chg":-1.33,"vol":1360000,"relvol":0.97,"eps":1.5894,"dps":0.8995,"epsg":null,"payout":56.6,"shares_out":6594690265,"rsi":null,"rat":"Buy","sentiment_asof":"2026-08-20","flag":null,"note":"Highest <b>covered</b> yield you can actually buy. Covered 1.8x, rated Buy, not overbought, 15m traded. El Ni&ntilde;o fills the dams &mdash; water is free fuel. Sells almost everything to Kenya Power. Reports 30 Oct.","price_asof":"2026-08-21","pe":7.02,"dy":8.07,"mcap":73.53,"rsiu":false,"scwhy":{"income":null,"growth":"no published earnings-growth figure \u2014 not a zero, an unknown. Nothing can be scored from it","safety":null},"to":15164000,"net":7.67,"real":1.18,"g":[true,true,true,false,true],"pct":8.6,"sc":{"income":76.7,"growth":null,"safety":14.5}},{"tk":"F","name":"Family Bank","sec":"Banking","price":33.0,"chg":0.0,"vol":1410000,"relvol":2.39,"eps":4.46,"dps":null,"epsg":62.0,"payout":0.0,"shares_out":1670303030,"rsi":null,"rat":"\u2014","sentiment_asof":"2026-08-20","flag":"QUALITY","note":"Reported 20 Aug: profit <b>+62% to 3.70bn</b>, H1 EPS 2.23. But loans grew 10% while government securities jumped <b>55% to 94.1bn</b> &mdash; a leveraged T-bill fund with a banking licence. Non-interest income fell. NPLs +19% to 18.14bn = <b>16.3% of loans</b> vs Equity's 9.5%. 1.65x book. No dividend.","price_asof":"2026-08-20","pe":7.4,"dy":null,"mcap":55.12,"rsiu":false,"scwhy":{"income":"pays no dividend","growth":null,"safety":"the printed profit is not repeatable"},"to":46530000,"net":0.0,"real":-6.49,"g":[true,false,false,false,true],"pct":2.8,"sc":{"income":null,"growth":2.4,"safety":null}},{"tk":"BAT","name":"British American Tobacco","sec":"Tobacco","price":560.0,"chg":0.0,"vol":28400,"relvol":0.6,"eps":52.46,"dps":70.504,"epsg":17.0,"payout":134.0,"shares_out":99285714,"rsi":null,"rat":"Neutral","sentiment_asof":"2026-08-20","flag":"PAYOUT","note":"Biggest yield on the exchange &mdash; and it pays out <b>134% of earnings</b>. Book closure 28 Aug. A dividend above profit gets cut.","price_asof":"2026-08-20","pe":10.67,"dy":12.59,"mcap":55.6,"rsiu":false,"scwhy":{"income":"the dividend is not covered by earnings","growth":null,"safety":"the dividend is not covered by earnings"},"to":15904000,"net":11.96,"real":5.47,"g":[true,true,false,true,true],"pct":8.2,"sc":{"income":null,"growth":-25.0,"safety":null}},{"tk":"SCBK","name":"Standard Chartered","sec":"Banking","price":325.0,"chg":-5.52,"vol":46060,"relvol":1.37,"eps":29.53,"dps":29.25,"epsg":-42.19,"payout":99.0,"shares_out":400523077,"rsi":null,"rat":"Neutral","sentiment_asof":"2026-08-20","flag":"DIVUP","note":"<b>Fell 5.5%.</b> Profit &minus;17%, trailing EPS &minus;42%, pays out <b>99%</b> &mdash; and raised the interim to 8.50 anyway with <b>no payment date given</b>.","price_asof":"2026-08-20","pe":11.01,"dy":9.0,"mcap":130.17,"rsiu":false,"scwhy":{"income":"the dividend is not covered by earnings","growth":null,"safety":"the dividend is not covered by earnings"},"to":14969500,"net":8.55,"real":2.06,"g":[true,true,false,true,true],"pct":8.7,"sc":{"income":null,"growth":-15.1,"safety":null}},{"tk":"CARB","name":"Carbacid","sec":"Industrial gas","price":48.0,"chg":7.74,"vol":545130,"relvol":13.29,"eps":4.05,"dps":2.1648,"epsg":30.25,"payout":53.0,"shares_out":235416667,"rsi":95.4,"rat":"\u2014","sentiment_asof":"2026-08-20","flag":"MOMENTUM","note":"<b>RSI 95.4 &mdash; most overbought on the exchange &mdash; on volume 13.3x normal, with nothing announced.</b> The most dangerous chart here.","price_asof":"2026-08-20","pe":11.85,"dy":4.51,"mcap":11.3,"rsiu":false,"scwhy":{"income":null,"growth":null,"safety":null},"to":26166240,"net":4.28,"real":-2.21,"g":[true,true,true,false,false],"pct":5.0,"sc":{"income":34.8,"growth":7.9,"safety":-18.3}},{"tk":"CGEN","name":"Car &amp; General","sec":"Distribution","price":375.75,"chg":9.87,"vol":44610,"relvol":1.14,"eps":30.4975,"dps":3.7575,"epsg":null,"payout":11.0,"shares_out":72947438,"rsi":86.79,"rat":"\u2014","sentiment_asof":"2026-08-20","flag":"QUALITY","note":"Forward P/E ~<b>5.8</b> on annualised H1 (2.60bn on 80.2m shares). One year <b>+1,066%</b>. But 78% of profit is Watu Credit &mdash; publishes no accounts, and its own profit fell 85% in the 2024 floods. El Ni&ntilde;o forecast for October.","price_asof":"2026-08-20","price_conflict":{"other":372.0,"src":"africanfinancials, same trading date"},"pe":12.32,"dy":1.0,"mcap":27.41,"rsiu":false,"scwhy":{"income":null,"growth":"no published earnings-growth figure \u2014 not a zero, an unknown. Nothing can be scored from it","safety":"the printed profit is not repeatable"},"to":16762208,"net":0.95,"real":-5.54,"g":[true,false,true,false,false],"pct":7.8,"sc":{"income":1.5,"growth":null,"safety":null}},{"tk":"SCOM","name":"Safaricom","sec":"Telecom","price":36.35,"chg":-0.95,"vol":15290000,"relvol":3.09,"eps":2.39,"dps":1.5157,"epsg":36.97,"payout":63.0,"shares_out":39237057221,"rsi":null,"rat":"Strong buy","sentiment_asof":"2026-08-20","flag":null,"note":"<b>561m traded &mdash; more than the next two counters combined.</b> The only share where 1.3m is invisible. Half the market's value. Payout 63%, covered. But 3.92% net is half the T-bill.","price_asof":"2026-08-21","pe":15.21,"dy":4.17,"mcap":1426.27,"rsiu":false,"scwhy":{"income":null,"growth":null,"safety":null},"to":555791500,"net":3.96,"real":-2.53,"g":[true,true,true,false,true],"pct":0.2,"sc":{"income":39.6,"growth":18.5,"safety":16.1}},{"tk":"EABL","name":"EABL","sec":"Beverages","price":277.0,"chg":0.0,"vol":924410,"relvol":7.83,"eps":16.11,"dps":9.5565,"epsg":45.35,"payout":59.0,"shares_out":783646209,"rsi":null,"rat":"Sell","sentiment_asof":"2026-08-20","flag":null,"note":"<b>The only Sell rating on the exchange &mdash; and volume was 7.8x normal at 256m, and it fell.</b> Somebody large is leaving.","price_asof":"2026-08-21","pe":17.19,"dy":3.45,"mcap":217.07,"rsiu":false,"scwhy":{"income":null,"growth":null,"safety":null},"to":256061570,"net":3.28,"real":-3.21,"g":[true,true,true,false,true],"pct":0.5,"sc":{"income":22.8,"growth":-2.3,"safety":-2.7}},{"tk":"NSE","name":"Nairobi Sec Exchange","sec":"Financial mkts","price":26.7,"chg":-1.48,"vol":852100,"relvol":3.24,"eps":1.04,"dps":0.7156,"epsg":133.45,"payout":69.0,"shares_out":264794007,"rsi":null,"rat":"\u2014","sentiment_asof":"2026-08-20","flag":null,"note":"The exchange itself at 25.6x &mdash; a leveraged bet on trading volumes. Volumes fell 25.6% last week. Fell 1.5% on 3.2x volume.","price_asof":"2026-08-20","pe":25.67,"dy":2.68,"mcap":7.07,"rsiu":false,"scwhy":{"income":null,"growth":null,"safety":null},"to":22751070,"net":2.55,"real":-3.94,"g":[true,true,true,false,true],"pct":5.7,"sc":{"income":25.5,"growth":10.0,"safety":1.6}},{"tk":"TPSE","name":"TPS Serena","sec":"Hotels","price":15.9,"chg":-0.62,"vol":5450,"relvol":0.1,"eps":4.32,"dps":0.3482,"epsg":197.32,"payout":8.0,"shares_out":183018868,"rsi":null,"rat":"\u2014","sentiment_asof":"2026-08-20","flag":null,"note":"Cheapest real business on the market. 5,450 shares traded &mdash; 87,000 shillings all day. Your order is 15x the entire day.","price_asof":"2026-08-20","pe":3.68,"dy":2.19,"mcap":2.91,"rsiu":false,"scwhy":{"income":"you cannot buy it at this size","growth":"you cannot buy it at this size","safety":"you cannot buy it at this size, which is the opposite of safe"},"to":86655,"net":2.08,"real":-4.41,"g":[false,true,true,false,true],"pct":1500.2,"sc":{"income":null,"growth":null,"safety":null}},{"tk":"KNRE","name":"Kenya Re","sec":"Insurance","price":3.63,"chg":-1.89,"vol":1160000,"relvol":1.07,"eps":0.7,"dps":0.1477,"epsg":-11.57,"payout":21.0,"shares_out":5691460055,"rsi":null,"rat":"Buy","sentiment_asof":"2026-08-20","flag":null,"note":"Cheap, liquid, rated Buy. But earnings falling, board frozen by court order to 1 Oct, and El Ni&ntilde;o flood claims land on the national reinsurer.","price_asof":"2026-08-20","pe":5.19,"dy":4.07,"mcap":20.66,"rsiu":false,"scwhy":{"income":"you cannot buy it at this size","growth":"you cannot buy it at this size","safety":"you cannot buy it at this size, which is the opposite of safe"},"to":4210800,"net":3.87,"real":-2.62,"g":[false,true,true,false,true],"pct":30.9,"sc":{"income":null,"growth":null,"safety":null}},{"tk":"JUB","name":"Jubilee Holdings","sec":"Insurance","price":418.0,"chg":-1.36,"vol":4220,"relvol":1.43,"eps":76.59,"dps":14.7972,"epsg":17.55,"payout":19.0,"shares_out":73421053,"rsi":null,"rat":"\u2014","sentiment_asof":"2026-08-20","flag":null,"note":"1.8m turnover. Return on equity only 10.4%.","price_asof":"2026-08-20","pe":5.46,"dy":3.54,"mcap":30.69,"rsiu":false,"scwhy":{"income":"you cannot buy it at this size","growth":"you cannot buy it at this size","safety":"you cannot buy it at this size, which is the opposite of safe"},"to":1763960,"net":3.36,"real":-3.13,"g":[false,true,true,false,true],"pct":73.7,"sc":{"income":null,"growth":null,"safety":null}},{"tk":"BKG","name":"BK Group","sec":"Banking","price":61.75,"chg":-1.2,"vol":5460,"relvol":0.31,"eps":10.73,"dps":4.6498,"epsg":12.17,"payout":43.0,"shares_out":907692308,"rsi":null,"rat":"\u2014","sentiment_asof":"2026-08-20","flag":null,"note":"Cheap with a covered 7.53%. And 337,000 shillings traded all day. Untouchable in size.","price_asof":"2026-08-20","pe":5.75,"dy":7.53,"mcap":56.05,"rsiu":false,"scwhy":{"income":"you cannot buy it at this size","growth":"you cannot buy it at this size","safety":"you cannot buy it at this size, which is the opposite of safe"},"to":337155,"net":7.15,"real":0.66,"g":[false,true,true,false,true],"pct":385.6,"sc":{"income":null,"growth":null,"safety":null}},{"tk":"HFCB","name":"HF Group","sec":"Banking","price":13.45,"chg":0.37,"vol":338240,"relvol":1.13,"eps":2.2,"dps":null,"epsg":23.64,"payout":0.0,"shares_out":1857249071,"rsi":74.37,"rat":"\u2014","sentiment_asof":"2026-08-20","flag":null,"note":"No dividend. Overbought.","price_asof":"2026-08-20","pe":6.11,"dy":null,"mcap":24.98,"rsiu":false,"scwhy":{"income":"you cannot buy it at this size","growth":"you cannot buy it at this size","safety":"you cannot buy it at this size, which is the opposite of safe"},"to":4549328,"net":0.0,"real":-6.49,"g":[false,true,false,false,false],"pct":28.6,"sc":{"income":null,"growth":null,"safety":null}},{"tk":"UNGA","name":"Unga Group","sec":"Food","price":34.0,"chg":3.03,"vol":5380,"relvol":0.66,"eps":5.53,"dps":null,"epsg":null,"payout":0.0,"shares_out":74117647,"rsi":null,"rat":"\u2014","sentiment_asof":"2026-08-20","flag":null,"note":"No dividend. 183,000 traded. P/B 0.67 on attributable book of 50.53.","price_asof":"2026-08-20","pe":6.15,"dy":null,"mcap":2.52,"rsiu":false,"scwhy":{"income":"you cannot buy it at this size","growth":"you cannot buy it at this size","safety":"you cannot buy it at this size, which is the opposite of safe"},"to":182920,"net":0.0,"real":-6.49,"g":[false,true,false,false,true],"pct":710.7,"sc":{"income":null,"growth":null,"safety":null}},{"tk":"IMH","name":"I&amp;M Group","sec":"Banking","price":76.5,"chg":4.08,"vol":77170,"relvol":0.65,"eps":11.49,"dps":4.001,"epsg":18.85,"payout":35.0,"shares_out":1550980392,"rsi":79.55,"rat":"\u2014","sentiment_asof":"2026-08-20","flag":null,"note":"Rose 4.1% into overbought on thin volume. Not yet reported.","price_asof":"2026-08-20","pe":6.66,"dy":5.23,"mcap":118.65,"rsiu":false,"scwhy":{"income":"you cannot buy it at this size","growth":"you cannot buy it at this size","safety":"you cannot buy it at this size, which is the opposite of safe"},"to":5903505,"net":4.97,"real":-1.52,"g":[false,true,true,false,false],"pct":22.0,"sc":{"income":null,"growth":null,"safety":null}},{"tk":"SLAM","name":"Sanlam Kenya","sec":"Insurance","price":9.8,"chg":-0.61,"vol":18170,"relvol":0.36,"eps":1.42,"dps":null,"epsg":-66.13,"payout":0.0,"shares_out":637755102,"rsi":null,"rat":"\u2014","sentiment_asof":"2026-08-20","flag":null,"note":"Reported: pre-tax &minus;28%, insurance result &minus;34.5%, investment income &minus;83.3%. Premiums grew, profit shrank. Borrowings down to 1.44bn from 4.37bn.","price_asof":"2026-08-20","pe":6.9,"dy":null,"mcap":6.25,"rsiu":false,"scwhy":{"income":"you cannot buy it at this size","growth":"you cannot buy it at this size","safety":"you cannot buy it at this size, which is the opposite of safe"},"to":178066,"net":0.0,"real":-6.49,"g":[false,true,false,false,true],"pct":730.1,"sc":{"income":null,"growth":null,"safety":null}},{"tk":"LBTY","name":"Liberty Kenya","sec":"Insurance","price":9.22,"chg":-2.95,"vol":37410,"relvol":1.0,"eps":1.32,"dps":0.485,"epsg":-48.88,"payout":190.0,"shares_out":552060738,"rsi":null,"rat":"\u2014","sentiment_asof":"2026-08-20","flag":"PAYOUT","note":"Earnings halved and it pays out ~190% of them.","price_asof":"2026-08-20","pe":6.98,"dy":5.26,"mcap":5.09,"rsiu":false,"scwhy":{"income":"you cannot buy it at this size","growth":"you cannot buy it at this size","safety":"you cannot buy it at this size, which is the opposite of safe"},"to":344920,"net":5.0,"real":-1.49,"g":[false,true,false,false,true],"pct":376.9,"sc":{"income":null,"growth":null,"safety":null}},{"tk":"SBIC","name":"Stanbic Holdings","sec":"Banking","price":274.0,"chg":-0.36,"vol":7170,"relvol":0.12,"eps":34.86,"dps":23.701,"epsg":5.62,"payout":68.0,"shares_out":372956204,"rsi":null,"rat":"\u2014","sentiment_asof":"2026-08-20","flag":"LIQUIDITY","note":"<b>The only counter on the exchange whose covered dividend beats the T-bill after tax</b> &mdash; 8.22% net vs 7.68%, covered 1.47x, not overbought. And 7,170 shares traded. Your order is 66% of a day. Ex-div 1 Sep.","price_asof":"2026-08-20","pe":7.86,"dy":8.65,"mcap":102.19,"rsiu":false,"scwhy":{"income":"you cannot buy it at this size","growth":"you cannot buy it at this size","safety":"you cannot buy it at this size, which is the opposite of safe"},"to":1964580,"net":8.22,"real":1.73,"g":[false,true,true,true,true],"pct":66.2,"sc":{"income":null,"growth":null,"safety":null}},{"tk":"BRIT","name":"Britam Holdings","sec":"Insurance","price":18.35,"chg":1.94,"vol":388500,"relvol":2.84,"eps":2.19,"dps":null,"epsg":10.01,"payout":0.0,"shares_out":2475204360,"rsi":null,"rat":"\u2014","sentiment_asof":"2026-08-20","flag":null,"note":"No dividend. Volume 2.8x normal. Reports ~28 Aug.","price_asof":"2026-08-20","pe":8.38,"dy":null,"mcap":45.42,"rsiu":false,"scwhy":{"income":"you cannot buy it at this size","growth":"you cannot buy it at this size","safety":"you cannot buy it at this size, which is the opposite of safe"},"to":7128975,"net":0.0,"real":-6.49,"g":[false,true,false,false,true],"pct":18.2,"sc":{"income":null,"growth":null,"safety":null}},{"tk":"ABSA","name":"Absa Bank Kenya","sec":"Banking","price":36.0,"chg":4.05,"vol":352960,"relvol":0.46,"eps":4.06,"dps":2.1312,"epsg":4.53,"payout":52.0,"shares_out":5220277778,"rsi":82.79,"rat":"Neutral","sentiment_asof":"2026-08-20","flag":"DIVUP","note":"Profit <b>fell 10%</b> to 10.53bn &mdash; and the share rose 4% into overbought. Raised interim dividend 150% to 0.50. Parent's buyout drew 21% take-up; stake now 71.99% at 34.50.","price_asof":"2026-08-20","pe":8.87,"dy":5.92,"mcap":187.93,"rsiu":false,"scwhy":{"income":"you cannot buy it at this size","growth":"you cannot buy it at this size","safety":"you cannot buy it at this size, which is the opposite of safe"},"to":12706560,"net":5.62,"real":-0.87,"g":[false,true,true,false,false],"pct":10.2,"sc":{"income":null,"growth":null,"safety":null}},{"tk":"CRWN","name":"Crown Paints","sec":"Building","price":63.5,"chg":0.79,"vol":9730,"relvol":1.12,"eps":6.67,"dps":3.0607,"epsg":74.53,"payout":45.0,"shares_out":139527559,"rsi":null,"rat":"\u2014","sentiment_asof":"2026-08-20","flag":null,"note":"Reported 17 Aug: record H1, revenue 8.38bn (+13.1%), profit 486m (+11.2%), pre-tax margin 8.2%. <b>But operating cash flow fell 40.9% to 681m</b> and current liabilities rose to 6.05bn. 618,000 traded.","price_asof":"2026-08-20","pe":9.52,"dy":4.82,"mcap":8.86,"rsiu":false,"scwhy":{"income":"you cannot buy it at this size","growth":"you cannot buy it at this size","safety":"you cannot buy it at this size, which is the opposite of safe"},"to":617855,"net":4.58,"real":-1.91,"g":[false,true,true,false,true],"pct":210.4,"sc":{"income":null,"growth":null,"safety":null}},{"tk":"HAFR","name":"Home Afrika","sec":"Real estate","price":1.19,"chg":5.31,"vol":557060,"relvol":0.67,"eps":0.11,"dps":null,"epsg":-18.27,"payout":0.0,"shares_out":391596639,"rsi":null,"rat":"\u2014","sentiment_asof":"2026-08-20","flag":null,"note":"Rose 5.3%. Earns 11 cents.","price_asof":"2026-08-20","pe":10.82,"dy":null,"mcap":0.47,"rsiu":false,"scwhy":{"income":"you cannot buy it at this size","growth":"you cannot buy it at this size","safety":"you cannot buy it at this size, which is the opposite of safe"},"to":662901,"net":0.0,"real":-6.49,"g":[false,true,false,false,true],"pct":196.1,"sc":{"income":null,"growth":null,"safety":null}},{"tk":"BOC","name":"BOC Kenya","sec":"Industrial gas","price":190.25,"chg":0.79,"vol":6750,"relvol":3.68,"eps":16.0828,"dps":13.1653,"epsg":null,"payout":79.9,"shares_out":19080158,"rsi":73.74,"rat":"\u2014","sentiment_asof":"2026-08-20","flag":"DIVUP","note":"Reported 21 Aug: <b>profit &minus;39.8% to 100.4m</b>, revenue &minus;17.2%, <b>five-year H1 growth streak ended</b>. Dividend still raised <b>60% to 4.00</b>. Overheads +17.3% on fuel and energy. Cash flow did rise 40.3% to 236.3m.","price_asof":"2026-08-20","pe":11.83,"dy":6.92,"mcap":3.63,"rsiu":false,"scwhy":{"income":"you cannot buy it at this size","growth":"you cannot buy it at this size","safety":"you cannot buy it at this size, which is the opposite of safe"},"to":1284188,"net":6.57,"real":0.08,"g":[false,true,true,false,false],"pct":101.2,"sc":{"income":null,"growth":null,"safety":null}},{"tk":"TOTL","name":"TotalEnergies Kenya","sec":"Energy","price":44.95,"chg":3.57,"vol":65840,"relvol":3.68,"eps":3.45,"dps":3.596,"epsg":46.02,"payout":104.0,"shares_out":603559511,"rsi":null,"rat":"\u2014","sentiment_asof":"2026-08-20","flag":"PAYOUT","note":"<b>Correcting my earlier screens: this dividend is NOT covered &mdash; 104% payout.</b> Rose 3.6% on 3.7x volume. Only 3m turnover.","price_asof":"2026-08-20","pe":13.03,"dy":8.0,"mcap":27.13,"rsiu":false,"scwhy":{"income":"you cannot buy it at this size","growth":"you cannot buy it at this size","safety":"you cannot buy it at this size, which is the opposite of safe"},"to":2959508,"net":7.6,"real":1.11,"g":[false,true,false,false,true],"pct":43.9,"sc":{"income":null,"growth":null,"safety":null}},{"tk":"SMER","name":"Sameer Africa","sec":"Industrial","price":18.25,"chg":0.0,"vol":59400,"relvol":1.06,"eps":0.99,"dps":null,"epsg":382.33,"payout":0.0,"shares_out":278356164,"rsi":null,"rat":"\u2014","sentiment_asof":"2026-08-20","flag":null,"note":"Earns 99 cents. Growth off a tiny base. No dividend.","price_asof":"2026-08-20","pe":18.43,"dy":null,"mcap":5.08,"rsiu":false,"scwhy":{"income":"you cannot buy it at this size","growth":"you cannot buy it at this size","safety":"you cannot buy it at this size, which is the opposite of safe"},"to":1084050,"net":0.0,"real":-6.49,"g":[false,true,false,false,true],"pct":119.9,"sc":{"income":null,"growth":null,"safety":null}},{"tk":"KUKZ","name":"Kakuzi","sec":"Agriculture","price":420.0,"chg":-1.87,"vol":923,"relvol":2.13,"eps":19.77,"dps":15.96,"epsg":null,"payout":81.0,"shares_out":19666667,"rsi":null,"rat":"\u2014","sentiment_asof":"2026-08-20","flag":null,"note":"923 shares traded.","price_asof":"2026-08-20","pe":21.24,"dy":3.8,"mcap":8.26,"rsiu":false,"scwhy":{"income":"you cannot buy it at this size","growth":"you cannot buy it at this size","safety":"you cannot buy it at this size, which is the opposite of safe"},"to":387660,"net":3.61,"real":-2.88,"g":[false,true,true,false,true],"pct":335.3,"sc":{"income":null,"growth":null,"safety":null}},{"tk":"KPC","name":"Kenya Pipeline","sec":"Energy","price":9.08,"chg":0.0,"vol":273990,"relvol":0.64,"eps":0.4122,"dps":null,"epsg":null,"payout":0.0,"shares_out":18172907489,"rsi":null,"rat":"\u2014","sentiment_asof":"2026-08-20","flag":null,"note":"Earns 41 cents &mdash; 22 years of profit &mdash; and no dividend declared. Down 1.09% since listing. It was priced fully, not ignored.","price_asof":"2026-08-20","pe":22.03,"dy":null,"mcap":165.01,"rsiu":false,"scwhy":{"income":"you cannot buy it at this size","growth":"you cannot buy it at this size","safety":"you cannot buy it at this size, which is the opposite of safe"},"to":2487829,"net":0.0,"real":-6.49,"g":[false,true,false,false,true],"pct":52.3,"sc":{"income":null,"growth":null,"safety":null}},{"tk":"SASN","name":"Sasini","sec":"Agriculture","price":24.5,"chg":-2.0,"vol":10220,"relvol":0.54,"eps":0.58,"dps":null,"epsg":null,"payout":0.0,"shares_out":228163265,"rsi":null,"rat":"\u2014","sentiment_asof":"2026-08-20","flag":null,"note":"42x earnings, no dividend.","price_asof":"2026-08-20","pe":42.24,"dy":null,"mcap":5.59,"rsiu":false,"scwhy":{"income":"you cannot buy it at this size","growth":"you cannot buy it at this size","safety":"you cannot buy it at this size, which is the opposite of safe"},"to":250390,"net":0.0,"real":-6.49,"g":[false,true,false,false,true],"pct":519.2,"sc":{"income":null,"growth":null,"safety":null}},{"tk":"WTK","name":"Williamson Tea","sec":"Agriculture","price":157.0,"chg":0.48,"vol":3740,"relvol":0.29,"eps":3.58,"dps":5.0397,"epsg":null,"payout":141.0,"shares_out":34777070,"rsi":null,"rat":"\u2014","sentiment_asof":"2026-08-20","flag":"PAYOUT","note":"44x earnings, pays out more than it earns.","price_asof":"2026-08-20","pe":43.85,"dy":3.21,"mcap":5.46,"rsiu":false,"scwhy":{"income":"you cannot buy it at this size","growth":"you cannot buy it at this size","safety":"you cannot buy it at this size, which is the opposite of safe"},"to":587180,"net":3.05,"real":-3.44,"g":[false,true,false,false,true],"pct":221.4,"sc":{"income":null,"growth":null,"safety":null}},{"tk":"OCH","name":"Olympia Capital","sec":"Building","price":8.38,"chg":4.49,"vol":36800,"relvol":5.32,"eps":0.06,"dps":null,"epsg":-75.68,"payout":0.0,"shares_out":39618138,"rsi":null,"rat":"\u2014","sentiment_asof":"2026-08-20","flag":null,"note":"<b>140x earnings on 5.3x volume.</b> Earns 6 cents. Earnings down 76%. Volume is not validation.","price_asof":"2026-08-20","pe":139.67,"dy":null,"mcap":0.33,"rsiu":false,"scwhy":{"income":"you cannot buy it at this size","growth":"you cannot buy it at this size","safety":"you cannot buy it at this size, which is the opposite of safe"},"to":308384,"net":0.0,"real":-6.49,"g":[false,true,false,false,true],"pct":421.6,"sc":{"income":null,"growth":null,"safety":null}},{"tk":"AMAC","name":"Africa Mega Agricorp","sec":"Process","price":130.0,"chg":2.36,"vol":516,"relvol":1.73,"eps":null,"dps":null,"epsg":null,"payout":null,"shares_out":12307692,"rsi":null,"rat":"\u2014","sentiment_asof":"2026-08-20","flag":null,"note":"516 shares traded.","price_asof":"2026-08-20","pe":null,"dy":null,"mcap":1.6,"rsiu":false,"scwhy":{"income":"you cannot buy it at this size","growth":"you cannot buy it at this size","safety":"you cannot buy it at this size, which is the opposite of safe"},"to":67080,"net":0.0,"real":-6.49,"g":[false,false,false,false,true],"pct":1938.0,"sc":{"income":null,"growth":null,"safety":null}},{"tk":"CIC","name":"CIC Insurance","sec":"Insurance","price":4.68,"chg":-0.85,"vol":150720,"relvol":0.6,"eps":null,"dps":0.1296,"epsg":null,"payout":null,"shares_out":2882478632,"rsi":null,"rat":"\u2014","sentiment_asof":"2026-08-20","flag":null,"note":"No published earnings.","price_asof":"2026-08-20","pe":null,"dy":2.77,"mcap":13.49,"rsiu":false,"scwhy":{"income":"you cannot buy it at this size","growth":"you cannot buy it at this size","safety":"you cannot buy it at this size, which is the opposite of safe"},"to":705370,"net":2.63,"real":-3.86,"g":[false,false,false,false,true],"pct":184.3,"sc":{"income":null,"growth":null,"safety":null}},{"tk":"CTUM","name":"Centum","sec":"Holding","price":17.35,"chg":-0.29,"vol":128390,"relvol":1.22,"eps":null,"dps":0.3227,"epsg":null,"payout":null,"shares_out":659942363,"rsi":null,"rat":"\u2014","sentiment_asof":"2026-08-20","flag":null,"note":"No published earnings.","price_asof":"2026-08-20","pe":null,"dy":1.86,"mcap":11.45,"rsiu":false,"scwhy":{"income":"you cannot buy it at this size","growth":"you cannot buy it at this size","safety":"you cannot buy it at this size, which is the opposite of safe"},"to":2227566,"net":1.77,"real":-4.72,"g":[false,false,false,false,true],"pct":58.4,"sc":{"income":null,"growth":null,"safety":null}},{"tk":"EGAD","name":"Eaagads","sec":"Agriculture","price":28.8,"chg":2.86,"vol":13160,"relvol":2.36,"eps":null,"dps":null,"epsg":null,"payout":null,"shares_out":30763889,"rsi":null,"rat":"\u2014","sentiment_asof":"2026-08-20","flag":null,"note":"Volume 2.4x on an 886m company.","price_asof":"2026-08-20","pe":null,"dy":null,"mcap":0.89,"rsiu":false,"scwhy":{"income":"you cannot buy it at this size","growth":"you cannot buy it at this size","safety":"you cannot buy it at this size, which is the opposite of safe"},"to":379008,"net":0.0,"real":-6.49,"g":[false,false,false,false,true],"pct":343.0,"sc":{"income":null,"growth":null,"safety":null}},{"tk":"EVRD","name":"Eveready","sec":"Consumer","price":1.03,"chg":-0.96,"vol":347280,"relvol":0.43,"eps":null,"dps":null,"epsg":null,"payout":null,"shares_out":211650485,"rsi":null,"rat":"\u2014","sentiment_asof":"2026-08-20","flag":null,"note":"A 218m company.","price_asof":"2026-08-20","pe":null,"dy":null,"mcap":0.22,"rsiu":false,"scwhy":{"income":"you cannot buy it at this size","growth":"you cannot buy it at this size","safety":"you cannot buy it at this size, which is the opposite of safe"},"to":357698,"net":0.0,"real":-6.49,"g":[false,false,false,false,true],"pct":363.4,"sc":{"income":null,"growth":null,"safety":null}},{"tk":"FTGH","name":"Flame Tree","sec":"Consumer","price":2.18,"chg":1.4,"vol":24150,"relvol":0.19,"eps":-0.09,"dps":null,"epsg":-107.88,"payout":null,"shares_out":172935780,"rsi":null,"rat":"\u2014","sentiment_asof":"2026-08-20","flag":null,"note":"Loss-making. Second-biggest weekly gainer to 14 Aug.","price_asof":"2026-08-20","pe":null,"dy":null,"mcap":0.38,"rsiu":false,"scwhy":{"income":"you cannot buy it at this size","growth":"you cannot buy it at this size","safety":"you cannot buy it at this size, which is the opposite of safe"},"to":52647,"net":0.0,"real":-6.49,"g":[false,false,false,false,true],"pct":2469.3,"sc":{"income":null,"growth":null,"safety":null}},{"tk":"KAPC","name":"Kapchorua Tea","sec":"Agriculture","price":340.0,"chg":-0.58,"vol":2630,"relvol":1.35,"eps":null,"dps":24.956,"epsg":null,"payout":null,"shares_out":15676471,"rsi":null,"rat":"\u2014","sentiment_asof":"2026-08-20","flag":null,"note":"7.34% dividend on 894,000 traded all day.","price_asof":"2026-08-20","pe":null,"dy":7.34,"mcap":5.33,"rsiu":false,"scwhy":{"income":"you cannot buy it at this size","growth":"you cannot buy it at this size","safety":"you cannot buy it at this size, which is the opposite of safe"},"to":894200,"net":6.97,"real":0.48,"g":[false,false,false,false,true],"pct":145.4,"sc":{"income":null,"growth":null,"safety":null}},{"tk":"KQ","name":"Kenya Airways","sec":"Airline","price":5.7,"chg":-0.35,"vol":1230000,"relvol":0.74,"eps":-120.31,"dps":null,"epsg":-12502.68,"payout":null,"shares_out":5538596491,"rsi":null,"rat":"\u2014","sentiment_asof":"2026-08-20","flag":null,"note":"<b>Loses 120.31 per share.</b> Fuel +72%, fleet grounded, routes suspended. Now says it will diversify into hospitals, hotels and education.","price_asof":"2026-08-20","pe":null,"dy":null,"mcap":31.57,"rsiu":false,"scwhy":{"income":"you cannot buy it at this size","growth":"you cannot buy it at this size","safety":"you cannot buy it at this size, which is the opposite of safe"},"to":7011000,"net":0.0,"real":-6.49,"g":[false,false,false,false,true],"pct":18.5,"sc":{"income":null,"growth":null,"safety":null}},{"tk":"KURV","name":"Kurwitu Ventures","sec":"Finance","price":1420.0,"chg":0.0,"vol":10,"relvol":0.88,"eps":null,"dps":null,"epsg":null,"payout":null,"shares_out":null,"rsi":null,"rat":"\u2014","sentiment_asof":"2026-08-20","flag":null,"note":"<b>10 shares traded.</b> Not a market.","price_asof":"2026-08-20","pe":null,"dy":null,"mcap":null,"rsiu":false,"scwhy":{"income":"you cannot buy it at this size","growth":"you cannot buy it at this size","safety":"you cannot buy it at this size, which is the opposite of safe"},"to":14200,"net":0.0,"real":-6.49,"g":[false,false,false,false,true],"pct":9154.9,"sc":{"income":null,"growth":null,"safety":null}},{"tk":"LIMT","name":"Limuru Tea","sec":"Agriculture","price":496.0,"chg":0.4,"vol":22,"relvol":0.92,"eps":-21.88,"dps":null,"epsg":-245.13,"payout":null,"shares_out":2540323,"rsi":null,"rat":"\u2014","sentiment_asof":"2026-08-20","flag":null,"note":"<b>22 shares traded.</b> Loses 21.88 a share.","price_asof":"2026-08-20","pe":null,"dy":null,"mcap":1.26,"rsiu":false,"scwhy":{"income":"you cannot buy it at this size","growth":"you cannot buy it at this size","safety":"you cannot buy it at this size, which is the opposite of safe"},"to":10912,"net":0.0,"real":-6.49,"g":[false,false,false,false,true],"pct":11913.5,"sc":{"income":null,"growth":null,"safety":null}},{"tk":"LKL","name":"Longhorn","sec":"Publishing","price":2.65,"chg":-8.62,"vol":12890,"relvol":0.86,"eps":-0.45,"dps":null,"epsg":35.93,"payout":null,"shares_out":289056604,"rsi":null,"rat":"\u2014","sentiment_asof":"2026-08-20","flag":null,"note":"<b>Fell 8.6%.</b> Loss-making.","price_asof":"2026-08-20","pe":null,"dy":null,"mcap":0.77,"rsiu":false,"scwhy":{"income":"you cannot buy it at this size","growth":"you cannot buy it at this size","safety":"you cannot buy it at this size, which is the opposite of safe"},"to":34158,"net":0.0,"real":-6.49,"g":[false,false,false,false,true],"pct":3805.8,"sc":{"income":null,"growth":null,"safety":null}},{"tk":"NBV","name":"Nairobi Business Ventures","sec":"Retail","price":1.33,"chg":-2.21,"vol":20670,"relvol":0.53,"eps":null,"dps":null,"epsg":null,"payout":null,"shares_out":1383458647,"rsi":null,"rat":"\u2014","sentiment_asof":"2026-08-20","flag":null,"note":"No earnings data.","price_asof":"2026-08-20","pe":null,"dy":null,"mcap":1.84,"rsiu":false,"scwhy":{"income":"you cannot buy it at this size","growth":"you cannot buy it at this size","safety":"you cannot buy it at this size, which is the opposite of safe"},"to":27491,"net":0.0,"real":-6.49,"g":[false,false,false,false,true],"pct":4728.8,"sc":{"income":null,"growth":null,"safety":null}},{"tk":"NMG","name":"Nation Media","sec":"Media","price":12.55,"chg":-0.4,"vol":15370,"relvol":0.34,"eps":-1.78,"dps":null,"epsg":-24.93,"payout":null,"shares_out":191235060,"rsi":null,"rat":"\u2014","sentiment_asof":"2026-08-20","flag":null,"note":"<b>Revenue at a 21-year low.</b> Print collapse.","price_asof":"2026-08-20","pe":null,"dy":null,"mcap":2.4,"rsiu":false,"scwhy":{"income":"you cannot buy it at this size","growth":"you cannot buy it at this size","safety":"you cannot buy it at this size, which is the opposite of safe"},"to":192894,"net":0.0,"real":-6.49,"g":[false,false,false,false,true],"pct":673.9,"sc":{"income":null,"growth":null,"safety":null}},{"tk":"PORT","name":"E.A. Portland","sec":"Building","price":115.5,"chg":-6.85,"vol":5590,"relvol":2.06,"eps":null,"dps":null,"epsg":null,"payout":null,"shares_out":96277056,"rsi":null,"rat":"\u2014","sentiment_asof":"2026-08-20","flag":null,"note":"<b>Fell 6.9%</b> on 2.1x volume while national cement demand is reportedly rising. No dividend, no published earnings.","price_asof":"2026-08-20","pe":null,"dy":null,"mcap":11.12,"rsiu":false,"scwhy":{"income":"you cannot buy it at this size","growth":"you cannot buy it at this size","safety":"you cannot buy it at this size, which is the opposite of safe"},"to":645645,"net":0.0,"real":-6.49,"g":[false,false,false,false,true],"pct":201.3,"sc":{"income":null,"growth":null,"safety":null}},{"tk":"SCAN","name":"Scangroup","sec":"Advertising","price":2.09,"chg":-1.88,"vol":55970,"relvol":0.68,"eps":-1.61,"dps":null,"epsg":-37.25,"payout":null,"shares_out":430143541,"rsi":null,"rat":"\u2014","sentiment_asof":"2026-08-20","flag":null,"note":"Loses 1.61 a share.","price_asof":"2026-08-20","pe":null,"dy":null,"mcap":0.9,"rsiu":false,"scwhy":{"income":"you cannot buy it at this size","growth":"you cannot buy it at this size","safety":"you cannot buy it at this size, which is the opposite of safe"},"to":116977,"net":0.0,"real":-6.49,"g":[false,false,false,false,true],"pct":1111.3,"sc":{"income":null,"growth":null,"safety":null}},{"tk":"SGL","name":"Stanlib Fahari I-REIT","sec":"Real estate","price":6.18,"chg":1.31,"vol":2750,"relvol":0.99,"eps":null,"dps":null,"epsg":null,"payout":null,"shares_out":82847896,"rsi":null,"rat":"\u2014","sentiment_asof":"2026-08-20","flag":null,"note":"Property trust. 17,000 traded.","price_asof":"2026-08-20","pe":null,"dy":null,"mcap":0.51,"rsiu":false,"scwhy":{"income":"you cannot buy it at this size","growth":"you cannot buy it at this size","safety":"you cannot buy it at this size, which is the opposite of safe"},"to":16995,"net":0.0,"real":-6.49,"g":[false,false,false,false,true],"pct":7649.3,"sc":{"income":null,"growth":null,"safety":null}},{"tk":"SKL","name":"Shri Krishana","sec":"Process","price":16.9,"chg":5.62,"vol":28310,"relvol":3.33,"eps":null,"dps":null,"epsg":null,"payout":null,"shares_out":null,"rsi":79.55,"rat":"\u2014","sentiment_asof":"2026-08-20","flag":null,"note":"Overbought at 79.6 on 3.3x volume with <b>no published earnings at all</b>. Appeared in gainers/losers 7 of 15 days &mdash; a known pump.","price_asof":"2026-08-20","pe":null,"dy":null,"mcap":null,"rsiu":false,"scwhy":{"income":"you cannot buy it at this size","growth":"you cannot buy it at this size","safety":"you cannot buy it at this size, which is the opposite of safe"},"to":478439,"net":0.0,"real":-6.49,"g":[false,false,false,false,false],"pct":271.7,"sc":{"income":null,"growth":null,"safety":null}},{"tk":"UCHM","name":"Uchumi","sec":"Retail","price":1.51,"chg":0.67,"vol":206950,"relvol":0.76,"eps":null,"dps":null,"epsg":null,"payout":null,"shares_out":374834437,"rsi":null,"rat":"\u2014","sentiment_asof":"2026-08-20","flag":null,"note":"Still 1.51. No earnings.","price_asof":"2026-08-20","pe":null,"dy":null,"mcap":0.57,"rsiu":false,"scwhy":{"income":"you cannot buy it at this size","growth":"you cannot buy it at this size","safety":"you cannot buy it at this size, which is the opposite of safe"},"to":312494,"net":0.0,"real":-6.49,"g":[false,false,false,false,true],"pct":416.0,"sc":{"income":null,"growth":null,"safety":null}},{"tk":"UMME","name":"Umeme","sec":"Power","price":6.68,"chg":2.14,"vol":62870,"relvol":0.96,"eps":null,"dps":26.2958,"epsg":null,"payout":null,"shares_out":534431138,"rsi":null,"rat":"\u2014","sentiment_asof":"2026-08-20","flag":"TRAP","note":"<b>That 393% yield is the Uganda concession ending &mdash; a one-off return of your own capital, not income.</b> Screen on yield and this is the first thing you find.","price_asof":"2026-08-20","pe":null,"dy":393.65,"mcap":3.57,"rsiu":false,"scwhy":{"income":"you cannot buy it at this size","growth":"you cannot buy it at this size","safety":"you cannot buy it at this size, which is the opposite of safe"},"to":419972,"net":373.97,"real":367.48,"g":[false,false,false,true,true],"pct":309.5,"sc":{"income":null,"growth":null,"safety":null}},{"tk":"XPRS","name":"Express Kenya","sec":"Logistics","price":7.0,"chg":-1.41,"vol":2440,"relvol":0.44,"eps":-2.62,"dps":null,"epsg":-15.86,"payout":null,"shares_out":48428571,"rsi":null,"rat":"\u2014","sentiment_asof":"2026-08-20","flag":null,"note":"Loses 2.62 a share. 17,000 traded.","price_asof":"2026-08-20","pe":null,"dy":null,"mcap":0.34,"rsiu":false,"scwhy":{"income":"you cannot buy it at this size","growth":"you cannot buy it at this size","safety":"you cannot buy it at this size, which is the opposite of safe"},"to":17080,"net":0.0,"real":-6.49,"g":[false,false,false,false,true],"pct":7611.2,"sc":{"income":null,"growth":null,"safety":null}}],"macro":[["NSE market value","3.996 tn","+1.30% on the week, 3.62bn short of 4 trillion"],["Banking index","276.63","+2.83% &mdash; banks were 55.38% of all weekly turnover"],["NASI","238.13","+1.30%"],["Weekly turnover","3.92 bn","&minus;5.62%. Volume fell 25.61% to 100.09m shares"],["Foreign flows","&minus;1.17 bn","Net sellers in all five sessions, double the prior week. Locals 76.2% of turnover"],["Central Bank Rate","8.75%","Held for a fourth consecutive meeting, 11 August"],["Inflation","6.49%","July 2026 &mdash; the bar every return must clear"],["364-day T-bill","9.037%","7.68% after the 15% tax. No stockbroker needed"],["182-day T-bill","8.950%",""],["91-day T-bill","8.773%",""],["Infrastructure bonds","tax exempt","Three reopened issues drew a record 460.4bn of bids against a 150bn target"],["Lending rate","14.38%","June 2026"],["Savings rate","3.32%","Loses 3.17% a year in real terms"],["Shilling","129.49","Reserves USD 15.25bn, 6.3 months import cover"]],"cal":[["Mon 24 Aug","Market reopens","Next trading day.","hot"],["~Tue 25 Aug","Last buy for the NCBA dividend","T+3 settlement makes this the final realistic day to own it before book closure.","hot"],["Thu 27 Aug","Jubilee Holdings","Results expected on or before.",""],["Fri 28 Aug","NCBA and BAT book closure","Own before this date to receive the dividend. Britam and NSE results also expected.","hot"],["Mon 31 Aug","KCB \u00b7 Co-op \u00b7 NCBA \u00b7 I&M \u00b7 Stanbic","<b>Statutory deadline &mdash; all five must report.</b> As of 23 August none had. Anyone buying them now is buying before the number.","hot"],["Tue 1 Sep","Stanbic ex-dividend","",""],["~24 Sep","Unga Group","Full year to June.",""],["30 Sep","Kenya Power","Full year to June. The foreign-exchange question gets answered.",""],["30 Oct","KenGen","Full year to June.",""],["Oct 2026","KCB first bond tranche","100bn target.",""]],"macroK":{"infl":6.49,"cbr":8.75,"t364":9.037,"tbn":7.68,"order":1300000,"gate":13000000,"divt":0.05,"intt":0.15,"stamp":"2026-08-21T17:00:00+03:00","news":"2026-08-23T12:00:00+03:00"},"news":[{"d":"21 Aug 2026","who":"NCBA Group","head":"Interim dividend of 3.75 a share, register closes 28 August","body":"Payment 8 September. Against the 2.25 interim paid in 2024 this is <b>67% higher</b>. The declaration came before the half-year results, which were still due by 31 August &mdash; so the dividend was raised into a profit figure the market had not seen. Three other listed companies raised dividends into <i>falling</i> profit in the same fortnight, so the pattern is worth holding in mind until the number appears.","tk":"NCBA"},{"d":"17 Aug 2026","who":"Car &amp; General","head":"Interim dividend of 1.00 a share, register closes 3 September","body":"Payment 10 September. On a share around 375 that is 0.27%. Car &amp; General is up roughly tenfold in a year; the dividend is not the reason anyone is holding it, and 78% of its profit is a share of Watu Credit, which publishes no accounts.","tk":"CGEN"},{"d":"29 Jul 2026","who":"British American Tobacco","head":"Interim dividend of 10.00 a share, register closes 28 August","body":"Payment 25 September. The biggest per-share payment here, and the reason this counter tops every yield table in the country. Its payout ratio is <b>134%</b> &mdash; it is distributing more than it earns, which is funded by borrowing or by selling something, and cannot continue indefinitely.","tk":"BAT"},{"d":"21 Aug 2026","who":"Market","head":"Friday's session was missing from this page until now","body":"Prices here were stamped Thursday 20 August. A check on 23 August found a Friday 21 August session: <b>Co-operative Bank &minus;6.19% to 36.35</b>, Kenya Power &minus;2.33% to 20.95, KenGen &minus;1.33% to 11.15, Safaricom &minus;0.95% to 36.35, NCBA +0.28% to 90.50. Six counters were updated. For the rest the only source reachable was <i>older</i> than what this page already held, so it was left alone &mdash; a price is only replaced by one with a later date on it.","tk":null},{"d":"2026-08-21","who":"BOC Kenya","head":"Five-year profit streak ends &mdash; and the dividend goes up 60%","body":"H1 profit fell 39.8% to KSh 100.4m, revenue &minus;17.2% to KSh 600m, pre-tax &minus;37.4%. Overheads rose 17.3% to KSh 190.8m on fuel and energy. Interim dividend nonetheless raised 60% to KSh 4.00 &mdash; the highest in the series. Operating cash flow did improve 40.3% to KSh 236.3m, cash KSh 1.29bn.","tk":"BOC"},{"d":"2026-08-20","who":"Family Bank","head":"Maiden results: profit +62%, but the engine is Treasury bills","body":"PAT KSh 3.70bn, H1 EPS 2.23 from 1.75. Net interest income 6.95bn&rarr;9.78bn. Loans +10% to 111.06bn; government securities <b>+55% to 94.10bn</b>. Deposits +20% to 180.22bn on flat interest expense. Liquidity ratio 53.1%&rarr;61.3%. Due to other banks +198% to 4.54bn. <b>Gross NPLs +19% to 18.14bn.</b> Provisions 663.5m&rarr;998.3m. Assets +24% to 238.93bn, equity 33.22bn.","tk":"F"},{"d":"2026-08-19","who":"Equity Group","head":"Record KSh 45.5bn, and the best asset-quality swing of the cycle","body":"Attributable PAT 43.7bn (+31.5%); group 45.5bn (+32%). Total income +25% to 124.9bn. Assets +20% to 2.16tn. <b>NPL ratio 13.7% &rarr; 9.5%.</b> Regional subsidiaries now 52% of banking assets, 42% of PAT. <b>No interim dividend</b> &mdash; capital retained for expansion.","tk":"EQTY"},{"d":"2026-08-19","who":"Diamond Trust","head":"Pre-tax +37% on cheaper funding","body":"H1 pre-tax 9.84bn. PAT 6.4bn. Total operating income +21% to 26.5bn from 21.9bn. Net interest income +26%. Double-digit loan growth. Reported six days earlier than the estimated date &mdash; the share had already run 14% on triple volume.","tk":"DTK"},{"d":"2026-08-19","who":"KCB Group","head":"300bn borrowing programme, first 100bn tranche by October","body":"Five-year medium-term note programme, subject to regulatory approval, alongside a new sustainability bond framework launched at the KCB Leadership Centre. <b>This is debt, not equity &mdash; no dilution to shareholders.</b> It signals intent to lend materially more, and it means a KCB bond will shortly exist as a fixed-income alternative.","tk":"KCB"},{"d":"2026-08-19","who":"Car &amp; General","head":"Front page calls it speculative retail","body":"Business Daily attributes the rally to &ldquo;speculative retail investors&rdquo;. Market value up from KSh 2.65bn to KSh 27.41bn in twelve months &mdash; a 936% increase, about KSh 24.76bn of new paper wealth. The quiet phase is over.","tk":"CGEN"},{"d":"2026-08-18","who":"Standard Chartered","head":"Profit &minus;17%, dividend raised anyway, no payment date","body":"Interim dividend lifted to KSh 8.50 from 8.00 while half-year profit fell 17%. Trailing EPS is down 42.19% and the payout ratio stands at 99%. No timeline for the payment was disclosed.","tk":"SCBK"},{"d":"2026-08-18","who":"Absa Bank Kenya","head":"Profit &minus;10%, dividend +150%, and the parent's buyout failed","body":"H1 PAT KSh 10.53bn, down from 11.6bn as rate cuts squeezed income. Interim dividend raised 150% to a record KSh 0.50. Net loans a record 329.87bn. Separately the South African parent sought 895.9m shares at KSh 34.50 to reach 85%; only 189.38m came in &mdash; a <b>21.1% take-up</b>. Stake rose to 71.99%, not the 85% intended. Over 64,000 minority holders declined.","tk":"ABSA"},{"d":"2026-08-19","who":"Kenya Airways","head":"Wider losses, and a plan to open hospitals","body":"Fuel costs +72%, fleet grounded, intra-Africa routes suspended and frequencies cut. Management's revival strategy is diversification into healthcare, hospitality and education, plus spinning off the maintenance unit.","tk":"KQ"},{"d":"2026-08-17","who":"Crown Paints","head":"Record half-year &mdash; on weaker cash","body":"Revenue +13.1% to KSh 8.38bn, net profit +11.2% to a record KSh 486m, pre-tax +25.5% to 688m, margin 7.4%&rarr;8.2%. <b>But net operating cash flow fell 40.9% to 681m</b> and current liabilities rose to 6.05bn from 4.87bn. Assets +19.1% to 10.63bn. KSh 1.56bn now sunk in a loss-making Tanzanian unit. No interim dividend.","tk":"CRWN"},{"d":"2026-08-17","who":"Nation Media Group","head":"Revenue at a 21-year low","body":"Broadcasting and digital growth insufficient to offset print collapse; losses widened.","tk":"NMG"},{"d":"2026-08-14","who":"Market","head":"Foreigners sold in all five sessions while the index rose","body":"NSE market cap +1.30% to KSh 3.996tn, 3.62bn short of 4 trillion. Banking index +2.83% to 276.63; banks were 55.38% of weekly turnover. <b>Turnover fell 5.62% to 3.92bn and volume fell 25.61% to 100.09m shares.</b> Foreign investors were net sellers of KSh 1.17bn &mdash; more than double the prior week &mdash; in every session. Locals were 76.2% of turnover.","tk":"MKT"},{"d":"2026-08-11","who":"Central Bank","head":"Rate held at 8.75% for a fourth straight meeting","body":"CBK cited stable inflation and exchange rate against elevated global energy risk, and noted declining commercial lending rates supporting private-sector credit. Shilling KSh 129.40/USD, reserves USD 15.25bn, 6.3 months import cover. <b>Three reopened infrastructure bonds drew a record KSh 460.4bn of bids against a KSh 150bn target.</b> T-bills drew 40.8bn against 28bn offered.","tk":"MKT"}],"legal":[{"sev":"critical","tks":["KCB","NCBA","COOP"],"title":"DPP charges the chief executives of three of the largest banks","forum":"Director of Public Prosecutions","status":"Charged 5 Aug 2026","yr":"2026","body":"Charges brought under the Proceeds of Crime and Anti-Money Laundering Act, sections 5 and 44(2). <b>The individuals were charged, not the institutions</b> &mdash; a distinction that matters for the shares. But these three banks are roughly a quarter of this exchange's value and all three must publish half-year results within days.","impact":"Governance discount and headline risk, not a balance-sheet event. Watch whether any board makes a leadership change before results."},{"sev":"critical","tks":["KNRE"],"title":"Constitutional petition freezes twelve board appointments","forum":"High Court","status":"Order runs to 1 October 2026","yr":"2026","body":"Governance at the national reinsurer is unresolved by court order until October &mdash; arriving in the season when El Ni&ntilde;o flood and crop claims land on exactly this balance sheet.","impact":"Cannot make major decisions while frozen. Rated Buy, cheap on earnings, and structurally stuck."},{"sev":"elevated","tks":["DTK"],"title":"SIM-swap fraud judgment apportions the bank 40% liability","forum":"High Court &mdash; [2026] KEHC 9771 (KLR)","status":"Judgment delivered","yr":"2026","body":"The court apportioned Diamond Trust 40% of the loss, KES 1,788,601. Immaterial as a number against a 47bn market cap.","impact":"Precedent, not provision. Establishes bank co-liability in mobile-fraud losses &mdash; relevant to every bank with a mobile channel."},{"sev":"elevated","tks":["KCB"],"title":"Moving to take over Kilimani apartments in a 2bn dispute","forum":"High Court / administration","status":"Live","yr":"2026","body":"KCB placed the developer Northcote under administration and is moving on the security. Ordinary recovery action for a bank of this size.","impact":"Recovery timing, not solvency. Included because it is live and disclosed."},{"sev":"watch","tks":[],"title":"Tribunal: KRA cannot deny VAT deductions on supplier red flags alone","forum":"Tax Appeals Tribunal","status":"Ruled","yr":"2026","body":"A taxpayer-favourable ruling limiting the Revenue Authority's ability to disallow input VAT purely because a supplier looks irregular. Relevant to any listed company carrying contested assessments.","impact":"Mildly positive across the market for contingent tax liabilities."},{"sev":"watch","tks":[],"title":"EPZ firm loses a 390m appeal on burden of proof","forum":"Tax Appeals Tribunal","status":"Decided against taxpayer","yr":"2026","body":"The company could not prove KRA had received its objection letter. The claim failed on procedure, not merit.","impact":"A reminder that tax contingencies in annual reports turn on paperwork, not argument."},{"sev":"watch","tks":["ABSA"],"title":"Parent's tender offer fails to reach its target","forum":"Corporate action, not litigation","status":"Closed at 21.1% take-up","yr":"2026","body":"Absa Group sought 895.9m shares at KSh 34.50 to lift its stake to as much as 85%. Only 189.38m came in. The stake rose to <b>71.99%</b>, not 85%. Over 64,000 minority holders declined to sell &mdash; in a bank whose half-year profit had just fallen 10%.","impact":"Free float stays wider than the parent intended. Read the refusal as minority holders expecting more than 34.50 &mdash; the share closed at 36.00."}],"debt":[{"tk":"KCB","name":"KCB Group","head":"300bn note programme, first 100bn tranche by October","body":"A five-year medium-term note programme, subject to regulatory approval, launched 19 August alongside a new sustainability bond framework.","read":"<b>This is debt, not shares.</b> Nobody's slice of KCB gets smaller &mdash; there is no dilution. It signals intent to lend materially more, and it means a KCB bond will exist by October as a fixed-income alternative.","sev":"watch"},{"tk":"F","name":"Family Bank","head":"Interbank borrowing up 198% to 4.54bn","body":"Balances due to other banks rose 198% to KSh 4.54bn. Government securities holdings 94.10bn against net loans of 111.06bn. Equity 33.22bn on assets of 238.93bn.","read":"Borrowing in the interbank market to fund a Treasury-bill carry trade. It works while rates hold and reverses when they fall &mdash; which is precisely what cut Absa's profit 10% this half.","sev":"elevated"},{"tk":"CRWN","name":"Crown Paints","head":"Current liabilities 6.05bn while cash conversion fell 41%","body":"Current liabilities rose to KSh 6.05bn from 4.87bn in the same half that operating cash flow fell 40.9% to 681m. KSh 1.56bn cumulative sunk into a loss-making Tanzanian subsidiary, 791.47m of it in 2025. Planned capex 141.24m at Lukenya.","read":"Rising short-term obligations against falling cash conversion is the combination that ends small manufacturers. Record profit does not offset it.","sev":"elevated"},{"tk":"ABSA","name":"Absa Bank Kenya","head":"Record loan book of 329.87bn, and profit still fell","body":"Net loans and advances reached a record KSh 329.87bn, up 8%, while half-year profit fell 10% to 10.53bn as rate cuts compressed margin.","read":"Growing the book into a falling-rate environment did not protect earnings. That is the read-across to every bank still to report.","sev":"watch"},{"tk":"SLAM","name":"Sanlam Kenya","head":"Borrowings cut to 1.44bn from 4.37bn","body":"Borrowings down to KSh 1.44bn from 4.37bn at June 2024. Solvency ratio 266%. But pre-tax profit fell 28.1%, the insurance service result 34.5%, and investment returns 83.3%.","read":"The balance sheet was repaired. The earnings engine was not. Deleveraging is not a thesis on its own.","sev":"watch"},{"tk":"EQTY","name":"Equity Group","head":"Assets 2.16 trillion, bad loans 13.7% to 9.5%","body":"Total assets expanded 20% to KSh 2.16tn. The non-performing loan ratio fell from 13.7% to 9.5%. Regional subsidiaries are now 52% of banking assets and 42% of profit.","read":"<b>The best asset-quality improvement of this cycle.</b> On a balance sheet this size, a 4.2-point NPL fall is worth more than any dividend on this exchange.","sev":"clear"},{"tk":"KQ","name":"Kenya Airways","head":"Fuel costs up 72%, fleet grounded","body":"Fuel costs rose 72%. Aircraft grounded, intra-Africa routes suspended, frequencies cut. Losing KSh 120.31 per share.","read":"No debt disclosure changes this picture. The stated revival plan is diversification into hospitals, hotels and education.","sev":"critical"},{"tk":"BOC","name":"BOC Kenya","head":"Cash flow rose 40% while profit fell 40%","body":"Operating cash flow improved 40.3% to KSh 236.3m and cash reserves reached 1.29bn &mdash; in the half where net profit fell 39.8% to 100.4m and a five-year growth streak ended.","read":"The rare inverse of the Crown Paints problem: worse profit, better cash. Of the two, better cash is the one you want.","sev":"watch"}],"divup":[{"n":"Standard Chartered","t":"SCBK","p":-17.0,"d":6.25,"x":"8.00 &rarr; 8.50, no payment date given"},{"n":"Absa Bank Kenya","t":"ABSA","p":-10.0,"d":150.0,"x":"0.20 &rarr; 0.50, a record"},{"n":"BOC Kenya","t":"BOC","p":-39.8,"d":60.0,"x":"2.50 &rarr; 4.00, highest in the series"}],"goaldoc":{"income":{"t":"Income now","one":"You want money arriving in your account.","mean":"Twice a year most listed companies send cash to shareholders. That is a dividend. It lands in your bank account and you can spend it. This goal is about getting paid, not about getting rich.","accept":"The share price may go nowhere for years. You are buying a cheque, not a rocket.","kills":"<b>A dividend that is not covered by profit.</b> If a company earns 10 and pays out 13, it is borrowing or selling something to pay you. That gets cut &mdash; usually without warning. Three companies on this exchange did exactly this in the last week.","test":"Payout ratio under 90%, and the after-tax yield beating what the government pays you risk-free."},"growth":{"t":"Growth","one":"You want the price higher than you paid.","mean":"You buy at 90, you hope to sell at 140. Dividends are a bonus you barely notice. All of your return comes from someone later paying more than you did.","accept":"No cash for years, and the real possibility of being wrong for a long time while holding.","kills":"<b>Buying growth that already happened.</b> A share up 400% has already been discovered. And profit that will not repeat &mdash; a currency gain, a one-off sale, a share of a company that publishes no accounts.","test":"Earnings actually growing, at a price that has not already priced it in, and profit that repeats."},"safety":{"t":"Safety first","one":"You want your money back, plus a bit.","mean":"You would rather make 8% you can rely on than 40% you might. You are protecting what you have more than you are building.","accept":"You will watch other people make more than you, and it will be uncomfortable.","kills":"<b>Buying something you cannot sell.</b> A share nobody trades has a price on the screen and no buyer when you need one. And a dividend funded by borrowing rather than profit.","test":"Covered dividend, real daily trading, price not already stretched, and income that at least keeps pace with inflation."},"preserve":{"t":"I cannot afford to lose it","one":"This is money you actually need.","mean":"Rent. School fees. The money that stands between you and a crisis. If it halved, something in your life would break.","accept":"Nothing. That is the point. This goal does not accept losses.","kills":"<b>The stock market itself.</b> Any share can fall 30% in a month for reasons that have nothing to do with the company. There is no share on this exchange that is safe in the way this goal needs.","test":"This page will not recommend a share for this goal. It will show you where the money should go instead, and the numbers for that."}},"edu":[{"k":"Years of profit","also":"Price to earnings, or P/E","s":"If it says 6, the company earns back what you paid in about six years at today's rate of profit.","l":"Lower looks cheaper. But cheap often means the market expects that profit to fall &mdash; so a very low number is a question, not a bargain. Kenya Power sits at 1.65 on this exchange, and that is a warning rather than a gift, because its profit comes from currency movements on dollar debt rather than from selling electricity."},{"k":"Earnings per share","also":"EPS","s":"Of all the profit the company made, this is the slice sitting behind one share.","l":"If a company earns 14.50 per share and the share costs 90, you are paying about 6.2 years of profit. Watch for the word <i>attributable</i> &mdash; group profit includes slices belonging to partners in other countries, and that part is not yours."},{"k":"Dividend","also":"Yield","s":"Cash the company sends you, shown as a percentage of what the share costs today.","l":"A 7.78% dividend on a 90-shilling share means about 7 shillings a year per share. It is paid in cash, usually twice a year, and it is the only return that does not depend on someone else buying your shares later."},{"k":"Payout ratio","also":"Dividend cover","s":"Of every 100 shillings the company earns, how much it hands to shareholders.","l":"Under 70 is comfortable. Over 100 means it is paying out more than it earns &mdash; funded by borrowing or by selling something &mdash; and that cannot continue. <b>BAT on this exchange pays 134%. Standard Chartered pays 99% with earnings down 42%.</b> Those are the two highest yields here and both are countdowns."},{"k":"Tax on your return","also":"Withholding tax","s":"Kenya takes 5% of share dividends and 15% of interest on government paper.","l":"This changes which option actually wins, and almost nobody adjusts for it. A 7.96% dividend nets 7.56%. A 9.037% Treasury bill nets 7.68%. The share <i>looks</i> higher and is actually lower. Infrastructure bonds are exempt entirely, which is why they get three times oversubscribed."},{"k":"The risk-free rate","also":"What doing nothing pays","s":"The government will pay you 9.037% to lend it money for a year, with no risk of the company failing.","l":"After its 15% tax that is 7.68%. This is the bar. <b>If a share pays you less than 7.68% in dividends, you are taking company risk for free</b> &mdash; the only reason left to own it is a belief the price will rise. Every yield on this page is measured against this line."},{"k":"Real return","also":"After inflation","s":"Prices in Kenya rose 6.49% in the year to July. Your return has to beat that before you are actually ahead.","l":"A savings account paying 3.32% loses you 3.17% a year in what your money can buy. You feel richer and get poorer. Every income figure on this page is also shown after inflation, because that is the only version that is true."},{"k":"Traded in a day","also":"Liquidity","s":"The price on the screen only exists for the number of shares people are actually trading.","l":"This is the one beginners never hear about and it costs the most. If your order is larger than a day's trading, you push the price up against yourself and pay more than the screen says. When you sell, the same in reverse &mdash; and there may be nobody there. <b>Of 57 counters here, most cannot absorb even a modest order.</b> Enter your amount above and the page marks which ones can."},{"k":"Momentum","also":"RSI","s":"How hard the price has run recently. Above 70 means the crowd already arrived.","l":"It does not mean the price will fall. It means you are not early, and the easy part is behind you. Right now <b>eleven counters here are overbought and none are oversold</b> &mdash; there is nowhere on this exchange you can buy something the crowd has abandoned."},{"k":"Earnings quality","also":"Is the profit real","s":"Profit can come from selling things, or from a one-off that will not happen again.","l":"A currency gain on dollar debt. A property revaluation. A share of another company's profit. The first kind repeats and is worth paying for; the others are not. <b>Car &amp; General looks cheap on forward earnings, but 78% of its profit is a share of Watu Credit, which publishes no accounts and whose own profit fell 85% in the 2024 floods.</b>"},{"k":"Cash conversion","also":"Profit versus cash","s":"Whether the profit on paper actually turned into money in the bank.","l":"Always put these two next to each other. Crown Paints just posted a record half-year profit while its operating cash flow <b>fell 40.9%</b> &mdash; the sales are real but the money has not arrived. That gap is the single most useful check an ordinary investor can make, and it takes one minute."},{"k":"Book closure","also":"Ex-dividend date","s":"The deadline to own a share if you want its next dividend.","l":"You must be on the register before that date. And a trade takes three working days to settle, so the last realistic day to buy is roughly three working days earlier. Miss it by a day and you wait a year."},{"k":"Reading news against the numbers","also":"Why ratios lie","s":"Every ratio on every screen is backward-looking. News is what changes the price.","l":"This is the lesson that cost the most. A screen showed a share at 12 years of profit while its results, published the day before, had tripled the profit &mdash; making it 5.8 years. <b>The ratio was not wrong, it was late.</b> On this page every counter's verdict states what the news does to the numbers, because the numbers alone would have told you to walk past it."}],"newsread":{"EQTY":{"dir":"up","t":"The news makes this better than the ratios say","b":"Reported 19 August: profit to shareholders <b>43.7bn, up 31.5%</b>, and bad loans fell from <b>13.7% to 9.5%</b>. On a 2.16 trillion balance sheet a 4.2-point fall in bad loans is worth more than any dividend on this exchange. Annualise the half-year and you are paying about <b>4.0 years of profit</b>, not the 4.72 the trailing screen shows.","c":"But there is <b>no interim dividend</b> &mdash; the cash is being kept for expansion &mdash; and the share is overbought after a 5% week. You are buying the better bank at a stretched price with no cash until next year."},"DTK":{"dir":"up","t":"The news explains the volume","b":"Reported 19 August: pre-tax profit <b>+37% to 9.84bn</b>, interest income +26%, total income +21%. It reported <b>six days earlier than the estimated date</b> &mdash; which is why the share ran 14% the week before on triple normal volume. Somebody knew.","c":"The figure is the <i>group</i>. Diamond Trust has real minority partners in Tanzania, Uganda and Burundi, so the slice belonging to you is smaller than the headline. And the news is now in the price &mdash; momentum 83.8."},"SCBK":{"dir":"down","t":"The news destroys the yield","b":"Reported 18 August: profit <b>&minus;17%</b>. Trailing earnings per share are down <b>42%</b>. It pays out <b>99% of what it earns</b> &mdash; and raised the interim dividend to 8.50 anyway, <b>with no payment date disclosed</b>.","c":"That 9.00% is the highest apparently-safe income on this exchange and the least safe number on this page. The share fell 5.5% on the day. <b>A screen sorting by yield puts this near the top. Do not let it.</b>"},"ABSA":{"dir":"down","t":"The news contradicts the price","b":"Reported 18 August: profit <b>fell 10%</b> to 10.53bn as rate cuts squeezed income &mdash; and the share <b>rose 4%</b> into overbought territory two days later. It raised the interim dividend 150% to a record 0.50 anyway.","c":"Separately the South African parent tried to buy 895.9m shares at 34.50 to reach 85%. Only <b>21.1%</b> came in; the stake went to 71.99%. <b>Over 64,000 small holders refused cash</b> in a bank whose profit is falling. Read that as the crowd expecting more, not as a valuation."},"BOC":{"dir":"down","t":"The news ends a five-year story","b":"Reported 21 August: profit <b>&minus;39.8% to 100.4m</b>, revenue &minus;17.2%, and a <b>five-year run of first-half profit growth ended</b>. Overheads rose 17.3% on fuel and energy. The interim dividend was still raised <b>60% to 4.00</b> &mdash; the third company in one week to do that.","c":"One genuine positive: operating cash flow rose 40.3% to 236.3m and cash reached 1.29bn. Worse profit, better cash &mdash; of the two, better cash is the one you want. But the payout is now 80% of a shrinking number."},"F":{"dir":"down","t":"The news explains where the growth came from, and it is not banking","b":"Reported 20 August: profit <b>+62% to 3.70bn</b>. Then look at the engine. Loans grew <b>10%</b> while holdings of government securities jumped <b>55% to 94.10bn</b>. Deposits rose 20% while interest costs stayed flat. <b>It is a leveraged Treasury-bill fund with a banking licence.</b> Non-interest income actually fell.","c":"And bad loans rose <b>19% to 18.14bn &mdash; 16.3% of its loan book</b>, against Equity's 9.5%. You would pay 1.65 times book for that, with <b>no dividend</b>, to access a trade you can do yourself risk-free. It closed at 33.00, below the 37 it touched."},"CGEN":{"dir":"mixed","t":"The news is now the story, and that is the warning","b":"Half-year profit <b>2.60bn, up 309%</b>. On 80.2m shares that annualises to about <b>5.8 years of profit</b> &mdash; not expensive at all. One year: <b>+1,066%</b>. Market value went from 2.65bn to 27.41bn.","c":"On 19 August the national business paper put it on the front page and attributed the rally to <b>&ldquo;speculative retail investors&rdquo;</b>. And <b>78% of that profit is a share of Watu Credit's earnings</b> &mdash; an associate that publishes no accounts, whose own profit collapsed 85% in the 2024 floods. El Ni&ntilde;o rains are forecast for October. You cannot audit four-fifths of the profit."},"KPLC":{"dir":"down","t":"The cheapest number here is the biggest warning","b":"It earns <b>12.76 per share</b> on a 21.45 price &mdash; 1.65 years of profit, the cheapest on the exchange. The dividend is covered <b>11.6 times</b>. Rated Buy, genuinely liquid, not overbought. On paper the best thing here.","c":"But Kenya Power's profit swings on <b>foreign-exchange gains on its dollar debt</b>, not on selling electricity. When the shilling strengthens it books enormous paper gains straight through the income statement. Same category as Car &amp; General's associate income: real in the accounts, not repeatable. Up 88% in a year. <b>Full-year results land 30 September and could look entirely different.</b>"},"KCB":{"dir":"mixed","t":"Overbought before the number, and a new borrowing programme","b":"Launched a <b>300bn medium-term note programme</b> on 19 August, first tranche 100bn targeted by October. Read this correctly: <b>it is debt, not new shares.</b> Nobody's slice gets smaller. It signals intent to lend materially more.","c":"But it is <b>overbought at 84.8 before it has reported</b>, and it must publish by 31 August. Its chief executive was among three charged by the DPP on 5 August. You would be buying a stretched price ahead of a number you have not seen."},"NCBA":{"dir":"up","t":"Quietly the last one standing","b":"It <b>drifted down while every other large bank rose</b>. It is the only liquid large bank that is <b>not overbought</b>, its 7.78% dividend is <b>covered 2.1 times</b>, and it trades 30.7m a day. <b>Book closure 28 August.</b>","c":"It has not reported yet &mdash; the figures land by 31 August. Earnings growth is only 8.3%, the weakest of the big banks. And its chief executive was among three charged on 5 August. The dividend also nets <b>7.39% against a 7.68% Treasury bill</b>, so on income alone you are still behind."},"TOTL":{"dir":"down","t":"Correcting my own earlier screens","b":"I called this the overlooked one: 8% dividend, earnings up 46%, not overbought, nobody talking about it.","c":"<b>The dividend is not covered.</b> Payout is 104% &mdash; it pays out more than it earns. That is the same defect as BAT, on a smaller company. And it traded 3m in a day. Withdraw the earlier read."},"SBIC":{"dir":"mixed","t":"The right answer you cannot have","b":"The <b>only counter on this exchange whose covered dividend beats the Treasury bill after tax</b> &mdash; 8.22% net against 7.68%, covered 1.47 times, and not overbought. On the numbers alone it wins outright.","c":"It traded <b>7,170 shares</b>. Under 2m shillings in a full day. Enter almost any real amount above and this fails the access gate. <b>The best income on the exchange sits behind a door most people cannot fit through.</b>"},"CARB":{"dir":"down","t":"Nothing was announced","b":"Up 25% in days, and 7.74% on the last session alone.","c":"Momentum <b>95.4 &mdash; the most overbought reading on the exchange &mdash; on volume 13.3 times normal, with no announcement of any kind</b>. No results, no dividend news, nothing. This is the single most dangerous chart on this page and there is no information behind it."},"CRWN":{"dir":"mixed","t":"Record profit, worse cash","b":"Reported 17 August: best half-year on record. Revenue 8.38bn (+13.1%), profit 486m (+11.2%), pre-tax margin up to 8.2%. The recovery runs 37m &rarr; 75m &rarr; 437m &rarr; 486m across four first halves.","c":"<b>Operating cash flow fell 40.9% to 681m</b> and current liabilities rose to 6.05bn from 4.87bn. Profit up, cash down. It also traded 618,000 shillings, so at most real order sizes it is academic anyway."},"KQ":{"dir":"down","t":"The plan is the red flag","b":"Losing <b>120.31 per share</b>. Fuel costs up 72%, aircraft grounded, intra-Africa routes suspended.","c":"Management's stated revival strategy is to <b>diversify into healthcare, hospitality and education</b> and spin off the maintenance unit. An airline that cannot fly profitably is not fixed by opening a hospital."},"KEGN":{"dir":"up","t":"The quiet one that holds up","b":"Highest <b>covered</b> dividend you can realistically buy &mdash; 7.96% gross, covered 1.8 times, rated Buy, <b>not overbought</b>, and 15.4m traded a day. El Ni&ntilde;o rains fill the dams, and water is free fuel where diesel is not.","c":"It sells almost everything to one customer &mdash; Kenya Power &mdash; which has a history of owing it money. Government holds about 70%. And results are not until <b>30 October</b>, so you would hold ten weeks blind. Nets 7.56% against a 7.68% Treasury bill."},"SCOM":{"dir":"mixed","t":"The only one your order is invisible in","b":"Traded <b>561m in a single day</b> &mdash; more than the next two counters combined. Half the market's value. Earnings up 37%, payout 63% and covered, rated Strong buy.","c":"15.4 years of profit, and the dividend nets <b>3.92%</b> &mdash; barely half the Treasury bill. You would be buying it for growth and for the ability to get out, not for income."},"EABL":{"dir":"down","t":"Somebody large is leaving","b":"Earnings up 45% on trailing figures.","c":"It carries <b>the only Sell rating on this exchange</b>, and on the last session it traded <b>256m &mdash; 7.8 times normal volume &mdash; and fell</b>. Heavy volume on a falling price with a Sell rating is distribution, not accumulation."},"SLAM":{"dir":"down","t":"Growing the top line while the profit shrinks","b":"Premiums up 32%, solvency 266%, borrowings cut to 1.44bn from 4.37bn.","c":"Pre-tax profit <b>&minus;28.1%</b>, insurance service result <b>&minus;34.5%</b>, investment returns <b>&minus;83.3%</b>, and a 147.5m net financial loss. The balance sheet was repaired. The earnings engine was not."},"NMG":{"dir":"down","t":"Revenue at a 21-year low","b":"Broadcasting and digital subscriptions are growing.","c":"Not fast enough. Group revenue is at its <b>lowest level in 21 years</b> as print collapses, and losses widened."},"COOP":{"dir":"mixed","t":"A source conflict you must settle yourself","b":"Earnings up 27%, 6.75 years of profit, and 50m traded a day &mdash; genuinely liquid.","c":"<b>The dividend figure disagrees across sources.</b> One implies 2.50 per share (6.44%), another has 3.00 (7.74% here, and 8.12% at Friday's intraday low of 36.95). At 3.00 it clears the Treasury bill; at 2.50 it does not. <b>Check the last dividend notice before you size this.</b> It is also overbought and has not reported yet."},"KNRE":{"dir":"down","t":"Cheap, liquid, and structurally stuck","b":"5.18 years of profit, rated Buy, and 4.2m traded &mdash; cheap on the face of it.","c":"Earnings are <b>falling 11.6%</b>, a court order has <b>frozen twelve board appointments until 1 October</b>, and a forecast El Ni&ntilde;o is about to land flood and crop claims on the national reinsurer. Cheap for reasons."},"BAT":{"dir":"down","t":"The biggest yield on the exchange is a countdown","b":"12.59% gross &mdash; nothing else here comes close. Earnings up 17%. Book closure 28 August.","c":"It pays out <b>134% of what it earns</b>. A dividend above profit is funded by borrowing or by selling something, and it gets cut. The only question is when."},"NSE":{"dir":"down","t":"A leveraged bet on the thing that just fell","b":"Earnings up 133%, though off a small base &mdash; it earns 1.04 per share.","c":"At 25.6 years of profit it is a leveraged bet on trading volumes &mdash; and <b>volumes fell 25.61% last week</b> while turnover fell 5.62%. You would be paying a high multiple for a business whose input is shrinking."},"TPSE":{"dir":"mixed","t":"Cheapest real business here, and unbuyable","b":"<b>3.68 years of profit with earnings up 197%</b> &mdash; the cheapest genuine business on this exchange.","c":"It traded <b>87,000 shillings</b> in a full day. And El Ni&ntilde;o rains hit safari tourism in the season it earns most. The valuation is real; the access is not."},"KPC":{"dir":"down","t":"Flat since listing, and that is the answer","b":"A 9-shilling share on a 165bn company. It looks cheap because the price is small.","c":"It earns <b>41 cents a share</b> &mdash; 22 years of profit &mdash; and has <b>declared no dividend at all</b>. Down 1.09% over twelve months. It has gone nowhere because it was priced fully at listing, not because the market is ignoring it. <b>A low share price is not a low valuation.</b>"},"UMME":{"dir":"down","t":"The trap that catches every yield screener","b":"393.65% dividend yield. The highest number on any screen of this market.","c":"It is <b>not income</b>. The Uganda concession is ending and capital is being returned to shareholders &mdash; you are being handed back your own money, once. Sort any screen by yield and this appears first. Anyone who acts on it has misunderstood what the number is."},"OCH":{"dir":"down","t":"Volume is not validation","b":"Up 4.5% on 5.3 times normal volume.","c":"It trades at <b>140 years of profit</b>, earns <b>six cents a share</b>, and earnings are down 76%. Heavy volume on a company this small and this expensive is being pumped, not discovered."},"IMH":{"dir":"mixed","t":"Rose into overbought on thin volume","b":"6.66 years of profit, earnings up 19%, dividend 5.23%.","c":"It rose 4.1% on the last session on <b>below-normal volume</b> and is now overbought at 79.6. It has also not reported &mdash; figures due by 31 August."}},"prices":{"CGEN":[["25 Oct 2021","36.00","Close on a trading day nearly five years back &mdash; rich.co.ke NSE table, the page stamped 25 Oct 2021"],["20 Nov 2024","23.00","Close two years back &mdash; afx NSE summary, the page stamped Wednesday 20 November 2024"],["Aug 2025","26.40","One year ago, per the market report"],["14 Aug 2026","262.00","Week close"],["mid-Aug 2026","285.00","Intraday high noted at the time"],["20 Aug 2026","375.75","Latest close"]],"F":[["23 Jun 2026","18.00","Listing reference price &mdash; it never traded here"],["23 Jun 2026","26.00","Day-one close, the first price you could actually pay"],["2026 low","22.40","Lowest close since listing"],["mid-Aug 2026","37.00","High"],["20 Aug 2026","33.00","Latest close"]],"COOP":[["25 Oct 2021","12.60","Close on a trading day nearly five years back &mdash; rich.co.ke NSE table, the page stamped 25 Oct 2021"],["20 Nov 2024","14.55","Close two years back &mdash; afx NSE summary, the page stamped Wednesday 20 November 2024"],["14 Aug 2026","38.30","Week close"],["21 Aug 2026","36.95","Intraday, day range 36.00&ndash;39.00"],["20 Aug 2026","38.75","Latest close"]],"SCOM":[["25 Oct 2021","42.35","Close on a trading day nearly five years back &mdash; rich.co.ke NSE table, the page stamped 25 Oct 2021"],["20 Nov 2024","14.90","Close two years back &mdash; afx NSE summary, the page stamped Wednesday 20 November 2024"],["14 Aug 2026","35.40","Recovering after book closure"],["20 Aug 2026","36.70","Latest close"]],"EQTY":[["25 Oct 2021","49.50","Close on a trading day nearly five years back &mdash; rich.co.ke NSE table, the page stamped 25 Oct 2021"],["20 Nov 2024","47.00","Close two years back &mdash; afx NSE summary, the page stamped Wednesday 20 November 2024"],["14 Aug 2026","89.50","Week close, +4.99% that week"],["20 Aug 2026","94.50","Latest close"]],"KCB":[["25 Oct 2021","44.00","Close on a trading day nearly five years back &mdash; rich.co.ke NSE table, the page stamped 25 Oct 2021"],["20 Nov 2024","37.55","Close two years back &mdash; afx NSE summary, the page stamped Wednesday 20 November 2024"],["14 Aug 2026","87.25","Week close, +2.95% that week"],["20 Aug 2026","93.75","Latest close"]],"EABL":[["25 Oct 2021","167.00","Close on a trading day nearly five years back &mdash; rich.co.ke NSE table, the page stamped 25 Oct 2021"],["20 Nov 2024","180.00","Close two years back &mdash; afx NSE summary, the page stamped Wednesday 20 November 2024"],["14 Aug 2026","273.25","Week close, &minus;4.12% that week"],["20 Aug 2026","277.00","Latest close"]],"ABSA":[["25 Oct 2021","10.10","Close on a trading day nearly five years back &mdash; rich.co.ke NSE table, the page stamped 25 Oct 2021"],["20 Nov 2024","15.30","Close two years back &mdash; afx NSE summary, the page stamped Wednesday 20 November 2024"],["Aug 2026","34.50","Price the parent offered minorities &mdash; 79% refused"],["20 Aug 2026","36.00","Latest close"]],"SCBK":[["25 Oct 2021","129.50","Close on a trading day nearly five years back &mdash; rich.co.ke NSE table, the page stamped 25 Oct 2021"],["20 Nov 2024","236.00","Close two years back &mdash; afx NSE summary, the page stamped Wednesday 20 November 2024"],["20 Aug 2026 open","342.00","Before the market read the results"],["20 Aug 2026","325.00","Close, &minus;5.52%"]],"BOC":[["14 Aug 2026","179.75","Before it woke up"],["20 Aug 2026 intraday","200.00","High"],["20 Aug 2026","190.25","Close"]],"KPLC":[["25 Oct 2021","1.65","Close on a trading day nearly five years back &mdash; rich.co.ke NSE table, the page stamped 25 Oct 2021"],["20 Nov 2024","4.22","Close two years back &mdash; afx NSE summary, the page stamped Wednesday 20 November 2024"],["20 Aug 2026","21.45","Latest close"]],"KEGN":[["25 Oct 2021","4.73","Close on a trading day nearly five years back &mdash; rich.co.ke NSE table, the page stamped 25 Oct 2021"],["20 Nov 2024","4.00","Close two years back &mdash; afx NSE summary, the page stamped Wednesday 20 November 2024"],["20 Aug 2026","11.30","Latest close"]],"BAT":[["25 Oct 2021","436.25","Close on a trading day nearly five years back &mdash; rich.co.ke NSE table, the page stamped 25 Oct 2021"],["20 Nov 2024","351.00","Close two years back &mdash; afx NSE summary, the page stamped Wednesday 20 November 2024"],["20 Aug 2026","560.00","Latest close"]],"NCBA":[["25 Oct 2021","24.85","Close on a trading day nearly five years back &mdash; rich.co.ke NSE table, the page stamped 25 Oct 2021"],["20 Nov 2024","44.00","Close two years back &mdash; afx NSE summary, the page stamped Wednesday 20 November 2024"],["20 Aug 2026","90.25","Latest close"]],"DTK":[["25 Oct 2021","58.75","Close on a trading day nearly five years back &mdash; rich.co.ke NSE table, the page stamped 25 Oct 2021"],["20 Nov 2024","53.00","Close two years back &mdash; afx NSE summary, the page stamped Wednesday 20 November 2024"],["20 Aug 2026","173.25","Latest close"]],"SBIC":[["25 Oct 2021","90.00","Close on a trading day nearly five years back &mdash; rich.co.ke NSE table, the page stamped 25 Oct 2021"],["20 Nov 2024","127.00","Close two years back &mdash; afx NSE summary, the page stamped Wednesday 20 November 2024"],["20 Aug 2026","274.00","Latest close"]],"JUB":[["25 Oct 2021","350.00","Close on a trading day nearly five years back &mdash; rich.co.ke NSE table, the page stamped 25 Oct 2021"],["20 Nov 2024","167.75","Close two years back &mdash; afx NSE summary, the page stamped Wednesday 20 November 2024"],["20 Aug 2026","418.00","Latest close"]],"NSE":[["25 Oct 2021","8.22","Close on a trading day nearly five years back &mdash; rich.co.ke NSE table, the page stamped 25 Oct 2021"],["20 Nov 2024","5.86","Close two years back &mdash; afx NSE summary, the page stamped Wednesday 20 November 2024"],["20 Aug 2026","26.70","Latest close"]]},"hist":{"SCOM":{"n":"Safaricom","a":42.35,"b":14.9,"c":36.7,"t":-13.3,"e":-64.8,"l":146.3},"EQTY":{"n":"Equity Group","a":49.5,"b":47.0,"c":94.5,"t":90.9,"e":-5.1,"l":101.1},"KCB":{"n":"KCB Group","a":44.0,"b":37.55,"c":93.75,"t":113.1,"e":-14.7,"l":149.7},"COOP":{"n":"Co-operative Bank","a":12.6,"b":14.55,"c":38.75,"t":207.5,"e":15.5,"l":166.3},"EABL":{"n":"EABL","a":167.0,"b":180.0,"c":277.0,"t":65.9,"e":7.8,"l":53.9},"KPLC":{"n":"Kenya Power","a":1.65,"b":4.22,"c":21.45,"t":1200.0,"e":155.8,"l":408.3},"KEGN":{"n":"KenGen","a":4.73,"b":4.0,"c":11.3,"t":138.9,"e":-15.4,"l":182.5},"ABSA":{"n":"Absa Bank Kenya","a":10.1,"b":15.3,"c":36.0,"t":256.4,"e":51.5,"l":135.3},"SCBK":{"n":"Standard Chartered","a":129.5,"b":236.0,"c":325.0,"t":151.0,"e":82.2,"l":37.7},"BAT":{"n":"British American Tobacco","a":436.25,"b":351.0,"c":560.0,"t":28.4,"e":-19.5,"l":59.5},"NCBA":{"n":"NCBA Group","a":24.85,"b":44.0,"c":90.25,"t":263.2,"e":77.1,"l":105.1},"DTK":{"n":"Diamond Trust","a":58.75,"b":53.0,"c":173.25,"t":194.9,"e":-9.8,"l":226.9},"SBIC":{"n":"Stanbic Holdings","a":90.0,"b":127.0,"c":274.0,"t":204.4,"e":41.1,"l":115.7},"JUB":{"n":"Jubilee Holdings","a":350.0,"b":167.75,"c":418.0,"t":19.4,"e":-52.1,"l":149.2},"CGEN":{"n":"Car &amp; General","a":36.0,"b":23.0,"c":375.75,"t":943.8,"e":-36.1,"l":1533.7},"NSE":{"n":"Nairobi Sec Exchange","a":8.22,"b":5.86,"c":26.7,"t":224.8,"e":-28.7,"l":355.6}},"histmeta":{"n":16,"d1":"25 Oct 2021","d2":"20 Nov 2024","d3":"20 Aug 2026","s1":"rich.co.ke NSE table, the page stamped 25 Oct 2021","s2":"afx NSE summary, the page stamped Wednesday 20 November 2024","note":"The daily history for this exchange is published only as scanned images with no text layer in them, so nobody can read it without transcribing every page by hand."},"trend":{"CGEN":[53.6,196.0,374.0,420.0,1066.0],"COOP":[-1.16,9.84,19.4,30.5,122.0],"BOC":[5.09,8.94,14.1,33.9,108.0],"KPLC":[6.05,2.93,36.7,13.5,88.0],"KEGN":[0.45,8.21,22.0,16.4,50.5],"KPC":[-0.22,-0.22,-0.44,-1.09,-1.09]},"tlabels":["1wk","4wk","3mo","6mo","1yr"],"crwn":[["2023",37],["2024",75],["2025",437],["2026",486]],"nextdiv":{"NCBA":{"amt":3.75,"declared":"21 Aug 2026","record":"28 Aug 2026","pay":"8 Sep 2026","kind":"Interim","note":"Declared the day after this page's screener capture, which is why it was missing until now. It is <b>67% above the 2.25 interim paid in 2024</b>. The half-year results were still due by 31 August when it was declared, so the profit behind it was not public at the time.","src":"africanfinancials company announcement, 21 Aug 2026"},"BAT":{"amt":10.0,"declared":"29 Jul 2026","record":"28 Aug 2026","pay":"25 Sep 2026","kind":"Interim","note":"The largest single payment on this exchange in shillings per share. Read it against a <b>134% payout ratio</b> &mdash; British American Tobacco is paying out more than it earns, and this page flags it for exactly that reason.","src":"africanfinancials company announcement, 29 Jul 2026"},"CGEN":{"amt":1.0,"declared":"17 Aug 2026","record":"3 Sep 2026","pay":"10 Sep 2026","kind":"Interim","note":"One shilling on a share that costs about 375. That is <b>0.27%</b> &mdash; a rounding error next to the price move, and a reminder that Car &amp; General's story has nothing to do with income.","src":"africanfinancials company announcement, 17 Aug 2026"}},"nextdivmeta":{"asof":"23 Aug 2026","lede":"A dividend yield is a trailing number: it tells you what was paid, not what is coming. These are the payments actually declared, with the dates attached. To receive one you must be on the register by the record date, and a trade takes three working days to settle &mdash; so the last realistic day to buy is about three working days earlier.","gap":"Every other counter on this exchange has no declared payment pending that could be verified. That is not the same as never paying &mdash; most pay once a year after full-year results. It means there is no dated cash to point at right now."}};window.__ICO={"desk":"<svg viewBox=\"0 0 24 24\"><rect x=\"3\" y=\"3\" width=\"7\" height=\"7\" rx=\"1\"/><rect x=\"14\" y=\"3\" width=\"7\" height=\"7\" rx=\"1\"/><rect x=\"14\" y=\"14\" width=\"7\" height=\"7\" rx=\"1\"/><rect x=\"3\" y=\"14\" width=\"7\" height=\"7\" rx=\"1\"/></svg>","markets":"<svg viewBox=\"0 0 24 24\"><path d=\"M3 3v16a2 2 0 0 0 2 2h16\"/><path d=\"M18 17V9M13 17V5M8 17v-3\"/></svg>","news":"<svg viewBox=\"0 0 24 24\"><path d=\"M15 18h-5M18 14h-8\"/><path d=\"M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-4 0v-9a2 2 0 0 1 2-2h2\"/></svg>","legal":"<svg viewBox=\"0 0 24 24\"><path d=\"m14.5 12.5-8 8a2.1 2.1 0 1 1-3-3l8-8\"/><path d=\"m16 16 6-6M8 8l6-6M9 7l8 8M21 11l-8-8\"/></svg>","debt":"<svg viewBox=\"0 0 24 24\"><path d=\"M12 7v14\"/><path d=\"M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z\"/></svg>"};</script>
+<script>
+const D = window.__D, M = D.macroK, ICO = window.__ICO;
+const GOALS = {
+  income:{t:"Income now",s:"I want cash reaching my account",h:"after-tax dividend, whether it is covered by earnings, and whether it beats the risk-free rate"},
+  growth:{t:"Growth",s:"I want the price to rise",h:"earnings growth against what you pay, penalising profit that will not repeat"},
+  safety:{t:"Safety first",s:"I want to not lose money",h:"dividend coverage, liquidity, momentum, and whether it keeps pace with inflation"},
+  preserve:{t:"I cannot afford to lose it",s:"This is money I need",h:"nothing on this exchange — see the answer"}
+};
+const IDX = {}; D.counters.forEach(c => IDX[c.tk] = c);
+let GOAL = null, Q = "", AMT = null;
+try { GOAL = localStorage.getItem("th-goal"); AMT = parseFloat(localStorage.getItem("th-amt"))||null; } catch(e){}
+if (!GOALS[GOAL]) GOAL = null;
+if (!(AMT > 0)) AMT = null;
+const A = ()=> AMT || M.order;
+/* gate 1 and every score depend on YOUR amount, so they are computed here, not baked in */
+function gates(c){
+  const g1 = c.to >= A()*10;
+  return [g1, c.g[1], c.g[2], c.g[3], c.g[4]];
+}
+function pctOfDay(c){ return c.to ? +(A()/c.to*100).toFixed(1) : null; }
+function shares(c){ return Math.floor(A()/c.price); }
+function scoreOf(c, goal){
+  if (goal==="preserve") return null;
+  const g = gates(c);
+  if (!g[0]) return null;                      // access gate uses YOUR amount
+  const s = c.sc[goal];
+  return s;                                     // other gates unchanged
+}
+
+/* ── helpers ── */
+const E = (s)=>String(s==null?"":s);
+const num=(v,d=2,suf="")=>v==null?'<span class="fl">&mdash;</span>':v.toLocaleString(undefined,{minimumFractionDigits:d,maximumFractionDigits:d})+suf;
+const mny=(v)=>v>=1e9?(v/1e9).toFixed(2)+"bn":v>=1e6?(v/1e6).toFixed(1)+"m":Math.round(v/1e3)+"k";
+const chg=(c)=>c==null?"&mdash;":`<span class="${c>0?'up':c<0?'dn':'fl'}">${c>0?"+":""}${c.toFixed(2)}%</span>`;
+const hrs=(iso)=>(Date.now()-new Date(iso).getTime())/36e5;
+const age=(h)=>h<1?Math.max(1,Math.round(h*60))+" min ago":h<48?Math.round(h)+" hours ago":Math.round(h/24)+" days ago";
+const fmtA=()=>{const v=A();return v>=1e6?"KES "+(v/1e6).toFixed(v%1e6?2:1)+"m":"KES "+v.toLocaleString()};
+const ksh=(v)=>"KES "+Math.round(v).toLocaleString();
+const tick=(b)=>b?'<i class="pa">&#10003;</i>':'<i class="fa">&#10007;</i>';
+
+function verdict(c, goal){
+  const g = goal || "safety";
+  if (g === "preserve") return {v:"NA", why:"On this goal nothing on the exchange qualifies. See the Desk."};
+  const s = scoreOf(c, g);
+  if (s == null){
+    if (!gates(c)[0]) return {v:"NA", why:`<b>Fails the access gate.</b> A full day of trading is ${mny(c.to)} — your ${fmtA()} would be ${pctOfDay(c)}% of it. You would push the price up against yourself buying, and find nobody there selling.`};
+    if (g==="income") return {v:"NA", why:"No covered dividend, so it cannot answer an income goal."};
+    if (g==="growth") return {v:"NA", why:"No published earnings, so growth cannot be assessed."};
+    return {v:"NA", why:"Fails an earlier gate — see the gate panel."};
+  }
+  const band = g==="income" ? [70,45] : g==="growth" ? [25,12] : [15,5];
+  const v = s >= band[0] ? "BUY" : s >= band[1] ? "HOLD" : "AVOID";
+  return {v, s, why:null};
+}
+
+function ring(c, goal){
+  const g = goal==="preserve"||!goal ? "safety" : goal;
+  const raw = scoreOf(c, g);
+  const cap = g==="income"?90:g==="growth"?40:35;
+  const pct = raw==null ? 0 : Math.max(0, Math.min(1, raw/cap));
+  const col = raw==null ? "#3a3a44" : pct>.72 ? "#e5a32c" : pct>.42 ? "#c98500" : "#8a5a2a";
+  const dash = (2*Math.PI*15*pct).toFixed(1);
+  return `<div class="ring"><svg viewBox="0 0 34 34" width="34" height="34">
+<circle cx="17" cy="17" r="15" fill="none" stroke="#20202a" stroke-width="2.6"/>
+<circle cx="17" cy="17" r="15" fill="none" stroke="${col}" stroke-width="2.6" stroke-linecap="round"
+ stroke-dasharray="${dash} 200"/></svg><i style="color:${col}">${raw==null?"–":Math.max(0,Math.round(raw))}</i></div>`;
+}
+
+/* momentum: three states, not two. A reading, calm, or NOT VERIFIED.
+   An unverified reading must never render as calm — that is the failure mode
+   that makes a stale page look current. */
+function rsiPill(c){
+  if(c.rsiu) return '<span class="pill wn" title="Momentum could not be re-checked">not verified</span>';
+  if(c.rsi==null) return '<span class="pill ok">calm</span>';
+  return `<span class="pill ${c.rsi>=90?'bd':c.rsi>=80?'wn':'gd'}">${Math.round(c.rsi)}</span>`;
+}
+function rsiWords(c){
+  if(c.rsiu) return "Momentum has not been re-checked since the reading was taken, so it is not counted. Treat the timing of this one as unknown rather than as safe.";
+  if(c.rsi==null) return "Below 70 &mdash; the crowd has not piled in";
+  return c.rsi>=90 ? "Severely overbought" : "Overbought &mdash; you would be arriving after the move";
+}
+
+/* ── charts ── */
+function spark(vals, w=170, h=54){
+  let lo=Math.min(...vals), hi=Math.max(...vals);
+  if(hi===lo) hi=lo+1;
+  const pad=(hi-lo)*.18; lo-=pad; hi+=pad;
+  const n=vals.length, X=i=>6+i*(w-12)/(n-1), Y=v=>h-8-(v-lo)/(hi-lo)*(h-18);
+  const pts=vals.map((v,i)=>`${X(i).toFixed(1)},${Y(v).toFixed(1)}`).join(" ");
+  const z = lo<0&&0<hi ? `<line x1="6" y1="${Y(0).toFixed(1)}" x2="${w-6}" y2="${Y(0).toFixed(1)}" stroke="#2b2b33" stroke-dasharray="2 3"/>`:"";
+  const dots=vals.map((v,i)=>`<circle cx="${X(i).toFixed(1)}" cy="${Y(v).toFixed(1)}" r="${i===n-1?4:2.3}" fill="${i===n-1?'#c98500':'#a06e13'}" stroke="#16161b" stroke-width="2"><title>${D.tlabels[i]}: ${v>0?"+":""}${v.toFixed(1)}%</title></circle>`).join("");
+  return `<svg viewBox="0 0 ${w} ${h}" width="100%" height="${h}">${z}<polyline points="${pts}" fill="none" stroke="#c98500" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>${dots}</svg>`;
+}
+function spark3(vals, labels, w=170, h=54){
+  let lo=Math.min(...vals), hi=Math.max(...vals);
+  if(hi===lo) hi=lo+1;
+  const pad=(hi-lo)*.18; lo-=pad; hi+=pad;
+  const n=vals.length, X=i=>6+i*(w-12)/(n-1), Y=v=>h-8-(v-lo)/(hi-lo)*(h-18);
+  const pts=vals.map((v,i)=>`${X(i).toFixed(1)},${Y(v).toFixed(1)}`).join(" ");
+  const dots=vals.map((v,i)=>`<circle cx="${X(i).toFixed(1)}" cy="${Y(v).toFixed(1)}" r="${i===n-1?4:2.6}" fill="${i===n-1?'#c98500':'#a06e13'}" stroke="#16161b" stroke-width="2"><title>${labels[i]}: ${v.toFixed(2)}</title></circle>`).join("");
+  return `<svg viewBox="0 0 ${w} ${h}" width="100%" height="${h}">
+<polyline points="${pts}" fill="none" stroke="#c98500" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>${dots}</svg>`;
+}
+function fiveYear(){
+  const hm = D.histmeta, L = [hm.d1, hm.d2, hm.d3];
+  const ks = Object.keys(D.hist).sort((a,b)=>D.hist[b].t-D.hist[a].t);
+  const best = D.hist[ks[0]], worst = D.hist[ks[ks.length-1]];
+  const grew = ks.filter(k=>D.hist[k].t>0).length;
+  const fellFirst = ks.filter(k=>D.hist[k].e<0).length;
+  const panels = ks.map(k=>{const h=D.hist[k];
+    return `<a class="smc" href="#/stock/${k}"><h5>${h.n}<s>${k}</s></h5>${spark3([h.a,h.b,h.c],L)}
+<f><span>${h.a.toFixed(2)} &rarr; ${h.c.toFixed(2)}</span><b class="${h.t>0?'up':'dn'}">${h.t>0?"+":""}${Math.round(h.t)}%</b></f>
+<div style="font:9.5px var(--mono);color:var(--tm);margin-top:2px">2021&ndash;24 ${h.e>0?"+":""}${Math.round(h.e)}% &middot; 2024&ndash;26 ${h.l>0?"+":""}${Math.round(h.l)}%</div></a>`}).join("");
+  const rows = ks.map(k=>{const h=D.hist[k], then=Math.floor(A()/h.a)*h.c;
+    return `<tr onclick="location.hash='#/stock/${k}'"><td><b>${h.n}</b> <span style="color:var(--tm);font:10.5px var(--mono)">${k}</span></td>
+<td class="mono">${h.a.toFixed(2)}</td><td class="mono" style="color:var(--tm)">${h.b.toFixed(2)}</td><td class="mono"><b>${h.c.toFixed(2)}</b></td>
+<td class="mono ${h.e>0?'up':'dn'}">${h.e>0?"+":""}${h.e.toFixed(0)}%</td>
+<td class="mono ${h.l>0?'up':'dn'}">${h.l>0?"+":""}${h.l.toFixed(0)}%</td>
+<td class="mono ${h.t>0?'up':'dn'}"><b>${h.t>0?"+":""}${h.t.toFixed(0)}%</b></td>
+<td class="mono ${then>A()?'up':'dn'}">${ksh(then)}</td></tr>`}).join("");
+  return `<section style="margin-top:34px"><div class="eyb">Five years, and it is not a curve</div>
+<h2 class="st">What ${hm.n} of these shares cost in 2021, in 2024, and now</h2>
+<p class="lede">Three closes, ${hm.d1} to ${hm.d3} &mdash; four years and ten months. Every figure is the price printed on a page that stamped its own trading date, and I checked both pages myself rather than taking one reading. <b>The line between the dots is not data.</b> It is drawn so you can see the shape; the price did things in between that no source available here recorded.</p>
+<div class="grid g4" style="margin:14px 0 4px">
+<div class="kpi"><v>${grew}/${hm.n}</v><k>Worth more than in 2021</k></div>
+<div class="kpi w"><v>${fellFirst}</v><k>Fell over the first three years</k></div>
+<div class="kpi"><v>+${Math.round(best.t)}%</v><k>${best.n}, best of the ${hm.n}</k></div>
+<div class="kpi c"><v>${Math.round(worst.t)}%</v><k>${worst.n}, worst of the ${hm.n}</k></div></div>
+<div class="sm" style="margin-top:12px">${panels}</div>
+<div class="card" style="margin-top:16px"><div class="scroll"><table>
+<thead><tr><th>Company</th><th>${hm.d1}</th><th>${hm.d2}</th><th>${hm.d3}</th><th>To 2024</th><th>Since 2024</th><th>Whole period</th><th>${fmtA()} then, now</th></tr></thead>
+<tbody>${rows}</tbody></table></div>
+<div style="margin-top:12px;font:11px/1.7 var(--mono);color:var(--tm)">Last column: whole shares ${fmtA()} would have bought at the 2021 price, valued at the 2026 price. Price only &mdash; the dividends paid in between are on top, and for the banks that is a large amount left out.</div></div>
+<div class="co r"><b>Read Safaricom first.</b> The most owned share on this exchange, the one everybody's aunt holds, is <b>${Math.abs(Math.round(D.hist.SCOM.t))}% below</b> where it was five years ago &mdash; it fell ${Math.abs(Math.round(D.hist.SCOM.e))}% to November 2024 and has since climbed ${Math.round(D.hist.SCOM.l)}%. Anyone who bought in 2021 waited four years to be wrong and is still not whole. <b>${fellFirst} of these ${hm.n} were worth less in 2024 than in 2021.</b> Nearly all of the gain you see happened in the last twenty-one months, which is also why so much of this market now reads as overbought.</div>
+<div class="co b"><b>What this is not.</b> Not adjusted for dividends, bonus issues or share splits &mdash; a company that split its shares would show here as a fall that never happened, so check the counter's own page before trusting a number. And not a daily series. ${hm.note} Two verified dates and today is what is honestly available, and it is still enough to see which shares went up, which went nowhere, and which went backwards.</div>
+</section>`;
+}
+function divChart(){
+  const items = D.counters.filter(c=>c.dy>0 && c.flag!=="TRAP")
+    .sort((a,b)=>b.net-a.net).slice(0,16);
+  const mx = Math.max(...items.map(i=>Math.abs(i.net-M.tbn)))*1.1;
+  const W=880,BH=22,GAP=8,NX=214,ZX=524,HALF=300,sc=HALF/mx;
+  const H=items.length*(BH+GAP)+34;
+  const rows=items.map((c,i)=>{
+    const y=26+i*(BH+GAP), d=c.net-M.tbn, wpx=Math.max(Math.abs(d)*sc,2.5);
+    const x = d>=0?ZX:ZX-wpx, col = d>=0?"#c98500":"#3987e5";
+    const cov = c.payout!=null && c.payout<90;
+    const vx = d>=0 ? x+wpx+9 : x-9;
+    return `<g><rect x="${x.toFixed(1)}" y="${y}" width="${wpx.toFixed(1)}" height="${BH}" rx="4" fill="${col}" opacity="${gates(c)[0]?1:.4}"/>
+<text x="${NX}" y="${y+15}" text-anchor="end" fill="#f2f0ec" font-size="12" font-weight="600" font-family="Archivo,sans-serif">${c.name}</text>
+<text x="${vx.toFixed(1)}" y="${y+15}" text-anchor="${d>=0?'start':'end'}" fill="#a5a09a" font-size="11.5" font-weight="600" font-family="Roboto Mono,monospace">${c.net.toFixed(2)}% <tspan fill="${cov?'#4cc98e':'#e8a83c'}">${cov?'✓':'⚠'}</tspan></text>
+<title>${c.name} (${c.tk}) — ${c.net.toFixed(2)}% after ${M.divt*100}% tax · payout ${c.payout==null?'?':c.payout}% · ${cov?'covered':'NOT covered'} · ${gates(c)[0]?'absorbs your order':'illiquid at your size'}</title></g>`;
+  }).join("");
+  return `<svg viewBox="0 0 ${W} ${H}" width="100%">
+<line x1="${ZX}" y1="14" x2="${ZX}" y2="${H-6}" stroke="#f0c968" stroke-width="1.5" stroke-dasharray="4 3"/>
+<text x="${ZX}" y="10" text-anchor="middle" fill="#f0c968" font-size="10" font-weight="700" font-family="Roboto Mono,monospace" letter-spacing="1">T-BILL ${M.tbn.toFixed(2)}% NET</text>
+${rows}</svg>`;
+}
+function cliff(){
+  const it=[...D.counters].sort((a,b)=>b.to-a.to).slice(0,18), mx=it[0].to;
+  const W=880,BH=20,GAP=6,H=it.length*(BH+GAP)+14;
+  return `<svg viewBox="0 0 ${W} ${H}" width="100%">`+it.map((c,i)=>{
+    const y=6+i*(BH+GAP), w=Math.max((c.to/mx)*(W-290),2);
+    return `<g><text x="176" y="${y+14}" text-anchor="end" fill="#f2f0ec" font-size="12" font-weight="600" font-family="Archivo,sans-serif">${c.name}</text>
+<rect x="184" y="${y}" width="${w.toFixed(1)}" height="${BH}" rx="4" fill="${gates(c)[0]?'#e5a32c':'#7a570d'}"><title>${c.name}: ${mny(c.to)} traded · your order = ${pctOfDay(c)}% of the day</title></rect>
+<text x="${(184+w+8).toFixed(1)}" y="${y+14}" fill="#a5a09a" font-size="11" font-weight="600" font-family="Roboto Mono,monospace">${mny(c.to)} <tspan fill="${gates(c)[0]?'#4cc98e':'#e8a83c'}">${gates(c)[0]?'✓':'⚠'}</tspan></text></g>`;
+  }).join("")+`</svg>`;
+}
+function bars(series,w=430,h=190){
+  const mx=Math.max(...series.map(s=>s[1]))*1.15, n=series.length, bw=(w-56)/n-10;
+  const grid=[0,1,2,3].map(k=>`<line x1="46" y1="${(h-28-(h-46)*k/3).toFixed(1)}" x2="${w-6}" y2="${(h-28-(h-46)*k/3).toFixed(1)}" stroke="#26262e"/>`).join("");
+  const ramp=["#7a570d","#a06e13","#c58619","#e5a32c"];
+  return `<svg viewBox="0 0 ${w} ${h}" width="100%">${grid}`+series.map((s,i)=>{
+    const bh=(s[1]/mx)*(h-46), x=48+i*((w-56)/n)+5, y=h-28-bh;
+    return `<g><rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${bw.toFixed(1)}" height="${bh.toFixed(1)}" rx="4" fill="${ramp[Math.min(i,3)]}"><title>${s[0]}: KSh ${s[1]}m</title></rect>
+<text x="${(x+bw/2).toFixed(1)}" y="${(y-6).toFixed(1)}" text-anchor="middle" fill="#f2f0ec" font-size="11" font-weight="600" font-family="Roboto Mono,monospace">${s[1]}</text>
+<text x="${(x+bw/2).toFixed(1)}" y="${h-10}" text-anchor="middle" fill="#726d66" font-size="10" font-weight="600" font-family="Roboto Mono,monospace">${s[0]}</text></g>`;
+  }).join("")+`</svg>`;
+}
+
+/* ══ watchlist ══ */
+function watchlist(sel){
+  const g = GOAL==="preserve"||!GOAL ? "safety" : GOAL;
+  const list = [...D.counters].sort((a,b)=>{
+    const A2=scoreOf(a,g), B2=scoreOf(b,g);
+    if(A2==null&&B2==null) return a.to>b.to?-1:1;
+    if(A2==null) return 1; if(B2==null) return -1;
+    return B2-A2;
+  });
+  const chips = Object.keys(GOALS).map(k=>
+    `<button class="gchip ${GOAL===k?'on':''}" data-g="${k}">${GOALS[k].t}</button>`).join("");
+  const rows = list.map(c=>{
+    const v = verdict(c, GOAL);
+    const hide = Q && !(c.tk.toLowerCase().includes(Q) || c.name.toLowerCase().includes(Q));
+    const risk = c.flag==="QUALITY"||c.flag==="PAYOUT"||c.flag==="TRAP" ? "#ef8078"
+               : c.rsi ? "#e8a83c" : gates(c)[0] ? "#4cc98e" : "#726d66";
+    return `<a class="row ${c.tk===sel?'on':''} ${hide?'off':''}" href="#/stock/${c.tk}">
+${ring(c,GOAL)}
+<div class="rmid"><div class="rtk"><b>${c.tk}</b><span class="dot" style="background:${risk}"></span><s>${c.name}</s></div>
+<div class="rpx"><span>${c.price.toFixed(2)}</span><em class="${c.chg>0?'up':c.chg<0?'dn':'fl'}" style="background:${c.chg>0?'rgba(76,201,142,.12)':c.chg<0?'rgba(239,128,120,.12)':'transparent'}">${c.chg>0?"+":""}${c.chg.toFixed(2)}%</em></div></div>
+<div class="rend"><span class="vd ${v.v}">${v.v}</span></div></a>`;
+  }).join("");
+  return `<div class="pane"><div class="stick">
+<div class="wl"><div class="wlh"><b>Watchlist &middot; ranked</b><span style="font:10px var(--mono);color:var(--tm)">${list.length} listed</span></div>
+<div class="gchips">${chips}</div></div>
+<div class="wlist">${rows}</div>
+<div class="wl" style="border-top:1px solid var(--line);border-bottom:0">
+<div style="font:11px/1.55 var(--mono);color:var(--tm)">Ring = score on your goal. Dot: <span style="color:#4cc98e">green</span> clean, <span style="color:#e8a83c">amber</span> overbought, <span style="color:#ef8078">red</span> earnings or dividend flag, <span style="color:#726d66">grey</span> cannot buy at your size.</div></div>
+</div></div>`;
+}
+
+/* ══ wire panel ══ */
+function wire(tkFilter){
+  const items = tkFilter ? D.news.filter(n=>n.tk===tkFilter||n.tk==="MKT") : D.news;
+  const news = items.slice(0,8).map((n,i)=>`<div class="row" style="display:block;padding:12px 14px;${i===0?'background:rgba(201,133,0,.05);border-left-color:var(--gd)':''}">
+<div class="ihd" style="margin-bottom:5px"><span class="iwho">${n.who}</span><span class="iage" data-age="${n.d}">&nbsp;</span></div>
+<div style="font-size:12.5px;line-height:1.45;font-weight:500">${n.head}</div></div>`).join("");
+  const pulse = D.macro.slice(0,8).map(m=>`<div style="display:flex;justify-content:space-between;gap:10px;padding:6px 0;border-bottom:1px solid var(--ink2);font:11px var(--mono)">
+<span style="color:var(--tm)">${m[0]}</span><span style="color:var(--gdt);font-weight:500;text-align:right">${m[1]}</span></div>`).join("");
+  return `<div class="pane"><div class="stick">
+<div class="wl"><div class="wlh"><b>The wire</b>${tkFilter?`<a href="#/stock/${tkFilter}" style="font:10px var(--mono);color:var(--gd)">${tkFilter} only</a>`:''}</div></div>
+<div style="max-height:44vh;overflow-y:auto">${news}</div>
+<div class="wl" style="border-top:1px solid var(--line)"><div class="wlh"><b>Market pulse</b></div>${pulse}</div>
+<div class="wl" style="border-bottom:0"><div class="co" style="margin:0;font-size:12.5px">
+<b>This page cannot refresh itself.</b> No live feed exists for the NSE that a published document can reach. Every item is stamped with its own age instead of pretending.</div></div>
+</div></div>`;
+}
+
+/* ══ DESK ══ */
+function deskCentre(){
+  const liq = D.counters.filter(c=>gates(c)[0]).length;
+  const ob = D.counters.filter(c=>c.rsi!=null).length;
+  const unver = D.counters.filter(c=>c.rsiu).length;
+  const mtm = unver >= D.counters.length*0.9;   // momentum has aged out wholesale
+  const all5 = D.counters.filter(c=>gates(c).every(Boolean)).length;
+  const covBeat = D.counters.filter(c=>c.g[2]&&c.g[3]);
+  const g = GOAL||"safety";
+  const top = [...D.counters].filter(c=>scoreOf(c,g)!=null).sort((a,b)=>scoreOf(b,g)-scoreOf(a,g)).slice(0,6);
+  const shortlist = GOAL==="preserve" ? `<div class="co r"><b>The honest answer is not on this exchange.</b>
+The 364-day Treasury bill pays <b>${M.t364}%</b> gross, <b>${M.tbn}%</b> after the ${M.intt*100}% tax &mdash; <b>+${(M.tbn-M.infl).toFixed(2)}%</b> real against ${M.infl}% inflation. Government obligation, no stockbroker, 50,000 minimum through DhowCSD.
+<br><br>Infrastructure bonds are <b>tax exempt</b>, which is why three reopened issues drew a record <b>460.4bn of bids against a 150bn target</b> &mdash; roughly <b>+5.3% real</b>, about four times the T-bill.
+<br><br><b>Every liquid share here with a covered dividend pays you less than the T-bill after tax.</b> If this is money you need, no amount of screening changes that.</div>`
+  : `<div class="scroll"><table><thead><tr><th>Counter</th><th>Score</th><th>Price</th><th>Div net</th><th>vs T-bill</th><th>Momentum</th><th>Verdict</th></tr></thead><tbody>
+${top.map(c=>{const v=verdict(c,GOAL);return `<tr onclick="location.hash='#/stock/${c.tk}'"><td><b>${c.name}</b> <span style="color:var(--tm);font:10.5px var(--mono)">${c.tk}</span></td>
+<td class="mono">${scoreOf(c,g)}</td><td class="mono">${c.price.toFixed(2)}</td>
+<td class="mono">${c.dy?c.net.toFixed(2)+'%':'<span class="fl">none</span>'}</td>
+<td class="mono">${c.dy?`<span class="${c.net>M.tbn?'up':'dn'}">${(c.net-M.tbn).toFixed(2)}</span>`:'<span class="fl">&mdash;</span>'}</td>
+<td>${rsiPill(c)}</td>
+<td><span class="vd ${v.v}">${v.v}</span></td></tr>`}).join("")}
+</tbody></table></div>`;
+
+  return `<div class="pane"><div class="page">
+<div class="eyb">The desk &middot; ${GOALS[GOAL||'safety'].t}</div>
+<h1 class="pt">${GOAL==="preserve"?"There is a right answer, and it is not a share":"What survives on your goal"}</h1>
+<p class="lede">Ranked by ${GOALS[GOAL||'safety'].h}. Sized for <b>${fmtA()}</b> &mdash; which is why the access gate comes first and eliminates ${57-liq} of the 57 counters before valuation is even considered. ${liq<8?"At this size the exchange is nearly closed to you; a smaller amount opens it up.":liq>34?"At this size almost the whole exchange is open, so valuation does the work.":""}</p>
+${shortlist}
+
+<section style="margin-top:30px"><div class="eyb">Market state</div><h2 class="st">The condition of the whole exchange</h2>
+<div class="grid g4" style="margin-top:12px">
+<div class="kpi w"><v>${mtm?"&mdash;":0}</v><k>${mtm?"Oversold &mdash; not verified":"Oversold, all 57"}</k></div>
+<div class="kpi w"><v>${mtm?"&mdash;":ob}</v><k>${mtm?"Overbought &mdash; not verified":"Overbought"}</k></div>
+<div class="kpi"><v>${liq}</v><k>You can buy at your size</k></div>
+<div class="kpi c"><v>&minus;1.17bn</v><k>Foreign net selling, one week</k></div>
+<div class="kpi"><v>3.996tn</v><k>NSE market value</k></div>
+<div class="kpi"><v>${M.tbn}%</v><k>T-bill after tax, no broker</k></div>
+</div>
+<div class="co ${mtm?'b':'r'}">${mtm
+  ? `<b>Momentum has not been re-checked recently, so this page is not counting it.</b> The readings it had were taken on ${D.counters[0].sentiment_asof||"an earlier date"} and they stopped counting after ten days. Every counter now fails the timing gate on <b>unknown</b> rather than passing it on <b>calm</b> &mdash; which is the right way round. The prices, yields and dividend cover below are current; only the timing is blind.`
+  : `<b>Nothing on this exchange is oversold and ${ob} counters are overbought.</b> The screen was run three separate times and returned zero every time. There is nowhere you can currently buy something the crowd has abandoned &mdash; that is a market condition, not a stock-picking problem.`}</div>
+<div class="co b"><b>And the professionals were selling into it.</b> In the week to 14 August foreign investors were net sellers of <b>1.17bn in all five sessions</b>, more than double the week before, while locals were 76.2% of turnover. Turnover fell 5.62% and volume fell 25.61%. A market rising on fewer and fewer shares.</div>
+</section>
+
+<section><div class="eyb">The gate that decides everything</div><h2 class="st">Every dividend, after tax, against doing nothing</h2>
+<p class="lede">Dividends on listed shares are taxed at ${M.divt*100}%. Interest on the 364-day Treasury bill is taxed at ${M.intt*100}%, leaving ${M.tbn}% net &mdash; the dashed line. Gold beats the government; blue loses to it. A tick means the dividend is covered by earnings.</p>
+<div class="card"><div class="scroll">${divChart()}</div>
+<div class="lgd"><span><span class="sw" style="background:#c98500"></span>Beats the T-bill</span>
+<span><span class="sw" style="background:#3987e5"></span>Loses to it</span>
+<span style="color:#4cc98e">&#10003; covered by earnings</span>
+<span style="color:#e8a83c">&#9888; paid out of something else</span>
+<span>Faded bars cannot absorb your order</span>
+<span><b>Umeme excluded</b> &mdash; its 393.65% is returned capital, not income</span></div></div>
+<div class="co r"><b>Read the top three bars.</b> The only counters clearly beating the government are <b>BAT at 134% payout</b> and <b>Standard Chartered at 99% payout with earnings down 42%</b> &mdash; they win the yield contest by not earning the yield. Strip those out and the best genuinely-earned income on the exchange is <b>Stanbic at 8.22% net</b>, and it traded 7,170 shares. <b>${all5===1?"One counter passes":all5===0?"No counter passes":all5+" counters pass"} all five gates at ${fmtA()}.</b></div>
+</section>
+
+<section><div class="eyb">The gate nobody mentions</div><h2 class="st">The liquidity cliff</h2>
+<p class="lede">A full day of trading by counter, top eighteen. Your order must stay under 10% of a day, so you need ${mny(A()*10)} traded. Hover any bar.</p>
+<div class="card"><div class="scroll">${cliff()}</div>
+<div class="lgd"><span><span class="sw" style="background:#e5a32c"></span>Absorbs your order</span>
+<span><span class="sw" style="background:#7a570d"></span>Does not</span><span>The other 39 counters are smaller still</span></div></div>
+<div class="co r"><b>Every cheap share worth naming sits below this cliff.</b> TPS Serena at 3.68x earnings traded <b>87,000 shillings</b> &mdash; your order is fifteen times the entire day. BK Group's covered 7.53% traded 337,000. Stanbic's 8.65% traded 1.96m. <b>Safaricom alone traded 561m</b>, more than the next two counters combined.</div>
+</section>
+
+<section><div class="eyb">The pattern of the week</div><h2 class="st">Three companies raised the dividend as profit fell</h2>
+<div class="scroll"><table><thead><tr><th>Company</th><th>H1 profit</th><th>Dividend</th><th class="tx">What was announced</th></tr></thead><tbody>
+${D.divup.map(x=>`<tr onclick="location.hash='#/stock/${x.t}'"><td><b>${x.n}</b> <span style="color:var(--tm);font:10.5px var(--mono)">${x.t}</span></td>
+<td class="mono dn">${x.p.toFixed(1)}%</td><td class="mono up">+${x.d}%</td><td class="tx">${x.x}</td></tr>`).join("")}
+</tbody></table></div>
+<div class="co r"><b>This is the most useful pattern on the page.</b> Three listed companies in one week raised interim dividends while profit fell &mdash; one by <b>39.8%</b>, ending a five-year growth streak. <b>Every dividend yield on every screen you will ever read is a trailing number.</b> When boards raise payouts into falling earnings, those yields are supported rather than earned, and the screens keep showing them as attractive right up until the cut.</div>
+</section>
+
+${datedCash()}
+
+${fiveYear()}
+
+<section><div class="eyb">Trend</div><h2 class="st">Trailing returns, one week to one year</h2>
+<p class="lede">Six counters where the full return series was verified individually. Each panel has its own scale &mdash; Car &amp; General would flatten every other line to nothing. This is the short view; the five-year prices are in the section above.</p>
+<div class="sm">${Object.keys(D.trend).map(tk=>{const v=D.trend[tk],c=IDX[tk];
+return `<a class="smc" href="#/stock/${tk}"><h5>${c.name}<s>${tk}</s></h5>${spark(v)}
+<f><span>1yr</span><b class="${v[v.length-1]>0?'up':'dn'}">${v[v.length-1]>0?"+":""}${Math.round(v[v.length-1])}%</b></f>
+<div style="font:9.5px var(--mono);color:var(--tm);margin-top:2px">scale ${Math.round(Math.min(...v))}% to ${Math.round(Math.max(...v))}%</div></a>`}).join("")}</div>
+<div class="co"><b>What the shapes say.</b> Car &amp; General is not a trend, it is a vertical line &mdash; <b>+1,066% in a year</b> with the steepest part in the last month. Kenya Power (+88%) and Co-op (+122%) doubled quietly while everyone watched it. And <b>Kenya Pipeline has done nothing at all in twelve months</b>, &minus;1.09% &mdash; the honest answer to why a 9-shilling share is not cheap. It was priced fully at listing, not ignored.</div>
+</section>
+
+<section><div class="eyb">Worked example</div><h2 class="st">What a real recovery looks like, and where to check it</h2>
+<div class="grid g2">
+<div class="card"><div style="font-size:12px;color:var(--ts);margin-bottom:6px;font-weight:600">Crown Paints &mdash; half-year net profit, KSh millions</div>${bars(D.crwn)}</div>
+<div class="card"><p style="font-size:13.5px;line-height:1.62;color:var(--ts)">Four consecutive first halves from the company's own announcements: <b style="color:var(--tp)">37m &rarr; 75m &rarr; 437m &rarr; 486m</b>. Revenue rose from 5.64bn to 8.38bn. Full-year 2025 profit up 74.2% to 948m. On its face one of the cleanest turnarounds here.</p>
+<p style="font-size:13.5px;line-height:1.62;color:var(--ts);margin-top:10px"><b style="color:var(--gdt)">Now the check that matters.</b> In this record half, operating cash flow <b style="color:var(--tp)">fell 40.9%</b> to 681m while current liabilities rose to 6.05bn. Profit up, cash down &mdash; that gap is receivables and stock.</p>
+<p style="font-size:13.5px;line-height:1.62;color:var(--ts);margin-top:10px">It traded 618,000 shillings, so at your size it is academic. It is here because the test transfers: <b style="color:var(--tp)">always put profit growth next to cash generation.</b> That one comparison separates Crown Paints from Car &amp; General's associate income and Kenya Power's currency gains.</p></div>
+</div></section>
+</div></div>`;
+}
+
+/* ══ DOSSIER ══ */
+const GATEQ = [
+ ["Access","Can I buy it at my size?"],["Earnings","Is the profit repeatable?"],
+ ["Dividend","Is it earned?"],["Hurdle","Does it beat the T-bill?"],["Timing","Am I early or late?"]];
+
+function dossier(tk){
+  const c = IDX[tk]; if(!c) return `<div class="pane"><div class="page"><h1 class="pt">Unknown counter</h1><p class="lede"><a href="#/markets" style="color:var(--gdt)">Back to markets &rarr;</a></p></div></div>`;
+  const v = verdict(c, GOAL);
+  const legal = D.legal.filter(l=>l.tks.includes(tk));
+  const debt = D.debt.filter(x=>x.tk===tk);
+  const news = D.news.filter(n=>n.tk===tk);
+  const tr = D.trend[tk];
+  const GG = gates(c); const gd = GG.map((p,i)=>{
+    const detail = [
+      p?`${mny(c.to)} traded &mdash; your ${fmtA()} is ${pctOfDay(c)}% of a day`:`only ${mny(c.to)} traded &mdash; your order is ${pctOfDay(c)}% of the day`,
+      c.pe==null?"no published earnings":c.flag==="QUALITY"?"profit is not repeatable &mdash; see the note":c.flag==="TRAP"?"the yield is returned capital, not income":`${c.pe.toFixed(2)} years of profit`,
+      c.payout==null?"no figure published":c.payout===0?"pays no dividend":`pays out ${c.payout}% of earnings`,
+      c.dy?`${c.net.toFixed(2)}% net vs ${M.tbn}% risk-free`:"no dividend to compare",
+      c.rsiu?"momentum not verified lately &mdash; unknown, so not counted":c.rsi==null?"momentum below 70 &mdash; not stretched":`momentum ${Math.round(c.rsi)} &mdash; overbought`
+    ][i];
+    return `<div class="gate ${p?'p':'f'}"><b>${GATEQ[i][0]} ${tick(p)}</b><s>${detail}</s></div>`;
+  }).join("");
+
+  const why = v.why || (()=>{
+    const bits=[];
+    if(GOAL==="income"||!GOAL) bits.push(c.dy?`a ${c.dy.toFixed(2)}% dividend that nets <b>${c.net.toFixed(2)}%</b> after tax and is covered ${c.payout?(100/c.payout).toFixed(1):'?'} times`:"no dividend at all");
+    if(c.pe) bits.push(`${c.pe.toFixed(2)} years of profit`);
+    if(c.epsg!=null) bits.push(`earnings ${c.epsg>0?'up':'down'} ${Math.abs(c.epsg).toFixed(0)}%`);
+    bits.push(GG[0]?`${mny(c.to)} of daily turnover, so your order is invisible at ${pctOfDay(c)}%`:`only ${mny(c.to)} traded`);
+    bits.push(c.rsiu?"and its momentum has not been re-checked recently":c.rsi==null?"and it is not overbought":`but momentum is ${Math.round(c.rsi)}`);
+    return bits.join(", ")+".";
+  })();
+
+  return `<div class="pane">
+<div class="dhd"><div class="dtop">
+<div><div class="dname">${c.name}</div>
+<div class="dmeta"><span class="chip">${c.tk}</span><span>${c.sec}</span><span>&middot;</span><span>MKT CAP ${c.mcap==null?'&mdash;':c.mcap>=1000?(c.mcap/1000).toFixed(2)+'tn':c.mcap.toFixed(2)+'bn'}</span>
+${c.rat&&c.rat!=="—"?`<span class="pill ${c.rat.includes('buy')||c.rat.includes('Buy')?'ok':c.rat==='Sell'?'bd':'gd'}">${c.rat}</span>`:''}
+${c.flag?`<span class="pill ${['QUALITY','PAYOUT','TRAP','MOMENTUM'].includes(c.flag)?'bd':'wn'}">${{QUALITY:'Earnings quality',PAYOUT:'Unearned dividend',TRAP:'Yield is not income',MOMENTUM:'Momentum extreme',LIQUIDITY:'Cannot buy at size',DIVUP:'Dividend up, profit down',YIELD:'Source conflict'}[c.flag]}</span>`:''}</div></div>
+<div class="dpx"><b>${c.price.toFixed(2)}</b> <span style="font:13px var(--mono)">${chg(c.chg)}</span>
+<div style="font:10.5px var(--mono);color:var(--tm);margin-top:4px">${c.vol.toLocaleString()} shares &middot; ${mny(c.to)} &middot; vol ${c.relvol==null?'&mdash;':c.relvol.toFixed(2)+'x normal'}</div>
+<div style="font:10.5px var(--mono);color:${c.price_asof===D.macroK.stamp.slice(0,10)?'var(--tm)':'var(--gdt)'};margin-top:3px">close of ${c.price_asof||D.macroK.stamp.slice(0,10)}</div>
+${c.price_conflict?`<div style="font:10.5px var(--mono);color:var(--wn);margin-top:3px">a second source says ${c.price_conflict.other.toFixed(2)}</div>`:''}</div>
+</div></div>
+
+<div class="page">
+<div class="verd ${v.v}"><div style="font:700 9.5px var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--tm);margin-bottom:6px">Verdict on ${GOALS[GOAL||'safety'].t}</div>
+<h4>${v.v==="NA"?"Not assessable on this goal":`${v.v} &mdash; ${c.name}`}</h4>
+<p>${why}</p></div>
+
+${position(c)}
+${divCash(c)}
+${newsRead(c)}
+<div class="eyb" style="margin-top:22px">The five gates</div>
+<div class="gates">${gd}</div>
+
+<section style="margin-top:26px"><h2 class="st">The numbers</h2>
+<div class="scroll"><table><tbody>
+<tr><td>Years of profit (P/E)</td><td class="mono">${num(c.pe)}</td><td class="tx">${c.pe==null?"No published earnings on either source consulted":c.pe<5?"Cheap on trailing earnings":c.pe<9?"Fair":c.pe<20?"Expensive":"Very expensive"}</td></tr>
+<tr><td>Earnings per share</td><td class="mono">${num(c.eps)}</td><td class="tx">${c.eps!=null&&c.eps<0?"Loss-making":""}</td></tr>
+<tr><td>Earnings growth</td><td class="mono">${c.epsg==null?'<span class="fl">&mdash;</span>':`<span class="${c.epsg>0?'up':'dn'}">${c.epsg>0?'+':''}${c.epsg.toFixed(1)}%</span>`}</td><td class="tx">Trailing twelve months against the prior year</td></tr>
+<tr><td>Dividend, gross</td><td class="mono">${num(c.dy,2,'%')}</td><td class="tx"></td></tr>
+<tr><td>Payout ratio</td><td class="mono">${c.payout==null?'<span class="fl">&mdash;</span>':c.payout===0?'<span class="fl">none</span>':`<span class="pill ${c.payout>=100?'bd':c.payout>=80?'wn':'ok'}">${c.payout}%</span>`}</td><td class="tx">${c.payout==null?"":c.payout===0?"Pays nothing":c.payout>=100?"Pays out more than it earns — this gets cut":c.payout>=80?"Tight cover":`Covered ${(100/c.payout).toFixed(1)} times`}</td></tr>
+<tr><td>Dividend after ${M.divt*100}% tax</td><td class="mono"><b>${c.dy?c.net.toFixed(2)+'%':'<span class="fl">&mdash;</span>'}</b></td><td class="tx">What actually reaches your account</td></tr>
+<tr><td>Against the T-bill (${M.tbn}%)</td><td class="mono">${c.dy?`<span class="${c.net>M.tbn?'up':'dn'}">${(c.net-M.tbn).toFixed(2)} pts</span>`:'<span class="fl">&mdash;</span>'}</td><td class="tx">${c.dy?(c.net>M.tbn?"Beats doing nothing":"Loses to a government Treasury bill"):""}</td></tr>
+<tr><td>Real, after ${M.infl}% inflation</td><td class="mono">${c.dy?`<span class="${c.real>0?'up':'dn'}">${c.real>0?'+':''}${c.real.toFixed(2)}%</span>`:'<span class="fl">&mdash;</span>'}</td><td class="tx">Income only. Excludes any price movement</td></tr>
+<tr><td>Traded, one day</td><td class="mono"><b>${mny(c.to)}</b></td><td class="tx">${c.vol.toLocaleString()} shares. Your ${fmtA()} is <b>${pctOfDay(c)}%</b> of it</td></tr>
+<tr><td>Momentum (RSI)</td><td class="mono">${rsiPill(c)}</td><td class="tx">${rsiWords(c)}</td></tr>
+</tbody></table></div></section>
+
+${scoreGaps(c)}
+${priceHistory(c)}
+${tr?`<section><h2 class="st">Trailing returns</h2><div class="card" style="max-width:420px">${spark(tr,380,120)}
+<div style="display:flex;justify-content:space-between;font:10.5px var(--mono);color:var(--tm);margin-top:6px">${D.tlabels.map((l,i)=>`<span>${l}<br><b style="font-size:12px;color:${tr[i]>0?'#4cc98e':'#ef8078'}">${tr[i]>0?'+':''}${tr[i].toFixed(1)}%</b></span>`).join("")}</div></div></section>`
+:`<section><div class="co b"><b>No verified return series for this counter.</b> Multi-period history was confirmed individually for six names only. Rather than draw an unverified line, there is no chart here.</div></section>`}
+
+<section><h2 class="st">Analyst note</h2><div class="card"><p style="font-size:13.5px;line-height:1.66;color:var(--ts)">${c.note}</p></div></section>
+
+${debt.length?`<section><h2 class="st">Debt and borrowings</h2>${debt.map(x=>`<div class="item"><div class="ihd"><span class="iwho">${x.head}</span></div><p>${x.body}</p><div class="imp"><b>Read:</b> ${x.read}</div></div>`).join("")}</section>`:''}
+
+${legal.length?`<section><h2 class="st">Legal and governance</h2><div class="grid g2">${legal.map(l=>`<div class="item">
+<div class="ihd"><span class="pill ${l.sev==='critical'?'bd':l.sev==='elevated'?'wn':'gd'}">${l.sev}</span><span class="iage">${l.yr}</span></div>
+<h3>${l.title}</h3><p style="font:10.5px var(--mono);color:var(--tm);margin-top:5px">${l.forum} &middot; ${l.status}</p><p>${l.body}</p>
+<div class="imp"><b>Impact:</b> ${l.impact}</div></div>`).join("")}</div></section>`
+:`<section><h2 class="st">Legal and governance</h2><div class="co"><b>Nothing verified on file for this counter.</b> The legal book covers what could be confirmed &mdash; absence here is not evidence of a clean record, only of nothing I could source.</div></section>`}
+
+${news.length?`<section><h2 class="st">What was published</h2><div class="grid g2">${news.map(n=>`<div class="item"><div class="ihd"><span class="iwho">${n.who}</span><span class="iage" data-age="${n.d}">&nbsp;</span></div><h3>${n.head}</h3><p>${n.body}</p></div>`).join("")}</div></section>`:''}
+</div></div>`;
+}
+
+
+/* ══ YOUR POSITION — the whole point of asking the amount ══ */
+function position(c){
+  const n = shares(c), cost = n*c.price, left = A()-cost;
+  const grossDiv = c.dy ? cost*c.dy/100 : 0;
+  const netDiv = grossDiv*(1-M.divt);
+  const tb = A()*M.t364/100*(1-M.intt);
+  const better = netDiv - tb;
+  const ok = gates(c)[0];
+  return `<section style="margin-top:4px"><div class="eyb">Your money in this one</div>
+<h2 class="st">What ${fmtA()} actually buys here</h2>
+<div class="card"><div class="scroll"><table><tbody>
+<tr><td>Shares you could buy</td><td class="mono"><b>${n.toLocaleString()}</b></td><td class="tx">At ${c.price.toFixed(2)} each. ${left>0?ksh(left)+" left over — you cannot buy a part of a share":""}</td></tr>
+<tr><td>What you would spend</td><td class="mono">${ksh(cost)}</td><td class="tx">Before your broker's commission, which is typically around 1.7% on small orders in Kenya</td></tr>
+<tr><td>Your order as a share of one day</td><td class="mono ${ok?'up':'dn'}"><b>${pctOfDay(c)}%</b></td><td class="tx">${ok?"Under 10%, so you can buy without moving the price against yourself":"<b>Over 10% of a day's trading.</b> Your own buying would push the price up, and when you sell there may be nobody there. This is the gate most people never hear about."}</td></tr>
+${c.dy?`<tr><td>Dividend, one year, in shillings</td><td class="mono">${ksh(grossDiv)}</td><td class="tx">${c.dy.toFixed(2)}% of what you spent. Paid as cash, usually twice a year</td></tr>
+<tr><td>After the ${M.divt*100}% tax</td><td class="mono"><b>${ksh(netDiv)}</b></td><td class="tx">What actually reaches your bank account</td></tr>`
+:`<tr><td>Dividend</td><td class="mono"><span class="fl">none</span></td><td class="tx">This company pays nothing. Your entire return depends on selling to someone later at a higher price</td></tr>`}
+<tr><td>The same money in a Treasury bill</td><td class="mono">${ksh(tb)}</td><td class="tx">${M.t364}% for 364 days, less the ${M.intt*100}% tax. Government obligation, and you do not need a stockbroker for it</td></tr>
+<tr style="border-top:2px solid var(--line2)"><td><b>Difference</b></td><td class="mono"><b class="${better>0?'up':'dn'}">${better>0?"+":""}${ksh(better)}</b></td>
+<td class="tx"><b>${better>0?`You would earn ${ksh(better)} more in income here than in a Treasury bill.`:`You would earn ${ksh(-better)} <b>less</b> in income here than in a Treasury bill &mdash; and carry company risk for it. The only reason left to buy is a belief the price rises.`}</b></td></tr>
+</tbody></table></div></div></section>`;
+}
+
+/* ══ WHAT THE NEWS DOES TO THE NUMBERS ══ */
+function newsRead(c){
+  const r = D.newsread[c.tk];
+  if(!r) return `<section><div class="co"><b>No material news on file for this counter.</b> The verdict above rests on the ratios alone &mdash; and ratios are always backward-looking. Treat it as less reliable than a counter where the news is known.</div></section>`;
+  const ic = r.dir==="up"?"ok":r.dir==="down"?"bd":"gd";
+  const lab = r.dir==="up"?"News improves the case":r.dir==="down"?"News damages the case":"News cuts both ways";
+  return `<section style="margin-top:22px"><div class="eyb">Read this before the ratios</div>
+<h2 class="st">${r.t}</h2>
+<div class="item" style="border-color:${r.dir==='down'?'#4a2020':r.dir==='up'?'#1d4030':'#3d2f0d'}">
+<div class="ihd"><span class="pill ${ic}">${lab}</span></div>
+<p style="font-size:13.5px;color:var(--tp)">${r.b}</p>
+<div class="imp" style="color:var(--ts)"><b style="color:var(--gdt)">And the other side:</b> ${r.c}</div></div>
+<div class="co b" style="font-size:13px"><b>Why this section exists.</b> Every ratio on this page is backward-looking. The news is what moves the price. A screen once showed a share at 12 years of profit while its results, published the day before, had tripled the profit &mdash; making it 5.8. The ratio was not wrong, it was late.</div></section>`;
+}
+
+/* ══ VERIFIED PRICE POINTS — real, dated, no invented lines ══ */
+function priceHistory(c){
+  const p = D.prices[c.tk];
+  if(!p) return `<section><h2 class="st">Price history</h2><div class="co b"><b>No verified price history for this counter.</b> Five years of daily prices for the Nairobi exchange are not obtainable from the sources this page was built from &mdash; and rather than draw a line I cannot stand behind, there is nothing here. A stockbroker's terminal or the exchange's own historical data will give it to you. <b>Any page showing you a smooth five-year curve for all 57 counters is almost certainly generating it.</b></div></section>`;
+  const vals = p.map(x=>parseFloat(x[1].replace(/,/g,"")));
+  const lo=Math.min(...vals), hi=Math.max(...vals);
+  const h = D.hist[c.tk];
+  const arc = h ? `<div class="grid g2" style="margin:4px 0 14px">
+<div class="card">${spark3([h.a,h.b,h.c],[D.histmeta.d1,D.histmeta.d2,D.histmeta.d3],420,120)}
+<div style="display:flex;justify-content:space-between;font:10.5px var(--mono);color:var(--tm);margin-top:4px"><span>${D.histmeta.d1}<br>${h.a.toFixed(2)}</span><span style="text-align:center">${D.histmeta.d2}<br>${h.b.toFixed(2)}</span><span style="text-align:right">${D.histmeta.d3}<br><b style="color:var(--gdt)">${h.c.toFixed(2)}</b></span></div></div>
+<div class="card"><table><tbody>
+<tr><td>Whole period, 2021 to now</td><td class="mono ${h.t>0?'up':'dn'}"><b>${h.t>0?"+":""}${h.t.toFixed(0)}%</b></td></tr>
+<tr><td>First three years, to Nov 2024</td><td class="mono ${h.e>0?'up':'dn'}">${h.e>0?"+":""}${h.e.toFixed(0)}%</td></tr>
+<tr><td>Since Nov 2024</td><td class="mono ${h.l>0?'up':'dn'}">${h.l>0?"+":""}${h.l.toFixed(0)}%</td></tr>
+<tr><td>${fmtA()} at the 2021 price, worth today</td><td class="mono ${Math.floor(A()/h.a)*h.c>A()?'up':'dn'}"><b>${ksh(Math.floor(A()/h.a)*h.c)}</b></td></tr>
+</tbody></table>
+<div style="font:11px/1.6 var(--mono);color:var(--tm);margin-top:8px">Price only. Dividends paid over those years are on top of this, and not counted here.</div></div></div>` : "";
+  return `<section><h2 class="st">Price history &mdash; every point verified and dated</h2>
+<p class="lede">These are the prices I could confirm with a date and a source. Not a modelled curve. The gap between them is real time in which the price did things nobody recorded here.</p>
+${arc}
+<div class="card"><div class="scroll"><table><thead><tr><th>When</th><th>Price</th><th>Move from first</th><th class="tx">What this point is</th></tr></thead><tbody>
+${p.map((x,i)=>{const v=vals[i], d=(v/vals[0]-1)*100;
+return `<tr><td class="mono" style="white-space:nowrap;color:var(--gdt)">${x[0]}</td><td class="mono"><b>${x[1]}</b></td>
+<td class="mono">${i===0?'<span class="fl">&mdash;</span>':`<span class="${d>0?'up':'dn'}">${d>0?'+':''}${d.toFixed(0)}%</span>`}</td>
+<td class="tx">${x[2]}</td></tr>`}).join("")}
+</tbody></table></div>
+<div style="margin-top:12px;font:11px var(--mono);color:var(--tm)">Range across verified points: ${lo.toFixed(2)} to ${hi.toFixed(2)} &mdash; a spread of ${((hi/lo-1)*100).toFixed(0)}%.</div></div></section>`;
+}
+
+/* ══ MARKETS ══ */
+function markets(){
+  const g = GOAL==="preserve"||!GOAL?"safety":GOAL;
+  const rows = D.counters.map(c=>{
+    const v=verdict(c,GOAL);
+    const hide = Q && !(c.tk.toLowerCase().includes(Q)||c.name.toLowerCase().includes(Q));
+    return `<tr class="${gates(c)[0]?'':'dim'} ${hide?'off':''}" onclick="location.hash='#/stock/${c.tk}'">
+<td><b>${c.name}</b> <span style="color:var(--tm);font:10.5px var(--mono)">${c.tk}</span><div style="font:9px var(--mono);color:var(--tm);text-transform:uppercase;letter-spacing:.05em">${c.sec}</div></td>
+<td class="mono">${c.price.toFixed(2)}</td><td class="mono">${chg(c.chg)}</td>
+<td class="mono"><b>${mny(c.to)}</b><div style="font-size:9px;color:var(--tm)">${pctOfDay(c)}% of day</div></td>
+<td class="mono">${num(c.pe)}</td><td class="mono">${num(c.eps)}</td>
+<td class="mono">${c.epsg==null?'<span class="fl">&mdash;</span>':`<span class="${c.epsg>0?'up':'dn'}">${c.epsg>0?'+':''}${c.epsg.toFixed(0)}%</span>`}</td>
+<td class="mono">${num(c.dy,2,'%')}</td>
+<td>${c.payout==null?'<span class="fl">&mdash;</span>':c.payout===0?'<span class="fl">none</span>':`<span class="pill ${c.payout>=100?'bd':c.payout>=80?'wn':'ok'}">${c.payout}%</span>`}</td>
+<td class="mono">${c.dy?`<b>${c.net.toFixed(2)}%</b>`:'<span class="fl">&mdash;</span>'}</td>
+<td class="mono">${c.dy?`<span class="${c.net>M.tbn?'up':'dn'}">${(c.net-M.tbn).toFixed(2)}</span>`:'<span class="fl">&mdash;</span>'}</td>
+<td>${rsiPill(c)}</td>
+<td class="gt">${gates(c).map(tick).join("")}</td>
+<td><span class="vd ${v.v}">${v.v}</span></td></tr>`;
+  }).join("");
+  return `<div class="page"><div class="eyb">Markets</div><h1 class="pt">All 57 listed counters</h1>
+<p class="lede">Sorted by access first, then by what you pay for earnings. Faded rows cannot absorb your ${fmtA()}. Click any row for its dossier. Gates read: access &middot; real earnings &middot; dividend earned &middot; beats the T-bill &middot; not overbought.</p>
+<div class="card" style="padding:0;overflow:hidden"><div class="scroll" style="max-height:74vh;overflow-y:auto"><table>
+<thead><tr><th>Counter</th><th>Price</th><th>Day</th><th>Traded</th><th>Yrs profit</th><th>Earns</th><th>Growth</th><th>Div gross</th><th>Payout</th><th>Div net</th><th>vs T-bill</th><th>Momentum</th><th class="gt">1 2 3 4 5</th><th>Verdict</th></tr></thead>
+<tbody>${rows}</tbody></table></div></div></div>`;
+}
+
+/* ══ NEWS / LEGAL / DEBT / METHOD ══ */
+function newsPage(){
+  return `<div class="page"><div class="eyb">The wire</div><h1 class="pt">What was actually published</h1>
+<p class="lede">Company announcements and market reporting, most recent first, each stamped with its own age. A published page has no live feed &mdash; so instead of a fake ticker, every item tells you how old it is.</p>
+<div class="grid g2">${D.news.map(n=>`<div class="item"><div class="ihd"><span class="iwho">${n.who}</span><span class="iage" data-age="${n.d}">&nbsp;</span></div>
+<h3>${n.head}</h3><p>${n.body}</p>${n.tk!=="MKT"?`<div class="imp"><a href="#/stock/${n.tk}" style="color:var(--gdt)">Open the ${n.tk} dossier &rarr;</a></div>`:''}</div>`).join("")}</div></div>`;
+}
+function legalPage(){
+  const cnt = {critical:0,elevated:0,watch:0};
+  D.legal.forEach(l=>cnt[l.sev]++);
+  const covered = new Set(); D.legal.forEach(l=>l.tks.forEach(t=>covered.add(t)));
+  return `<div class="page"><div class="eyb">The docket</div><h1 class="pt">Court and conduct</h1>
+<p class="lede">A share sits behind creditors and the state. This is the legal overlay on the counters in this screen &mdash; only matters that could be verified. <b>It is not a complete docket, and absence here is not evidence of a clean record.</b> Where a competitor's page lists a matter I could not source, I have left it out rather than repeat it.</p>
+<div class="grid g4" style="margin-bottom:22px">
+<div class="kpi w"><v>${cnt.critical}</v><k>Critical</k></div>
+<div class="kpi"><v>${cnt.elevated}</v><k>Elevated</k></div>
+<div class="kpi"><v>${cnt.watch}</v><k>Watch</k></div>
+<div class="kpi"><v>${covered.size}</v><k>Counters with a matter on file</k></div></div>
+<div class="grid g2">${D.legal.map(l=>`<div class="item"><div class="ihd">
+<span class="pill ${l.sev==='critical'?'bd':l.sev==='elevated'?'wn':'gd'}">${l.sev}</span>
+<span class="iage">${l.forum} &middot; ${l.yr}</span></div>
+<h3>${l.title}</h3>
+<p style="font:10.5px var(--mono);color:var(--gdt);margin-top:5px">${l.status}</p>
+<p>${l.body}</p><div class="imp"><b>Impact:</b> ${l.impact}</div>
+<div style="margin-top:9px">${l.tks.map(t=>`<a class="chip" href="#/stock/${t}">${t}</a>`).join("")}</div></div>`).join("")}</div>
+<div class="co r" style="margin-top:20px"><b>The one to weigh before Monday.</b> On 5 August the DPP charged the chief executives of <b>KCB, NCBA and Co-operative Bank</b>. The individuals were charged, not the institutions. But those three are roughly a quarter of this exchange's value, and <b>all three must publish half-year results within days</b> &mdash; and two of them are the names this screen keeps surfacing.</div></div>`;
+}
+function debtPage(){
+  return `<div class="page"><div class="eyb">Balance sheets</div><h1 class="pt">Debt, borrowings and what they signal</h1>
+<p class="lede">What these companies owe, and more importantly which direction it is moving. Drawn from the half-year announcements published this month.</p>
+<div class="grid g2">${D.debt.map(x=>`<div class="item"><div class="ihd">
+<span class="pill ${x.sev==='critical'?'bd':x.sev==='elevated'?'wn':x.sev==='clear'?'ok':'gd'}">${x.sev}</span>
+<a class="chip" href="#/stock/${x.tk}" style="margin-left:auto">${x.tk}</a></div>
+<h3>${x.name} &mdash; ${x.head}</h3><p>${x.body}</p><div class="imp"><b>Read:</b> ${x.read}</div></div>`).join("")}</div>
+<div class="co" style="margin-top:20px"><b>The one to understand properly.</b> KCB's 300bn note programme is <b>debt, not shares</b>. Nobody's slice of KCB gets smaller &mdash; there is no dilution. It means KCB intends to lend materially more, which is how a bank grows profit, and it means a <b>KCB bond will exist by October</b>. For anyone who would rather have a known return than a share price, that is a genuinely different instrument.</div>
+<section style="margin-top:30px"><h2 class="st">The macro backdrop</h2>
+<div class="card"><div class="scroll"><table><tbody>${D.macro.map(m=>`<tr><td>${m[0]}</td><td class="mono"><b>${m[1]}</b></td><td class="tx">${m[2]}</td></tr>`).join("")}</tbody></table></div></div></section>
+<section><h2 class="st">What happens next</h2><div class="card"><div class="scroll"><table>
+<thead><tr><th>Date</th><th>Event</th><th class="tx">Note</th></tr></thead><tbody>
+${D.cal.map(c=>`<tr style="${c[3]?'background:rgba(201,133,0,.06)':''}"><td class="mono" style="color:var(--gdt);white-space:nowrap">${c[0]}</td><td><b>${c[1]}</b></td><td class="tx">${c[2]}</td></tr>`).join("")}
+</tbody></table></div></div>
+<div class="co r"><b>Five of the largest banks &mdash; KCB, Co-op, NCBA, I&amp;M and Stanbic &mdash; must report by 31 August, and as of 23 August none had.</b> Bank results this season split hard: Equity +31.5% and Diamond Trust +37% pre-tax against Absa &minus;10%, Standard Chartered &minus;17% and BOC &minus;39.8%. Anyone buying those five now is buying before the number.</div></section></div>`;
+}
+function methodPage(){
+  return `<div class="page"><div class="eyb">Method</div><h1 class="pt">How to check me</h1>
+<section><h2 class="st">Where every number came from</h2><div class="card"><ul style="padding-left:20px;font-size:13.5px;line-height:1.7;color:var(--ts)">
+<li>Prices, volume, relative volume, momentum and analyst ratings: <b>TradingView Kenya</b> all-stocks and overbought/oversold screeners, captured at the close of Thursday 20 August 2026. The oversold screen was run three times and returned zero each time.</li>
+<li><b>Historical prices, 25 October 2021 and 20 November 2024:</b> two full-market tables, each on a page that prints its own trading date &mdash; the first from <b>rich.co.ke</b>, an NSE-authorised data vendor whose table is frozen at 25 Oct 2021; the second from <b>afx</b>, whose summary page is headed &ldquo;Wednesday, November 20, 2024&rdquo;. Both were read twice, independently, and the dates on the pages are what dates the figures. Nothing between those two dates and this month could be verified, so nothing between them is shown. The exchange's own daily price lists exist but are published as scanned images with no readable text.</li>
+<li>Earnings and dividends per share, share counts, payout ratios: verified counter by counter at <b>afx.kwayisi.org</b> on the evening of 20 August &mdash; specifically for Kenya Power, KenGen, Car &amp; General, Kenya Pipeline, BOC and Co-operative Bank, where TradingView had no figure or a conflicting one.</li>
+<li>Results: company announcements 17&ndash;23 August 2026 as reported by <b>Business Daily</b> and <b>The Kenyan Wall Street</b>.</li>
+<li>Macro: <b>Central Bank of Kenya</b>, 20 August 2026.</li>
+<li>Tax: 5% withholding on listed dividends, 15% on government paper under ten years, infrastructure bonds exempt &mdash; PwC Kenya tax summary and the Central Bank's own description.</li>
+<li>Colour: the gold single-series hue, the gold/blue diverging pair and the four-step ramp were each machine-validated for lightness band, chroma, colour-blind separation and contrast against this background. Nothing was chosen by eye.</li>
+</ul></div></section>
+<section><h2 class="st">What this page cannot do</h2><div class="card"><ul style="padding-left:20px;font-size:13.5px;line-height:1.7;color:var(--ts)">
+<li><b>It cannot refresh itself.</b> No live prices, no live news. The badge in the header computes its own age from your clock and warns when it goes stale.</li>
+<li><b>Five years of daily history is not here</b> for 51 of the 57 counters, because it could not be verified. Six have confirmed multi-period series. The rest show no chart rather than a guessed one.</li>
+<li><b>The legal book is not a docket.</b> It is what could be confirmed.</li>
+<li><b>Every dividend yield is trailing.</b> Three companies raised payouts into falling profit this month alone.</li>
+<li><b>The access gate is calibrated to the amount you entered.</b> Change it in the header and the survivors change &mdash; that is the point of it.</li>
+</ul></div></section>
+<section><h2 class="st">Two figures I got wrong this week</h2><div class="card"><p style="font-size:13.5px;line-height:1.7;color:var(--ts)">I priced a toner order at ten times market when it was under three, because I read set quantities as single units. And I said there was &ldquo;no new information&rdquo; behind a share that had published results the day before. <b style="color:var(--tp)">Both were caught by the reader, not by me.</b> Check anything here that would cost you money.</p></div></section>
+<div class="co r"><b>This is a factual screen, not investment advice.</b> The author is not a licensed investment adviser, cannot place trades and does not forecast prices. Nothing here accounts for your circumstances, timeframe, tax position or how much you can afford to lose.</div>
+<p class="foot">Every chart is inline SVG with hover values. No external requests beyond the font stylesheet, no tracking, no analytics. Counters marked &mdash; have no published figure on either source consulted: that is a data gap, not a judgement.</p></div>`;
+}
+
+
+/* ══ LEARN ══ */
+function learnPage(){
+  return `<div class="page"><div class="eyb">Start here if this is new</div><h1 class="pt">What the numbers actually mean</h1>
+<p class="lede">Nobody is born knowing this and none of it is complicated. Thirteen ideas, in the order they matter. Every one of them appears somewhere on this page attached to a real company, so you can see it working rather than just read a definition.</p>
+${D.edu.map((e,i)=>`<div class="item" style="margin-bottom:12px">
+<div class="ihd"><span class="pill gd">${String(i+1).padStart(2,"0")}</span><span style="font-family:var(--disp);font-size:19px;font-weight:600">${e.k}</span>
+<span class="iage">also called ${e.also}</span></div>
+<p style="font-size:14.5px;color:var(--tp);line-height:1.6">${e.s}</p>
+<div class="imp" style="color:var(--ts);font-size:13px;line-height:1.65">${e.l}</div></div>`).join("")}
+<section style="margin-top:28px"><h2 class="st">The order these questions go in</h2>
+<div class="card"><p style="font-size:13.5px;line-height:1.7;color:var(--ts)">Most people ask &ldquo;is it cheap?&rdquo; first. That is the fourth question, not the first. In order:</p>
+<div style="margin-top:14px">${[
+ ["Can I actually buy it, and get out again?","If a day's trading is smaller than your order, the price on the screen is not a price you can get. This eliminates most of the exchange before anything else is considered."],
+ ["Is the profit real and repeatable?","A currency gain or a share of an unaudited associate is not earnings power. It looks identical in a ratio."],
+ ["If I want income, is the dividend earned?","Paying out more than you earn is a countdown. Three companies here are doing it right now."],
+ ["Does it beat doing nothing?","The government pays 7.68% after tax with no company risk. Anything below that means you are taking risk for free."],
+ ["Am I early or late?","Eleven counters here are overbought and none are oversold. Being late is not fatal, but you should know which you are."]
+].map((x,i)=>`<div style="display:flex;gap:13px;padding:11px 0;border-bottom:1px solid var(--line)">
+<span style="flex:0 0 26px;height:26px;border-radius:8px;background:var(--ink3);border:1px solid var(--line);display:grid;place-items:center;font:700 11px var(--mono);color:var(--gdt)">${i+1}</span>
+<div><b style="font-size:14px">${x[0]}</b><div style="font-size:12.5px;color:var(--ts);line-height:1.55;margin-top:3px">${x[1]}</div></div></div>`).join("")}</div></div></section>
+<section><h2 class="st">The four mistakes that cost the most</h2><div class="grid g2">
+${[["A low share price is not a low valuation","Kenya Pipeline costs 9 shillings and is one of the most expensive things on this exchange &mdash; it earns 41 cents a share, so you are paying 22 years of profit, and it pays no dividend. Meanwhile a 560-shilling share can be cheap. <b>Price per share tells you nothing on its own.</b>"],
+  ["Sorting by dividend yield","The top of that list is where the danger is. The highest yield here pays out 134% of earnings. The second highest pays 99% with earnings down 42%. The third is a company returning your own capital as its concession ends. <b>Yield without coverage is a countdown.</b>"],
+  ["Trusting the estimated results date","Two banks here reported on 19 August against estimates of the 20th and 25th. A data page said a company would report on 31 August; it had reported on the 13th and the price had already moved 40%. <b>Only the company's own announcement is real.</b>"],
+  ["Chasing the thing that already moved","A share up 1,066% in a year has been discovered. The people who were early are now selling to the people arriving. That can run further &mdash; but you are no longer being paid to be early, you are paying for someone else's early."]
+].map(x=>`<div class="item"><h3>${x[0]}</h3><p>${x[1]}</p></div>`).join("")}</div></section>
+</div>`;
+}
+
+/* ══ chrome ══ */
+const NAVS = [["desk","Desk"],["markets","Markets"],["news","News"],["learn","Learn"],["legal","Legal"],["debt","Debt"]];
+function header(route){
+  const tape = [["NASI","238.13","+1.30%","g"],["NSE 25","6,637.29","+1.48%","g"],["Banking","276.63","+2.83%","g"],
+   ["Mkt cap","3.996tn","record","g"],["Foreign","−1.17bn","5 sessions",""],["Turnover","3.92bn","−5.62%",""],
+   ["Inflation","6.49%","Jul","" ],["T-bill 364","9.037%","7.68% net","g"],["CBR","8.75%","4th hold",""]];
+  return `<header class="hd">
+<a class="bmk" href="#/desk"><b>Thamani</b><s>NSE</s></a>
+<nav class="nav">${NAVS.map(([k,l])=>`<a href="#/${k}" class="${route===k?'on':''}">${l}</a>`).join("")}<a href="#/method" class="${route==='method'?'on':''}">Method</a></nav>
+<div class="sbox"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+<input id="q" placeholder="Ticker or name" value="${Q}" aria-label="Search counters"></div>
+<button class="amt" id="amtbtn" title="Change your amount"><k>Your amount</k><v>${fmtA()}</v></button>
+<div class="stat"><span class="age" id="age">&nbsp;</span><br>Prices to ${newestClose()} &middot; news to ${D.macroK.news.slice(0,10)}<br>${D.counters.length} counters</div>
+</header>
+<div class="tape">${tape.map(t=>`<div><k>${t[0]}</k><v>${t[1]}</v><c class="${t[3]}">${t[2]}</c></div>`).join("")}</div>`;
+}
+function bottomNav(route){
+  return `<nav class="bn">${NAVS.map(([k,l])=>`<a href="#/${k}" class="${route===k?'on':''}">${ICO[k]}${l}</a>`).join("")}</nav>`;
+}
+function goalGate(step){
+  const gd = D.goaldoc;
+  if(step==="amt"){
+    return `<div class="gate-ov" id="gate"><div class="gate-bx">
+<div class="eyb">Step two of two</div>
+<h2>How much are you working with?</h2>
+<p style="color:var(--ts);font-size:14px;line-height:1.62;max-width:60ch">This is not a formality and it is not stored anywhere but your own browser. <b style="color:var(--tp)">The amount decides which shares you can actually buy.</b> A day's trading on this exchange is often smaller than a single order &mdash; enter 100,000 and most of the market opens up; enter 5 million and almost all of it closes. Every verdict on the next screen is calculated from this number.</p>
+<div style="margin:22px 0 8px"><input id="amtin" class="amtin" type="text" inputmode="numeric" placeholder="e.g. 250,000" aria-label="Amount in Kenyan shillings" value="${AMT?AMT.toLocaleString():""}"></div>
+<div class="qamt">${[50000,100000,250000,500000,1000000,1300000,5000000].map(v=>`<button class="qb" data-amt="${v}">${v>=1e6?(v/1e6)+"m":(v/1000)+"k"}</button>`).join("")}</div>
+<button class="gbtn" id="amtgo" ${AMT?"":"disabled"}>${AMT?"Open the terminal":"Enter an amount to continue"}</button>
+<p style="font:11px/1.6 var(--mono);color:var(--tm);margin-top:14px">Change it any time from the button in the header. Nothing is sent anywhere &mdash; this page makes no outside requests.</p>
+</div></div>`;
+  }
+  return `<div class="gate-ov" id="gate"><div class="gate-bx">
+<div class="dsc dsc-top"><b>Read this first.</b> This page is not investment advice and nobody behind it is a licensed investment adviser. The labels it prints &mdash; buy, hold, avoid &mdash; describe how a counter scores against the published rule set on the Method page. They are not a recommendation to you, they take no account of your circumstances, and they are worked out from figures that are already days old by the time you read them. <b>Anyone acting on this is making their own decision.</b> If you want advice about your own money, an adviser licensed by the Capital Markets Authority is the person who can give it.</div>
+<div class="eyb">Step one of two</div>
+<h2>What is this money for?</h2>
+<p style="color:var(--ts);font-size:14px;line-height:1.62;max-width:60ch">The same share is a good idea for one purpose and a bad one for another. Read these properly &mdash; most people pick the one that sounds most impressive rather than the one that is true, and then wonder why the answer disappoints them.</p>
+<div class="gopts">${Object.keys(GOALS).map(k=>`<button class="gopt" data-pick="${k}">
+<b>${gd[k].t}</b><s>${gd[k].one}</s>
+<div class="gexp"><p><b>What it means.</b> ${gd[k].mean}</p>
+<p><b>What you accept.</b> ${gd[k].accept}</p>
+<p><b>What kills it.</b> ${gd[k].kills}</p>
+<p style="color:var(--gdt)"><b>So the test is:</b> ${gd[k].test}</p></div>
+<i>Select &rarr;</i></button>`).join("")}</div>
+<button class="gbtn" id="gogo" disabled>Select a goal to continue</button>
+<p style="font:11px/1.6 var(--mono);color:var(--tm);margin-top:12px">You can change this any time from the chips above the watchlist. Nothing about this choice is permanent.</p>
+</div></div>`;
+}
+
+/* ══ the notice that appears under every screen ══ */
+function noticeBand(){
+  return `<div class="wrap"><div class="dsc dsc-band">
+<b>Not investment advice.</b> Nobody behind this page is licensed to advise you, and nothing here takes account of your circumstances, your debts or what you can afford to lose.
+The buy, hold and avoid labels are the output of the published rule set on the Method page, applied to figures whose dates are printed beside them. Prices are the last close available to this page, not a live quote, and they can be wrong.
+Every source is named on the Method page. Verify anything before you act on it, and for a decision about your own money speak to an adviser licensed by the Capital Markets Authority.
+<span class="dsc-who">Thamani &middot; data close ${D.macroK.stamp.slice(0,10)} &middot; news to ${D.macroK.news.slice(0,10)}</span>
+</div></div>`;
+}
+
+/* ══ dated cash: a declared amount with a date, not a trailing yield ══ */
+function divCash(c){
+  const d = (D.nextdiv||{})[c.tk];
+  if(!d) return "";
+  const n = shares(c), gross = n*d.amt, net = gross*(1-M.divt);
+  const pctPrice = d.amt/c.price*100;
+  return `<section style="margin-top:22px"><div class="eyb">Dated cash</div>
+<h2 class="st">${d.kind} dividend of ${d.amt.toFixed(2)} a share, already declared</h2>
+<div class="card"><div class="scroll"><table><tbody>
+<tr><td>Declared</td><td class="mono">${d.declared}</td><td class="tx">${d.src}</td></tr>
+<tr><td>On the register by</td><td class="mono" style="color:var(--gdt)"><b>${d.record}</b></td><td class="tx">Own the shares before this date or you get nothing. Three working days to settle, so buy about three working days earlier</td></tr>
+<tr><td>Money reaches you</td><td class="mono"><b>${d.pay}</b></td><td class="tx">Paid as cash into your account</td></tr>
+<tr><td>On your ${fmtA()}</td><td class="mono">${ksh(gross)}</td><td class="tx">${n.toLocaleString()} shares &times; ${d.amt.toFixed(2)}. That is ${pctPrice.toFixed(2)}% of what you pay for the share, for this one payment</td></tr>
+<tr style="border-top:2px solid var(--line2)"><td><b>After the ${M.divt*100}% tax</b></td><td class="mono"><b>${ksh(net)}</b></td><td class="tx"><b>This is the only figure on this page that is a declared amount on a stated date rather than a trailing average.</b></td></tr>
+</tbody></table></div>
+<div class="co" style="margin-top:12px">${d.note}</div></div></section>`;
+}
+function datedCash(){
+  const nd = D.nextdiv||{}, meta = D.nextdivmeta||{};
+  const ks = Object.keys(nd).sort((a,b)=>nd[b].amt/IDX[b].price - nd[a].amt/IDX[a].price);
+  if(!ks.length) return "";
+  return `<section style="margin-top:34px"><div class="eyb">The only cash with a date on it</div>
+<h2 class="st">Dividends actually declared, and when the money moves</h2>
+<p class="lede">${meta.lede||""}</p>
+<div class="card"><div class="scroll"><table>
+<thead><tr><th>Company</th><th>Amount</th><th>% of the price</th><th>Register closes</th><th>Paid</th><th>On your ${fmtA()}, after tax</th></tr></thead>
+<tbody>${ks.map(tk=>{const d=nd[tk], c=IDX[tk], n=shares(c), net=n*d.amt*(1-M.divt);
+return `<tr onclick="location.hash='#/stock/${tk}'"><td><b>${c.name}</b> <span style="color:var(--tm);font:10.5px var(--mono)">${tk}</span></td>
+<td class="mono"><b>${d.amt.toFixed(2)}</b></td><td class="mono">${(d.amt/c.price*100).toFixed(2)}%</td>
+<td class="mono" style="color:var(--gdt)">${d.record}</td><td class="mono">${d.pay}</td>
+<td class="mono"><b>${ksh(net)}</b></td></tr>`}).join("")}</tbody></table></div></div>
+<div class="co b">${meta.gap||""}</div></section>`;
+}
+/* ══ a blank score is a measurement failure, and says which ══ */
+function scoreGaps(c){
+  const w = c.scwhy||{}, gaps = Object.keys(GOALS).filter(k=>k!=="preserve" && w[k]);
+  if(!gaps.length) return "";
+  return `<section style="margin-top:22px"><h2 class="st">What could not be scored here, and why</h2>
+<div class="card"><table><tbody>${gaps.map(k=>
+`<tr><td style="width:150px"><b>${GOALS[k].t}</b></td><td class="mono"><span class="pill wn">no score</span></td><td class="tx">${w[k]}</td></tr>`).join("")}
+</tbody></table>
+<div style="font:11px/1.6 var(--mono);color:var(--tm);margin-top:10px">A blank is not a low score. It means the question could not be answered from what is published, and a screen that prints a number anyway is inventing one.</div></div></section>`;
+}
+
+/* the newest close held by ANY counter — prices no longer share one date */
+function newestClose(){
+  const ds = D.counters.map(c=>c.price_asof).filter(Boolean).sort();
+  return ds.length ? ds[ds.length-1] : D.macroK.stamp.slice(0,10);
+}
+function priceDateSpread(){
+  const ds = [...new Set(D.counters.map(c=>c.price_asof).filter(Boolean))].sort();
+  return ds;
+}
+
+/* ══ router ══ */
+function route(){
+  const h = (location.hash||"#/desk").replace(/^#\/?/,"") || "desk";
+  const parts = h.split("/");
+  const page = parts[0] || "desk";
+  const app = document.getElementById("app");
+  let body, chrome = true;
+  if (page === "stock" && parts[1]) {
+    body = `<div class="wrap"><div class="desk">${watchlist(parts[1])}${dossier(parts[1])}${wire(parts[1])}</div></div>`;
+  } else if (page === "markets") { body = `<div class="wrap">${markets()}</div>`; }
+  else if (page === "news")    { body = `<div class="wrap">${newsPage()}</div>`; }
+  else if (page === "legal")   { body = `<div class="wrap">${legalPage()}</div>`; }
+  else if (page === "debt")    { body = `<div class="wrap">${debtPage()}</div>`; }
+  else if (page === "learn")   { body = `<div class="wrap">${learnPage()}</div>`; }
+  else if (page === "method")  { body = `<div class="wrap">${methodPage()}</div>`; }
+  else { body = `<div class="wrap"><div class="desk">${watchlist(null)}${deskCentre()}${wire(null)}</div></div>`; }
+  app.innerHTML = header(page) + body + noticeBand() + bottomNav(page);
+  if (!GOAL) app.insertAdjacentHTML("beforeend", goalGate("goal"));
+  else if (!AMT) app.insertAdjacentHTML("beforeend", goalGate("amt"));
+  wireUp();
+  if (parts[0]==="stock") window.scrollTo(0,0);
+}
+
+function wireUp(){
+  // staleness
+  try{
+    const hh = hrs(M.stamp), el = document.getElementById("age");
+    if(el){ el.textContent = "Data " + age(hh); el.className = "age " + (hh<24?"f":"s"); }
+  }catch(e){}
+  document.querySelectorAll("[data-age]").forEach(s=>{
+    try{ s.textContent = age(hrs(s.getAttribute("data-age")+"T09:00:00+03:00")); }catch(e){}
+  });
+  // search
+  const q = document.getElementById("q");
+  if(q) q.addEventListener("input", e=>{
+    Q = e.target.value.trim().toLowerCase();
+    document.querySelectorAll(".row[href]").forEach(r=>{
+      const tk = r.getAttribute("href").split("/").pop();
+      const c = IDX[tk];
+      r.classList.toggle("off", !!Q && !(tk.toLowerCase().includes(Q)||c.name.toLowerCase().includes(Q)));
+    });
+    document.querySelectorAll("tbody tr[onclick]").forEach(r=>{
+      const t = r.getAttribute("onclick").match(/stock\/(\w+)/);
+      if(!t) return; const c = IDX[t[1]]; if(!c) return;
+      r.classList.toggle("off", !!Q && !(c.tk.toLowerCase().includes(Q)||c.name.toLowerCase().includes(Q)));
+    });
+  });
+  // goal chips
+  document.querySelectorAll(".gchip").forEach(b=>b.addEventListener("click",()=>{
+    GOAL = b.dataset.g; try{localStorage.setItem("th-goal",GOAL);}catch(e){}; route();
+  }));
+  // goal gate
+  let pick = null;
+  document.querySelectorAll(".gopt").forEach(b=>b.addEventListener("click",()=>{
+    pick = b.dataset.pick;
+    document.querySelectorAll(".gopt").forEach(x=>x.classList.toggle("on",x===b));
+    const go = document.getElementById("gogo");
+    go.disabled = false; go.textContent = "Enter as " + GOALS[pick].t.toLowerCase();
+  }));
+  const go = document.getElementById("gogo");
+  if(go) go.addEventListener("click",()=>{
+    if(!pick) return; GOAL = pick; try{localStorage.setItem("th-goal",GOAL);}catch(e){}; route();
+  });
+  // amount step
+  const ain = document.getElementById("amtin"), ago = document.getElementById("amtgo");
+  const parse = (s)=>parseFloat(String(s).replace(/[^0-9.]/g,""))||0;
+  if(ain){
+    ain.focus();
+    const sync=()=>{ const v=parse(ain.value); ago.disabled = !(v>=1000);
+      ago.textContent = v>=1000 ? "Open the terminal with "+(v>=1e6?"KES "+(v/1e6).toFixed(v%1e6?2:1)+"m":"KES "+v.toLocaleString()) : (v>0?"Minimum 1,000":"Enter an amount to continue"); };
+    ain.addEventListener("input",()=>{ const v=parse(ain.value); ain.value = v? v.toLocaleString():""; sync(); });
+    ain.addEventListener("keydown",e=>{ if(e.key==="Enter"&&!ago.disabled) ago.click(); });
+    document.querySelectorAll(".qb").forEach(b=>b.addEventListener("click",()=>{
+      ain.value = (+b.dataset.amt).toLocaleString(); sync(); ain.focus(); }));
+    sync();
+  }
+  if(ago) ago.addEventListener("click",()=>{
+    const v = parse(document.getElementById("amtin").value);
+    if(!(v>=1000)) return; AMT = v; try{localStorage.setItem("th-amt",String(v));}catch(e){}; route();
+  });
+  const ab = document.getElementById("amtbtn");
+  if(ab) ab.addEventListener("click",()=>{ AMT=null; try{localStorage.removeItem("th-amt");}catch(e){}; route(); });
+}
+window.addEventListener("hashchange", route);
+route();
+
+</script>

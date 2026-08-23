@@ -1,0 +1,87 @@
+name: NSE price refresh
+
+# Every 15 minutes while the market is open, plus a sweep after the close.
+# The Nairobi exchange trades 09:00-15:00 East Africa Time = 06:00-12:00 UTC.
+#
+# Be clear about what 15 minutes buys you. The source publishes ONE table per
+# trading day, so polling it more often does not produce intraday prices — no
+# free source of those exists. What it does buy is latency: the moment the new
+# close appears, the page has it inside 15 minutes instead of hours later.
+#
+# The cost is near zero because refresh.py checks the trading date the source
+# prints on itself and exits immediately when it has not changed. A no-op run is
+# one HTTP request and a few seconds. Only the run that finds a new date does
+# any work, so out of roughly 28 runs a day, one writes.
+#
+# GitHub's scheduler is best-effort and can skip or delay runs on busy shared
+# runners, which is another reason to poll rather than to fire once and hope.
+on:
+  schedule:
+    - cron: "*/15 6-12 * * 1-5"     # every 15 min, market hours, weekdays
+    - cron: "30 15 * * 1-5"         # a backstop after the close
+  workflow_dispatch:          # the "Run workflow" button, for when you want it now
+
+permissions:
+  contents: write             # to commit the refreshed data back
+
+concurrency:
+  group: refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install what the scripts need
+        run: pip install --quiet requests pandas lxml
+
+      # Run the tests BEFORE touching anything. If the maths or the parser is
+      # broken, the day's prices are the least of the problems.
+      - name: Test
+        run: python src/test_refresh.py
+
+      - name: Fetch today's prices
+        run: python src/refresh.py
+
+      # The gate. Exits non-zero on anything implausible, which fails the job
+      # and leaves the published page exactly as it was.
+      - name: Validate before publishing
+        run: python src/validate.py
+
+      - name: Rebuild the page
+        run: python src/build.py
+
+      - name: Note a no-op plainly
+        if: success()
+        run: |
+          if [ ! -f data/counters.candidate.json ] && git diff --quiet; then
+            echo "no new trading date at the source — nothing to publish" >> $GITHUB_STEP_SUMMARY
+          fi
+
+      - name: Commit, only if something actually changed
+        run: |
+          git config user.name  "thamani-refresh"
+          git config user.email "actions@users.noreply.github.com"
+          if git diff --quiet; then
+            echo "nothing changed — no commit"
+            exit 0
+          fi
+          git add data docs
+          git commit -m "prices: $(python -c "import json;print(json.load(open('data/macro.json'))['stamp_close'][:10])")"
+          git push
+
+      # If anything above failed, say so loudly in the run summary rather than
+      # letting a silent failure look like a quiet day.
+      - name: Report a failure
+        if: failure()
+        run: |
+          echo "### The refresh did not publish" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "The live page still shows its previous prices and its previous date stamp, which is the intended behaviour on any doubt." >> $GITHUB_STEP_SUMMARY
+          echo "Look at the failing step above. The usual causes are: the source page changed shape, or the source was unreachable." >> $GITHUB_STEP_SUMMARY

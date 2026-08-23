@@ -1,0 +1,146 @@
+{
+ "stamp_close": "2026-08-21T17:00:00+03:00",
+ "stamp_news": "2026-08-23T12:00:00+03:00",
+ "inflation": 6.49,
+ "cbr": 8.75,
+ "tbill_364": 9.037,
+ "div_tax": 0.05,
+ "int_tax": 0.15,
+ "default_order": 1300000,
+ "table": [
+  [
+   "NSE market value",
+   "3.996 tn",
+   "+1.30% on the week, 3.62bn short of 4 trillion"
+  ],
+  [
+   "Banking index",
+   "276.63",
+   "+2.83% &mdash; banks were 55.38% of all weekly turnover"
+  ],
+  [
+   "NASI",
+   "238.13",
+   "+1.30%"
+  ],
+  [
+   "Weekly turnover",
+   "3.92 bn",
+   "&minus;5.62%. Volume fell 25.61% to 100.09m shares"
+  ],
+  [
+   "Foreign flows",
+   "&minus;1.17 bn",
+   "Net sellers in all five sessions, double the prior week. Locals 76.2% of turnover"
+  ],
+  [
+   "Central Bank Rate",
+   "8.75%",
+   "Held for a fourth consecutive meeting, 11 August"
+  ],
+  [
+   "Inflation",
+   "6.49%",
+   "July 2026 &mdash; the bar every return must clear"
+  ],
+  [
+   "364-day T-bill",
+   "9.037%",
+   "7.68% after the 15% tax. No stockbroker needed"
+  ],
+  [
+   "182-day T-bill",
+   "8.950%",
+   ""
+  ],
+  [
+   "91-day T-bill",
+   "8.773%",
+   ""
+  ],
+  [
+   "Infrastructure bonds",
+   "tax exempt",
+   "Three reopened issues drew a record 460.4bn of bids against a 150bn target"
+  ],
+  [
+   "Lending rate",
+   "14.38%",
+   "June 2026"
+  ],
+  [
+   "Savings rate",
+   "3.32%",
+   "Loses 3.17% a year in real terms"
+  ],
+  [
+   "Shilling",
+   "129.49",
+   "Reserves USD 15.25bn, 6.3 months import cover"
+  ]
+ ],
+ "calendar": [
+  [
+   "Mon 24 Aug",
+   "Market reopens",
+   "Next trading day.",
+   "hot"
+  ],
+  [
+   "~Tue 25 Aug",
+   "Last buy for the NCBA dividend",
+   "T+3 settlement makes this the final realistic day to own it before book closure.",
+   "hot"
+  ],
+  [
+   "Thu 27 Aug",
+   "Jubilee Holdings",
+   "Results expected on or before.",
+   ""
+  ],
+  [
+   "Fri 28 Aug",
+   "NCBA and BAT book closure",
+   "Own before this date to receive the dividend. Britam and NSE results also expected.",
+   "hot"
+  ],
+  [
+   "Mon 31 Aug",
+   "KCB · Co-op · NCBA · I&M · Stanbic",
+   "<b>Statutory deadline &mdash; all five must report.</b> As of 23 August none had. Anyone buying them now is buying before the number.",
+   "hot"
+  ],
+  [
+   "Tue 1 Sep",
+   "Stanbic ex-dividend",
+   "",
+   ""
+  ],
+  [
+   "~24 Sep",
+   "Unga Group",
+   "Full year to June.",
+   ""
+  ],
+  [
+   "30 Sep",
+   "Kenya Power",
+   "Full year to June. The foreign-exchange question gets answered.",
+   ""
+  ],
+  [
+   "30 Oct",
+   "KenGen",
+   "Full year to June.",
+   ""
+  ],
+  [
+   "Oct 2026",
+   "KCB first bond tranche",
+   "100bn target.",
+   ""
+  ]
+ ],
+ "last_source_date": "2026-08-21",
+ "news_note": "Prices no longer share one date. Each counter carries its own close date and is only replaced by a later one."
+}
