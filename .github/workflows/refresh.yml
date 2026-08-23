@@ -1,87 +1,79 @@
 name: NSE price refresh
-
-# Every 15 minutes while the market is open, plus a sweep after the close.
-# The Nairobi exchange trades 09:00-15:00 East Africa Time = 06:00-12:00 UTC.
-#
-# Be clear about what 15 minutes buys you. The source publishes ONE table per
-# trading day, so polling it more often does not produce intraday prices — no
-# free source of those exists. What it does buy is latency: the moment the new
-# close appears, the page has it inside 15 minutes instead of hours later.
-#
-# The cost is near zero because refresh.py checks the trading date the source
-# prints on itself and exits immediately when it has not changed. A no-op run is
-# one HTTP request and a few seconds. Only the run that finds a new date does
-# any work, so out of roughly 28 runs a day, one writes.
-#
-# GitHub's scheduler is best-effort and can skip or delay runs on busy shared
-# runners, which is another reason to poll rather than to fire once and hope.
+# Must live at .github/workflows/refresh.yml or GitHub ignores it.
+# Step 1 repairs the layout (browser uploads land flat); it is idempotent.
+# Then: prices every 15 min while Nairobi is open, plus once after the close.
+# The source publishes one table per trading day, so refresh.py exits at once
+# when the trading date has not changed. Of ~28 runs a day, one does work.
 on:
   schedule:
-    - cron: "*/15 6-12 * * 1-5"     # every 15 min, market hours, weekdays
-    - cron: "30 15 * * 1-5"         # a backstop after the close
-  workflow_dispatch:          # the "Run workflow" button, for when you want it now
-
+    - cron: "*/15 6-12 * * 1-5"
+    - cron: "30 15 * * 1-5"
+  workflow_dispatch:
 permissions:
-  contents: write             # to commit the refreshed data back
-
+  contents: write
 concurrency:
   group: refresh
   cancel-in-progress: false
-
 jobs:
   refresh:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
+      - name: Put the files where they belong
+        run: |
+          git config user.name "thamani-refresh"
+          git config user.email "actions@users.noreply.github.com"
+          DATA="counters.json macro.json editorial.json"
+          SRC="app.js build.py derive.py refresh.py validate.py test_refresh.py css.txt fonts.txt icons.json"
+          SITE="index.html artifact.html"
+          moved=0
+          mkdir -p data src docs
+          for f in $DATA; do if [ -f "$f" ]; then git mv -f "$f" "data/$f"; moved=$((moved+1)); fi; done
+          for f in $SRC; do if [ -f "$f" ]; then git mv -f "$f" "src/$f"; moved=$((moved+1)); fi; done
+          for f in $SITE; do if [ -f "$f" ]; then git mv -f "$f" "docs/$f"; moved=$((moved+1)); fi; done
+          if [ -f refresh.yml ]; then git rm -q -f refresh.yml; echo "removed stray root refresh.yml"; fi
+          if [ -f download ]; then git rm -q -f download; echo "removed leftover download file"; fi
+          touch docs/.nojekyll && git add docs/.nojekyll
+          echo "moved $moved files into place"
+          if [ "$moved" -gt 0 ]; then
+            git commit -q -m "repair: move files into data/, src/ and docs/"
+            git push
+            echo "Layout repaired: moved $moved files. Now set Settings - Pages - folder to /docs." >> $GITHUB_STEP_SUMMARY
+          fi
+      - name: Check the layout
+        run: |
+          fail=0
+          for p in data/counters.json data/macro.json data/editorial.json src/build.py src/derive.py src/refresh.py src/validate.py src/app.js; do
+            if [ ! -f "$p" ]; then echo "MISSING $p"; fail=1; fi
+          done
+          if [ "$fail" = "1" ]; then echo "Layout is wrong; nothing further can run." >&2; exit 1; fi
+          echo "layout ok"
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-
-      - name: Install what the scripts need
+      - name: Install dependencies
         run: pip install --quiet requests pandas lxml
-
-      # Run the tests BEFORE touching anything. If the maths or the parser is
-      # broken, the day's prices are the least of the problems.
       - name: Test
         run: python src/test_refresh.py
-
       - name: Fetch today's prices
         run: python src/refresh.py
-
-      # The gate. Exits non-zero on anything implausible, which fails the job
-      # and leaves the published page exactly as it was.
       - name: Validate before publishing
         run: python src/validate.py
-
       - name: Rebuild the page
         run: python src/build.py
-
-      - name: Note a no-op plainly
-        if: success()
+      - name: Commit only if something changed
         run: |
-          if [ ! -f data/counters.candidate.json ] && git diff --quiet; then
-            echo "no new trading date at the source — nothing to publish" >> $GITHUB_STEP_SUMMARY
-          fi
-
-      - name: Commit, only if something actually changed
-        run: |
-          git config user.name  "thamani-refresh"
+          git config user.name "thamani-refresh"
           git config user.email "actions@users.noreply.github.com"
           if git diff --quiet; then
-            echo "nothing changed — no commit"
+            echo "no new trading date at the source - nothing to publish" >> $GITHUB_STEP_SUMMARY
             exit 0
           fi
           git add data docs
-          git commit -m "prices: $(python -c "import json;print(json.load(open('data/macro.json'))['stamp_close'][:10])")"
+          git commit -q -m "prices refreshed"
           git push
-
-      # If anything above failed, say so loudly in the run summary rather than
-      # letting a silent failure look like a quiet day.
       - name: Report a failure
         if: failure()
         run: |
-          echo "### The refresh did not publish" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "The live page still shows its previous prices and its previous date stamp, which is the intended behaviour on any doubt." >> $GITHUB_STEP_SUMMARY
-          echo "Look at the failing step above. The usual causes are: the source page changed shape, or the source was unreachable." >> $GITHUB_STEP_SUMMARY
+          echo "The refresh did not publish. The live page keeps its previous prices and date stamp, which is intended on any doubt." >> $GITHUB_STEP_SUMMARY
+          echo "Look at the failing step. Usual causes: source page changed shape, source unreachable, or the layout is wrong." >> $GITHUB_STEP_SUMMARY
